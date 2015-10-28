@@ -12,7 +12,7 @@
 #include <RF24.h>
 //#include <RF24_config.h>
 
-RF24 radio(5,3);
+RF24 radio(9,8);
 //RF24 radio(13, 12);
 const byte rxAddr[6] = "00001";
 
