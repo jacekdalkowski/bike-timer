@@ -30,8 +30,8 @@ void loop()
   long duration, inches, cm;
 
   // Variables for nRF24 communication.
-  const char text1[] = "Hello World 1";
-  const char text2[] = "Hello World 2";
+  const char text1[] = "||||||||||||";
+  const char text2[] = "------------";
 
   // The PING is triggered by a HIGH pulse of 2 or more microseconds.
   // Give a short LOW pulse beforehand to ensure a clean HIGH pulse.
@@ -59,9 +59,9 @@ void loop()
       Serial.print("cm");
       Serial.println();
 
-      radio.write(&text1, sizeof(text1));
+      radio.write(text1, sizeof(text1));
   }else{
-      radio.write(&text2, sizeof(text2));
+      radio.write(text2, sizeof(text2));
   }
 
   delay(10);

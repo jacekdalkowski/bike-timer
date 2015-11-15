@@ -20,7 +20,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 //"SPI.h/Nordic_nRF8001.h/RBL_nRF8001.h" are needed in every new project
 #include <SPI.h>
-#include <Nordic_nRF8001.h>
+
+////// #include <Nordic_nRF8001.h>
+#ifndef NORDIC_NRF8001_H_
+#define NORDIC_NRF8001_H_
+// It is nothing here.
+#endif /
+/////////////////////////
+
+//#include <EEPROM.h>
+#include <boards.h>
 #include <RBL_nRF8001.h>
 
 void setup()
@@ -44,19 +53,22 @@ void setup()
   
   // Enable serial debug
   Serial.begin(57600);
-  
-  // LED stuff
-  // initialize digital pin 13 as an output.
-  pinMode(13, OUTPUT);
-  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
 }
 
 unsigned char buf[16] = {0};
 unsigned char len = 0;
 
+
+
 void loop()
 {
-  /*if ( ble_connected() )
+#if defined(BLEND_MICRO)
+Serial.println("BLEND_MICRO");
+#else
+Serial.println("no BLEND_MICRO");
+#endif
+  
+  if ( ble_connected() )
   {
     ble_write('H');
     ble_write('e');
@@ -84,7 +96,7 @@ void loop()
     Serial.println();
   }
  
-  delay(1000); */
+  delay(1000); 
   
 
   if ( ble_available() )

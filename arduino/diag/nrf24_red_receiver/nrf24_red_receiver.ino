@@ -19,7 +19,7 @@ const byte rxAddr[6] = "00001";
 void setup()
 { 
   // Set your BLE advertising name here, max. length 10
-  ble_set_name("teraz");
+  ble_set_name("teraz 2");
   
   // Init. and start BLE library.
   ble_begin();
@@ -28,61 +28,33 @@ void setup()
   Serial.begin(9600);
 
   radio.begin();
-  radio.openReadingPipe(0, rxAddr);
+  radio.openReadingPipe(0, 1);
   radio.startListening();
 }
 
 void loop()
 {
+ble_do_events();
+  
   if(ble_busy()){
-    Serial.println("ble busy");
+    Serial.println("BLE busy.");
   }else if ( ble_available() ){
-    Serial.println("ble available");
     while ( ble_available() )
-    {
       Serial.write(ble_read());
-    }
+      
     Serial.println();
   }else if (radio.available()){
-    Serial.println("radio available");
-    /*if ( ble_connected() )
-    {
-      ble_write('H');
-      ble_write('e');
-      ble_write('l');
-      ble_write('l');
-      ble_write('o');
-      ble_write(' ');
-      ble_write('W');
-      ble_write('o');
-      ble_write('r');
-      ble_write('l');
-      ble_write('d');
-      ble_write('!');
-    }*/
+    Serial.println("Radio available.");
     char text[32] = {0};
     radio.read(text, sizeof(text));
-
     Serial.println("Received: ");
     Serial.println(text);
   }else{
     Serial.println("Nothing available now.");
   }
 
-  ble_do_events();
   
-  /*if ( ble_available() )
-  {
-    while ( ble_available() )
-    {
-      Serial.write(ble_read());
-    }
-    
-    Serial.println();
-  }*/
 
-
- 
   delay(1000);  
 }
 
