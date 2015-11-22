@@ -1,16 +1,29 @@
 angular.module('bikeTimerApp')
 
-.controller('masterViewWithSideMenuCtrl', function($scope, $ionicModal, $timeout, ngFB) {
+.controller('masterViewWithSideMenuCtrl', ['$scope', '$ionicModal', '$timeout', 'facebookService',
+    function($scope, $ionicModal, $timeout, facebookService) {
 
-  $scope.fbLogin = function () {
-    ngFB.login({scope: 'public_profile,user_friends,email'}).then(
-      function (response) {
-        if (response.status === 'connected') {
-            console.log('Facebook login succeeded');
-        } else {
-            alert('Facebook login failed');
+      $scope.events = {
+
+        fbLogin: function () {
+          facebookService.getLoginStatus(function (response) {
+            btGlobals.log('getLoginStatus, response.status === ' + response.status);
+            if (response.status !== 'connected') {
+              facebookService.login(function(){}, function(){});
+            }
+          });
+        },
+
+        fbLogout: function () {
+          facebookService.logout(
+            function onSuccess(){
+              btGlobals.log('Successfull logout');
+            },
+            function onFailure(){
+              btGlobals.log('Unsuccessfull logout');
+            });
         }
-      });
-  };
 
-});
+      };
+
+}]);

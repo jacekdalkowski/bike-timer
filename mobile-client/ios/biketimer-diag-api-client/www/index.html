@@ -12,36 +12,42 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
-
-
-    <!-- ----------- LIBS ----------- -->
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
-    <!-- FB stuff -->
-    <script src="lib/fb/openfb.js"></script>
-    <script src="lib/fb/ngopenfb.js"></script>
-
-
-
-    <!-- ----------- BIKE TIMER STUFF ----------- -->
-    <!-- services -->
-    <script src="js/services/services-module.js"></script>
-
-    <!-- main -->
-    <script src="js/bike-timer-app.js"></script>
-
-    <!-- controllers -->
-    <script src="js/controllers/controllers-module.js"></script>
-    <script src="js/controllers/welcome.js"></script>
-    <script src="js/controllers/master-view-with-side-menu.js"></script>
-
   </head>
 
   <body ng-app="bikeTimerApp">
+
+    <div id="fb-root"></div>
     <ion-nav-view></ion-nav-view>
+
+
+    <!-- ----------- LIBS ----------- -->
+    <div id="libs">
+
+        <script src="js/_btGlobals.js"></script>
+
+        <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+        <!-- cordova script (this will be a 404 during development) -->
+        <script src="cordova.js"></script>
+
+        <!-- fb -->
+        <script src="lib/fb/facebookConnectPlugin.js"></script>
+
+        <!-- ----------- BIKE TIMER STUFF ----------- -->
+        <!-- services -->
+        <script src="js/services/services-module.js"></script>
+        <script src="js/services/facebook-service.js"></script>
+
+        <!-- main -->
+        <script src="js/bike-timer-app.js"></script>
+
+        <!-- controllers -->
+        <script src="js/controllers/controllers-module.js"></script>
+        <script src="js/controllers/welcome.js"></script>
+        <script src="js/controllers/master-view-with-side-menu.js"></script>
+    </div>
+
+
   </body>
 </html>
