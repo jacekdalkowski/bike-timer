@@ -146,7 +146,7 @@ if (!window.cordova || cordova.platformId == "browser") {
     
     window.fbAsyncInit = function() {
 		FB.init({
-			appId      : btGlobals.fbAppId,
+			appId      : bikeTimerGlobals.fbAppId,
 			xfbml      : true,
 			version    : 'v2.1'
 		});
@@ -155,7 +155,7 @@ if (!window.cordova || cordova.platformId == "browser") {
     // Bake in the JS SDK
     (function () {
         if (!window.FB) {
-            btGlobals.log("Launching FB SDK - local load");
+            bikeTimerGlobals.log("Launching FB SDK - local load");
             var e = document.createElement('script');
             e.src = '/lib/fb/fb_sdk_20_en_US.js';
             document.getElementById('fb-root').appendChild(e);

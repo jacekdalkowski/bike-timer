@@ -1,4 +1,4 @@
-angular.module('bikeTimerApp', ['ionic', 'bikeTimerApp.services'])
+angular.module('bikeTimerApp')
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
 
@@ -14,4 +14,4 @@ angular.module('bikeTimerApp', ['ionic', 'bikeTimerApp.services'])
       StatusBar.styleDefault();
     }
   });
-})
+});

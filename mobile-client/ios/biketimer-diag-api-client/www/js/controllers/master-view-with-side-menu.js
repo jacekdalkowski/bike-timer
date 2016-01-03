@@ -1,13 +1,16 @@
 angular.module('bikeTimerApp')
+.controller('masterViewWithSideMenuCtrl', ['$scope', '$ionicModal', '$timeout', '$state', 'facebookService',
+    function($scope, $ionicModal, $timeout, $state, facebookService) {
 
-.controller('masterViewWithSideMenuCtrl', ['$scope', '$ionicModal', '$timeout', 'facebookService',
-    function($scope, $ionicModal, $timeout, facebookService) {
+      $scope.masterModel = {
+        navState: $state
+      };
 
-      $scope.events = {
+      $scope.masterEvents = {
 
         fbLogin: function () {
           facebookService.getLoginStatus(function (response) {
-            btGlobals.log('getLoginStatus, response.status === ' + response.status);
+            bikeTimerGlobals.log('getLoginStatus, response.status === ' + response.status);
             if (response.status !== 'connected') {
               facebookService.login(function(){}, function(){});
             }
@@ -17,10 +20,10 @@ angular.module('bikeTimerApp')
         fbLogout: function () {
           facebookService.logout(
             function onSuccess(){
-              btGlobals.log('Successfull logout');
+              bikeTimerGlobals.log('Successfull logout');
             },
             function onFailure(){
-              btGlobals.log('Unsuccessfull logout');
+              bikeTimerGlobals.log('Unsuccessfull logout');
             });
         }
 
