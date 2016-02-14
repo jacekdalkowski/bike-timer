@@ -1,6 +1,7 @@
 angular.module('bikeTimerApp')
-.controller('masterViewWithSideMenuCtrl', ['$scope', '$ionicModal', '$timeout', '$state', 'facebookService',
-    function($scope, $ionicModal, $timeout, $state, facebookService) {
+.controller('masterViewWithSideMenuCtrl', ['$scope', '$ionicModal', '$timeout', '$state', 
+  'facebookAccountFactory',
+    function($scope, $ionicModal, $timeout, $state, facebookAccountService) {
 
       $scope.masterModel = {
         navState: $state

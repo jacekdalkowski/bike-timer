@@ -1,5 +1,5 @@
 angular.module('bikeTimerApp.services')
-.factory('facebookService', ['$http', 'apiUrl', function($http, apiUrl){
+.factory('facebookAccountFactory', ['$http', 'apiUrl', function($http, apiUrl){
 
 	return {
 		getLoginStatus: function(onResponse){

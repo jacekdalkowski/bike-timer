@@ -1,6 +1,6 @@
 angular.module('bikeTimerApp')
-.controller('standingsCtrl', ['$scope', '$ionicModal', '$timeout', 'facebookService',
-    function($scope, $ionicModal, $timeout, facebookService) {
+.controller('standingsCtrl', ['$scope', '$ionicModal', '$timeout', 'facebookAccountFactory',
+    function($scope, $ionicModal, $timeout, facebookAccountService) {
 
 		$scope.standingsModel = {
 

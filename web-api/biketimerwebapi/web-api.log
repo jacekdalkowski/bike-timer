@@ -1,0 +1,9 @@
+2015-12-13 21:50:35,296 - __main__ - INFO - adding resource: /Spot
+2015-12-13 21:50:35,296 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2015-12-13 21:50:35,298 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+2015-12-13 21:50:41,029 - resources.spot - DEBUG - get(self): invoked
+2015-12-13 21:50:41,029 - resources.spot - DEBUG - get(self): invoked
+2015-12-13 21:50:41,030 - werkzeug - INFO - 127.0.0.1 - - [13/Dec/2015 21:50:41] "GET /Spot HTTP/1.1" 200 -
+2016-01-27 22:59:36,054 - __main__ - INFO - adding resource: /Spot
+2016-01-27 22:59:36,055 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2016-01-27 22:59:36,058 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)

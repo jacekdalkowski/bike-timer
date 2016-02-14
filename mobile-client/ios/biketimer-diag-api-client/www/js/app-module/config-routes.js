@@ -1,27 +1,19 @@
 angular.module('bikeTimerApp')
 .config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 
-  (function setupTranslations(){
-    $translateProvider
-      .useStaticFilesLoader({
-        prefix: 'js/translations/',
-        suffix: '.json'
-      })
-      .registerAvailableLanguageKeys(['en', 'pl'], {
-        'en' : 'en', 'en_GB': 'en', 'en_US': 'en',
-        'pl' : 'pl', 'pl_PL': 'pl'
-      })
-      .preferredLanguage('en')
-      .fallbackLanguage('en')
-      .determinePreferredLanguage()
-      .useSanitizeValueStrategy('escapeParameters');
-  })();
-
   (function setupRoutes(){
     $stateProvider
+      .state('welcome-or-login', {
+        url: '/welcome-or-login',
+        templateUrl: 'templates/welcome-or-login.html',
+        controller: 'welcomeOrLoginCtrl'
+      })
       .state('tabs', {
         url: '/tabs',
         abstract: true,
+        data: {
+          requireLogin: true
+        },
         templateUrl: 'templates/master-view-with-side-menu.html',
         controller: 'masterViewWithSideMenuCtrl'
       })
@@ -44,6 +36,7 @@ angular.module('bikeTimerApp')
         }
       });
     // if none of the above states are matched, use this as the fallback
+    // $urlRouterProvider.otherwise('/welcome-or-login');
     $urlRouterProvider.otherwise('/tabs/timer');
   })();
 

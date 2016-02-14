@@ -1,0 +1,21 @@
+<ion-view view-title="Timer">
+  <ion-content>
+    <div>
+		<div>Bike timer</div>
+		<div ng-show="model.isLoggedIntoBikeTimer">
+			Welcome!
+			<button>Let's start</button>
+		</div>
+		<div ng-show="!model.isLoggedIntoBikeTimer">
+			<button>Login via Facebook</button>
+		</div>
+	</div>
+  </ion-content>
+</ion-view>
+<!--<script id="home" type="text/ng-template">
+  <ion-view view-title="Home">
+    <ion-content ng-controller="HomeCtrl">
+      <a href="#/music">Go to music page!</a>
+    </ion-content>
+  </ion-view>
+</script>-->
