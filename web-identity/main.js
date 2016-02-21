@@ -40,11 +40,11 @@ function mapHandler(req, res){
 function tokenRequestHandler(req, res, requestBody){
     var decodedBody = querystring.parse(requestBody);
     credentialsValidator.validate(decodedBody,
-        function onSuccess(userIdInfo){
-            btUserService.getOrAddUser(userIdInfo,
+        function onSuccess(userData){
+            btUserService.getOrAddUser(userData,
                 function onSuccess(userBtEntity){
                     var tokenPayload = {
-                        btUserId: userBtEntity.Id 
+                        btUserId: userBtEntity.id 
                     };
                     var token = jwt.encode(tokenPayload, tokenSecret);
                     res.writeHead(200, {'Content-Type': 'application/json'});
