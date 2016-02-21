@@ -6,7 +6,13 @@ module.exports = (function() {
         if(credentials.grantType === 'facebook_token'){
             facebookFacade.getUserProfile(credentials.accessToken,
                 function onGetUserProfileSuccess(fbResponse){
-                    onValidateCredentialsSuccess(fbResponse);
+                    onValidateCredentialsSuccess({
+                        email: fbResponse.email,
+                        fbId: fbResponse.id,
+                        fbName: fbResponse.first_name,
+                        fbSurname: fbResponse.last_name,
+                        fbAccessToken: credentials.accessToken
+                    });
                 },
                 onValidateCredentialsError);
         }else{
