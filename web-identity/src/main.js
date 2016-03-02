@@ -25,7 +25,7 @@ http.createServer(function (req, res) {
     });
 
 })
-.listen(8081, '127.0.0.1');
+.listen(8081);
 console.log('Server running at http://127.0.0.1:8081/.');
 
 function mapHandler(req, res){
@@ -43,7 +43,13 @@ function tokenRequestHandler(req, res, requestBody){
         function onSuccess(userData){
             btUserService.getOrAddUser(userData,
                 function onSuccess(userBtEntity){
+                    var currentDate = new Date();
+                    var twoWeeksAheadDate = new Date();
+                    twoWeeksAheadDate.setDate(twoWeeksAheadDate.getDate()+14)
                     var tokenPayload = {
+                        nbf: '0',
+                        exp: twoWeeksAheadDate.getTime(),
+                        iat: '0',
                         btUserId: userBtEntity.id 
                     };
                     var token = jwt.encode(tokenPayload, tokenSecret);
