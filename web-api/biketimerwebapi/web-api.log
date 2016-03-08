@@ -530,3 +530,75 @@ NameError: global name 'a' is not defined
 2016-03-02 23:08:02,468 - resources.spot - DEBUG - get(self): invoked
 2016-03-02 23:08:02,468 - resources.spot - DEBUG - get(self): invoked
 2016-03-02 23:08:02,468 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2016 23:08:02] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 20:39:53,785 - __main__ - INFO - adding resource: /Spot
+2016-03-06 20:39:53,785 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2016-03-06 20:39:53,789 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+2016-03-06 20:52:17,999 - __main__ - INFO - adding resource: /Spot
+2016-03-06 20:52:18,000 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2016-03-06 20:52:18,001 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+2016-03-06 20:54:19,097 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:19,097 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:19,099 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 20:54:19] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 20:54:20,765 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:20,765 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:20,766 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 20:54:20] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 20:54:21,494 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:21,494 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:21,496 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 20:54:21] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 20:54:21,733 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:21,733 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:21,734 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 20:54:21] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 20:54:21,940 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:21,940 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:21,941 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 20:54:21] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 20:54:22,882 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:22,882 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:54:22,883 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 20:54:22] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 20:57:44,068 - __main__ - INFO - adding resource: /Spot
+2016-03-06 20:57:44,069 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2016-03-06 20:57:44,071 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+2016-03-06 20:58:00,814 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:58:00,814 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 20:58:00,815 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 20:58:00] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 21:00:41,947 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:00:41,947 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:00:41,949 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 21:00:41] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 21:00:42,619 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:00:42,619 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:00:42,620 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 21:00:42] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 21:00:42,822 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:00:42,822 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:00:42,823 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 21:00:42] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 21:00:43,002 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:00:43,002 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:00:43,002 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 21:00:43] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 21:05:25,167 - __main__ - INFO - adding resource: /Spot
+2016-03-06 21:05:25,168 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2016-03-06 21:05:25,170 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+2016-03-06 21:05:31,058 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:05:31,058 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:05:31,059 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 21:05:31] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 21:06:09,549 - __main__ - INFO - adding resource: /Spot
+2016-03-06 21:06:09,550 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2016-03-06 21:06:09,552 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+2016-03-06 21:06:24,243 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:06:24,243 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:06:24,243 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 21:06:24] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 21:07:18,323 - __main__ - INFO - adding resource: /Spot
+2016-03-06 21:07:18,324 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2016-03-06 21:07:18,326 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+2016-03-06 21:12:52,162 - __main__ - INFO - adding resource: /Spot
+2016-03-06 21:12:52,163 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2016-03-06 21:12:52,165 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+2016-03-06 21:12:59,378 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:12:59,378 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:12:59,379 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 21:12:59] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 21:15:24,593 - __main__ - INFO - adding resource: /Spot
+2016-03-06 21:15:24,595 - __main__ - INFO - starting app on host: 0.0.0.0:5001
+2016-03-06 21:15:24,597 - werkzeug - INFO -  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+2016-03-06 21:16:44,585 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:16:44,585 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:16:44,589 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 21:16:44] "GET /Spot HTTP/1.1" 200 -
+2016-03-06 21:19:10,743 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:19:10,743 - resources.spot - DEBUG - get(self): invoked
+2016-03-06 21:19:10,746 - werkzeug - INFO - 127.0.0.1 - - [06/Mar/2016 21:19:10] "GET /Spot HTTP/1.1" 200 -

@@ -6,7 +6,7 @@ CREATE TYPE geopoint(
 );
 
 CREATE TABLE spots (
-	id int PRIMARY KEY,
+	id uuid PRIMARY KEY,
 	name text,
 	position frozen<geopoint>,
 	tags list<text>
