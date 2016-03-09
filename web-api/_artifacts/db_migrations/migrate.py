@@ -30,7 +30,7 @@ def db_operation(current_dir, file_sufix, reverse):
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if len(sys.argv) < 2:
-	print 'A paramter is required: up, down or seed.'
+	print 'A parameter is required: up, down or seed.'
 elif sys.argv[1] == 'up':
 	db_operation(current_dir, "_up.cql", False)
 elif sys.argv[1] == 'down':

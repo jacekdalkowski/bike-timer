@@ -22,8 +22,6 @@ class Spot(Resource):
         logger.debug('Spot.get(self)')
         all_spots = self.spots_repository.get_all()
         logger.debug(all_spots)
-        #for spot in all_spots:
-        #    logger.debug(spot.to_dict())
         response_data = [spot.to_dict() for spot in all_spots]
         logger.debug(response_data)
         return Response(json.dumps(response_data),  mimetype='application/json')

@@ -10,7 +10,6 @@ class TokenValidator:
 	def authenticate(username, password):
 	    raise Exception('Authentication is not supported by this application')
 
-	#@JWT.identity_handler
 	def identity(self, payload):
 	    bt_user_id = payload['btUserId']
 	    return ''
