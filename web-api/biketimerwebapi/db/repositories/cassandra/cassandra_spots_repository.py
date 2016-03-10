@@ -10,6 +10,10 @@ class CassandraSpotsRepository:
         all_spots = SpotEntity.objects
         return list(all_spots)
 
-    def get_by_id(self):
-        spot_row = session.execute('SELECT id, name, position, tags FROM users')
+    def get_by_id(self,id):
+        spot_query = SpotEntity.objects.filter(id=id)
+        if spot_query.count() > 0:
+            return spot_query[0]
+        else:
+            pass
 
