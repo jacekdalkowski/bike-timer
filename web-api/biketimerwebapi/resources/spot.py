@@ -19,9 +19,8 @@ class Spot(Resource):
 
     method_decorators = [jwt_required()] 
     def get(self, id):
-        logger.debug('Spot.get(self, id), id: ' + id)
+        logger.debug('Spot.get(self, id=' + str(id) + ')')
         spot = self.spots_repository.get_by_id(id)
-        logger.debug(spot)
         if spot != None:
             return Response(json.dumps(spot.to_dict()),  mimetype='application/json')
         else:
