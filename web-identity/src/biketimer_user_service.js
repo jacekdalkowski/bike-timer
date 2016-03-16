@@ -4,7 +4,7 @@ module.exports = (function() {
 
     var utils = require('./utils');
     var cassandra = require('cassandra-driver');
-    var cassandraClient = new cassandra.Client({contactPoints: [/*'cassandrahost'*/'127.0.0.1'], keyspace: 'biketimer'});
+    var cassandraClient = new cassandra.Client({contactPoints: ['cassandrahost'], keyspace: 'biketimer'});
 
     function getFbUserExistsQuery(fbId){
         return "select count(1) " + 
