@@ -3,7 +3,7 @@
 # Based on Ubuntu
 ############################################################
 
-# Set the base image to Ubuntu
+# Set the base image to Ubuntu #was: ubuntu
 FROM ubuntu
 
 # Add the application resources URL
@@ -18,20 +18,20 @@ RUN apt-get install -y tar git curl nano wget dialog net-tools build-essential
 # Install Python and Basic Python Tools
 RUN apt-get install -y python python-dev python-distribute python-pip
 
-ADD biketimerwebapi /biketimerwebapi
+COPY . /web-api
 
 # Get pip to download and install requirements:
-RUN pip install -r /biketimerwebapi/requirements.txt
+RUN pip install -r /web-api/requirements.txt
 
 # Expose ports
 EXPOSE 5000
 
 # Set the default directory where CMD will execute
-WORKDIR /biketimerwebapi
+#WORKDIR /web-api/biketimerwebapi
 
-ENV PYTHONPATH /biketimerwebapi:$PYTHON_PATH
+ENV PYTHONPATH /web-api/biketimerwebapi:$PYTHON_PATH
 
 # Set the default command to execute
 # when creating a new container
 # i.e. using CherryPy to serve the application
-CMD python app.py
+CMD python /web-api/app.py
