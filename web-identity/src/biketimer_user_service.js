@@ -21,7 +21,7 @@ module.exports = (function() {
     };
     
     function getInsertFbUserCommand(userData){
-        return "insert into users (id, fb_id, email, bt_name, fb_access_token, fb_name, fb_surname) " + 
+        return "insert into users (id, fb_id, email, bt_name, fb_access_token, fb_name, fb_surname, roles) " + 
                 "values (" +
                 "" + userData.id + ", " +
                 "'" + userData.fbId + "', " +
@@ -29,7 +29,8 @@ module.exports = (function() {
                 "'" + (userData.fbName + " " + userData.fbSurname) + "', " +
                 "'" + userData.fbAccessToken + "', " +
                 "'" + userData.fbName + "', " +
-                "'" + userData.fbSurname + "')";
+                "'" + userData.fbSurname + "', " +
+                "['biker'])";
     }
 
     function userExists(userData, onUserExistsSuccess, onUserExistsError){
