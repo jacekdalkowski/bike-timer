@@ -9,5 +9,8 @@ CREATE TABLE users (
     fb_name text,
     fb_surname text,
     roles list<text>,
-    PRIMARY KEY (id, fb_id)
+    friends_ids list<uuid>,
+    PRIMARY KEY (id)
 );
+
+create index on users(fb_id);

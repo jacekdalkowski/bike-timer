@@ -5,23 +5,30 @@ module.exports = (function() {
     var utils = require('./utils');
     var cassandra = require('cassandra-driver');
     var cassandraClient = new cassandra.Client({contactPoints: ['cassandrahost'], keyspace: 'biketimer'});
+    var facebookFacade = require('./facebook_facade');
 
     function getFbUserExistsQuery(fbId){
         return "select count(1) " + 
                 "from users " + 
-                "where fb_id='" + fbId + "'" +
+                "where fb_id='" + fbId + "' " +
                 "allow filtering";
     };
     
     function  getFbUserQuery(fbId){
         return "select id, fb_id, email, bt_name, fb_access_token, fb_name, fb_surname " +
                 "from users " +
-                "where fb_id='" + fbId + "'" +
+                "where fb_id='" + fbId + "' " +
                 "allow filtering";
     };
     
-    function getInsertFbUserCommand(userData){
-        return "insert into users (id, fb_id, email, bt_name, fb_access_token, fb_name, fb_surname, roles) " + 
+    function getInsertFbUserCommand(userData, friendsBtIdsList){
+        var i, friendsIdsStringList;
+        for(i = 0; i < friendsBtIdsList.length; ++i){
+            friendsBtIdsList[i] = ("" + friendsBtIdsList[i] + "");
+        }
+        friendsIdsStringList = friendsBtIdsList.join(", ")
+        
+        return "insert into users (id, fb_id, email, bt_name, fb_access_token, fb_name, fb_surname, friends_ids, roles) " + 
                 "values (" +
                 "" + userData.id + ", " +
                 "'" + userData.fbId + "', " +
@@ -30,7 +37,15 @@ module.exports = (function() {
                 "'" + userData.fbAccessToken + "', " +
                 "'" + userData.fbName + "', " +
                 "'" + userData.fbSurname + "', " +
+                "[" + friendsIdsStringList + "], " +
                 "['biker'])";
+    }
+    
+    function getAddFriendCommand(usersToUpdateBtIds, newFriendBtId){
+        var usersToUpdateBtIdsString = usersToUpdateBtIds.join(", ");
+        return "update users " +
+               "set friends_ids = friends_ids + [" + newFriendBtId + "] " +
+               "where id in (" + usersToUpdateBtIdsString + ");"
     }
 
     function userExists(userData, onUserExistsSuccess, onUserExistsError){
@@ -98,20 +113,59 @@ module.exports = (function() {
         });
     }
     
-    function addUser(userData, onAddUserSuccess, onAddUserError){
-        
-        var insertFbUserCommand;
-        userData.id = utils.guid();
-        insertFbUserCommand = getInsertFbUserCommand(userData);
-        
-        cassandraClient.execute(insertFbUserCommand, function (err, result) {
-            console.log('Cassandra query: ' + insertFbUserCommand + ' err: ' + err + ' result: ' + result);
+    function addFriendToUsers(idsOfUsersToUpdate, idOfUserToAdd, onSuccess, onError){
+        var addFriendCommand = getAddFriendCommand(idsOfUsersToUpdate, idOfUserToAdd);
+        cassandraClient.execute(addFriendCommand, function (err, result) {
+            console.log('Cassandra query: ' + addFriendCommand + ' err: ' + err + ' result: ' + result);
             if (!err){
-                onAddUserSuccess(userData);
+                onSuccess();
             }else{
-                onAddUserError('db_access_error', 'Query returned an error: ' + err);
+                onError('db_access_error', 'Query returned an error: ' + err);
             }
         });
+    }
+    
+    function addUser(userData, onAddUserSuccess, onAddUserError){
+        
+        var friendsCheckedAgainstBtDatabase = 0, friendsBtIds = [];
+        
+        facebookFacade.getUserFriends(
+            userData.fbAccessToken,
+            function onGetUserFriendsSuccess(friendsFbIdsList){
+                var i, fbUserQuery;
+                for(i = 0; i < friendsFbIdsList.data.length; ++i){
+                    fbUserQuery = getFbUserQuery(friendsFbIdsList.data[i].id);
+                    cassandraClient.execute(fbUserQuery, function (err, result) {
+                        console.log('Cassandra query: ' + fbUserQuery + ' err: ' + err + ' result: ' + result);
+                        if (!err){
+                            friendsCheckedAgainstBtDatabase += 1;
+                            if (result.rows.length === 1) {
+                                friendsBtIds.push(result.rows[0].id.toString());
+                            }
+                            if(friendsCheckedAgainstBtDatabase == friendsFbIdsList.data.length){
+                                var insertFbUserCommand;
+                                userData.id = utils.guid();
+                                insertFbUserCommand = getInsertFbUserCommand(userData, friendsBtIds);
+                                cassandraClient.execute(insertFbUserCommand, function (err, result) {
+                                    console.log('Cassandra query: ' + insertFbUserCommand + ' err: ' + err + ' result: ' + result);
+                                    if (!err){
+                                        addFriendToUsers(
+                                            friendsBtIds, 
+                                            userData.id, 
+                                            function() {onAddUserSuccess(userData)},
+                                            onAddUserError);
+                                    }else{
+                                        onAddUserError('db_access_error', 'Query returned an error: ' + err);
+                                    }
+                                });
+                            }
+                        }else{
+                            onAddUserError('db_access_error', 'Query returned an error: ' + err);
+                        }
+                    });
+                }
+            },
+            onAddUserError);
     }
 
     function getOrAddUser(userData, onGetOrAddUserSuccess, onGetOrAddUserError) {

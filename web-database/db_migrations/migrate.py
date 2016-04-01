@@ -5,7 +5,7 @@ from subprocess import call
 from operator import itemgetter, attrgetter, methodcaller
 
 CASSANDRA_PATH = '/Users/jacekdalkowski/Dev/_cassandra/apache-cassandra-2.2.3'
-ARTIFACTS_PATH = '/Users/jacekdalkowski/Dev/bike_timer/web-api/biketimerwebapi/_artifacts'
+ARTIFACTS_PATH = '/Users/jacekdalkowski/Dev/bike_timer/web-database/db_migrations'
 
 def filename_prefix_to_int(file_name):
 	p = re.compile("(\d+).*")
@@ -21,11 +21,11 @@ def db_operation(current_dir, file_sufix, reverse):
 		if file.endswith(file_sufix):
 			files += [file]
 	prefix_and_files = map(lambda f: { 'id': filename_prefix_to_int(f), 'file': f}, files)
-	int_prefix_and_files = filter(lambda pf: pf['id'], prefix_and_files)
-	sorted_int_prefix_and_files = sorted(int_prefix_and_files, key=lambda d: d['id'], reverse=reverse)
+	#int_prefix_and_files = filter(lambda pf: pf['id'], prefix_and_files)
+	sorted_int_prefix_and_files = sorted(prefix_and_files, key=lambda d: d['id'], reverse=reverse)
 	print sorted_int_prefix_and_files
 	for file in sorted_int_prefix_and_files:
-		call([CASSANDRA_PATH + '/bin/cqlsh', '-e', 'SOURCE \'' + ARTIFACTS_PATH + '/db_migrations/' + file['file'] + '\''])
+		call([CASSANDRA_PATH + '/bin/cqlsh', '-e', 'SOURCE \'' + ARTIFACTS_PATH + '/' + file['file'] + '\''])
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))

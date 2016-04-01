@@ -16,6 +16,7 @@ class UserEntity(Model):
     fb_name = columns.Text(required=True)
     fb_surname = columns.Text(required=True)
     roles   = columns.List(columns.Text)
+    friends_ids = columns.List(columns.UUID)
 
     def to_dict(self):
         dict_data = {};
@@ -27,4 +28,5 @@ class UserEntity(Model):
         dict_data['fb_name'] = str(self.fb_name)
         dict_data['fb_surname'] = str(self.fb_surname)
         dict_data['roles'] = [str(role) for role in self.roles]
+        dict_data['friends'] = [str(friend_id) for friend_id in self.friends_ids]
         return dict_data
