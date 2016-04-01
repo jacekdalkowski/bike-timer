@@ -132,33 +132,51 @@ module.exports = (function() {
         facebookFacade.getUserFriends(
             userData.fbAccessToken,
             function onGetUserFriendsSuccess(friendsFbIdsList){
-                var i, fbUserQuery;
-                for(i = 0; i < friendsFbIdsList.data.length; ++i){
-                    fbUserQuery = getFbUserQuery(friendsFbIdsList.data[i].id);
-                    cassandraClient.execute(fbUserQuery, function (err, result) {
-                        console.log('Cassandra query: ' + fbUserQuery + ' err: ' + err + ' result: ' + result);
+                var i, fbUserQuery, insertFbUserCommand;
+                if(friendsFbIdsList.data.length > 0){
+                    for(i = 0; i < friendsFbIdsList.data.length; ++i){
+                        fbUserQuery = getFbUserQuery(friendsFbIdsList.data[i].id);
+                        cassandraClient.execute(fbUserQuery, function (err, result) {
+                            console.log('Cassandra query: ' + fbUserQuery + ' err: ' + err + ' result: ' + result);
+                            if (!err){
+                                friendsCheckedAgainstBtDatabase += 1;
+                                if (result.rows.length === 1) {
+                                    friendsBtIds.push(result.rows[0].id.toString());
+                                }
+                                if(friendsCheckedAgainstBtDatabase == friendsFbIdsList.data.length){
+                                    // TODO: duplication
+                                    userData.id = utils.guid();
+                                    insertFbUserCommand = getInsertFbUserCommand(userData, friendsBtIds);
+                                    cassandraClient.execute(insertFbUserCommand, function (err, result) {
+                                        console.log('Cassandra query: ' + insertFbUserCommand + ' err: ' + err + ' result: ' + result);
+                                        if (!err){
+                                            addFriendToUsers(
+                                                friendsBtIds, 
+                                                userData.id, 
+                                                function() {onAddUserSuccess(userData)},
+                                                onAddUserError);
+                                        }else{
+                                            onAddUserError('db_access_error', 'Query returned an error: ' + err);
+                                        }
+                                    });
+                                }
+                            }else{
+                                onAddUserError('db_access_error', 'Query returned an error: ' + err);
+                            }
+                        });
+                    }
+                }else{
+                    // TODO: duplication
+                    userData.id = utils.guid();
+                    insertFbUserCommand = getInsertFbUserCommand(userData, []);
+                    cassandraClient.execute(insertFbUserCommand, function (err, result) {
+                        console.log('Cassandra query: ' + insertFbUserCommand + ' err: ' + err + ' result: ' + result);
                         if (!err){
-                            friendsCheckedAgainstBtDatabase += 1;
-                            if (result.rows.length === 1) {
-                                friendsBtIds.push(result.rows[0].id.toString());
-                            }
-                            if(friendsCheckedAgainstBtDatabase == friendsFbIdsList.data.length){
-                                var insertFbUserCommand;
-                                userData.id = utils.guid();
-                                insertFbUserCommand = getInsertFbUserCommand(userData, friendsBtIds);
-                                cassandraClient.execute(insertFbUserCommand, function (err, result) {
-                                    console.log('Cassandra query: ' + insertFbUserCommand + ' err: ' + err + ' result: ' + result);
-                                    if (!err){
-                                        addFriendToUsers(
-                                            friendsBtIds, 
-                                            userData.id, 
-                                            function() {onAddUserSuccess(userData)},
-                                            onAddUserError);
-                                    }else{
-                                        onAddUserError('db_access_error', 'Query returned an error: ' + err);
-                                    }
-                                });
-                            }
+                            addFriendToUsers(
+                                friendsBtIds, 
+                                userData.id, 
+                                function() {onAddUserSuccess(userData)},
+                                onAddUserError);
                         }else{
                             onAddUserError('db_access_error', 'Query returned an error: ' + err);
                         }
