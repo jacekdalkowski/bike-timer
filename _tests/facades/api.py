@@ -11,3 +11,4 @@ class ApiFacade:
 		r = requests.get('http://' + self.api_server_host + ':' + self.api_server_port + '/User/Me', 
 			headers={'Authorization': 'JWT ' + bt_token})
 		print 'Received /User/Me response: ' + r.text
+		return json.loads(r.text)

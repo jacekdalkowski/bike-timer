@@ -1,10 +1,12 @@
-from deployment.local_deployment import *
-from facades.fb import *
-from facades.identity import *
-from facades.api import *
+from _tests.deployment.local_deployment import *
+from _tests.facades.fb import *
+from _tests.facades.identity import *
+from _tests.facades.api import *
+from _tests.facades.db import *
+from _tests.scenarios.users_accounts import *
 
 if __name__ == '__main__':
-
+	'''
 	local_deployment = LocalDeployment.GetLocalDockerDeployment()
 
 	fb_facade = FbFacade()
@@ -15,4 +17,13 @@ if __name__ == '__main__':
 
 	api_facade = ApiFacade(local_deployment.ApiEndpoint.Address, local_deployment.ApiEndpoint.Port)
 	api_facade.request_user_me(bt_token)
+	'''
+
+	#db_facade = DbFacade()
+	#db_facade.clear_tables()
+
+	users_accounts = UsersAccounts()
+	users_accounts.add_first_three_friends();
+
+
 
