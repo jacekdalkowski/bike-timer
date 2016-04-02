@@ -7,6 +7,7 @@ from flask_injector import FlaskInjector
 from biketimerwebapi.common.error_friendly_api import ErrorFriendlyApi
 from biketimerwebapi.resources.user import User
 from biketimerwebapi.resources.user_me import UserMe
+from biketimerwebapi.resources.user_friends import UserFriends
 from biketimerwebapi.resources.spot import Spot
 from biketimerwebapi.resources.spots import Spots
 from biketimerwebapi.security.token_validator import TokenValidator
@@ -33,6 +34,7 @@ def SetupFlaskApp(logger):
     app = Flask(__name__)
     api = ErrorFriendlyApi(app)
     api.add_resource(UserMe, '/User/Me')
+    api.add_resource(UserFriends, '/User/Friends')
     api.add_resource(User, '/User', '/User/<string:id>')
     api.add_resource(Spot, '/Spot', '/Spot/<string:id>')
     api.add_resource(Spots, '/Spots')

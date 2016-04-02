@@ -12,7 +12,7 @@ class CassandraUsersRepository:
         all_users = UserEntity.objects
         return list(all_users)
 
-    def get_by_id(self,id):
+    def get_by_id(self, id):
         user_query = UserEntity.objects.filter(id=id)
         number_of_users_with_id = user_query.count()
         if number_of_users_with_id > 0:
@@ -24,6 +24,8 @@ class CassandraUsersRepository:
 
     def get_friends(self, id):
         user = self.get_by_id(id)
+        friends = UserEntity.objects.filter(id__in=user.friends_ids)
+        return friends
 
 
 

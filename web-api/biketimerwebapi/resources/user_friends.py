@@ -23,5 +23,5 @@ class UserFriends(Resource):
     @roles_required(['biker'])
     def get(self):
         logger.debug('UserFriends.get(self)')
-        userFriends = self.users_repository.get_friends
+        userFriends = self.users_repository.get_friends(current_identity.id)
         return Response(json.dumps([friend.to_dict() for friend in userFriends]),  mimetype='application/json')

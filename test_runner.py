@@ -22,7 +22,8 @@ if __name__ == '__main__':
 	#db_facade = DbFacade()
 	#db_facade.clear_tables()
 
-	users_accounts = UsersAccounts()
+	users_accounts = UsersAccounts(LocalDeployment.GetLocalDeployment())
+	#users_accounts.add_first_user();
 	users_accounts.add_first_three_friends();
 
 

@@ -9,7 +9,7 @@ from cassandra.cqlengine.usertype import UserType
 class UserEntity(Model):
     __table_name__ = 'Users'
     id      = columns.UUID(primary_key=True, default=uuid.uuid4)
-    fb_id 	= columns.Text(primary_key=True, required=True)
+    fb_id 	= columns.Text(required=True)
     bt_name = columns.Text(required=True)
     email 	= columns.Text(required=True)
     fb_access_token = columns.Text(required=True)
