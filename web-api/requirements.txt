@@ -3,4 +3,4 @@ flask-injector==0.6.2
 flask==0.10.1
 flask-restful==0.3.4
 Flask-JWT==0.3.2
-cassandra-driver==2.7.2 --install-option="--no-extensions"
+cassandra-driver==3.2.2

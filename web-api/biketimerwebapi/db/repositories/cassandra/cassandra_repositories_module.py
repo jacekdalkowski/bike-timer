@@ -9,7 +9,7 @@ from ..repositories_definitions import SpotsRepository
 
 class CassandraRepositoriesModule(Module):
     def configure(self, binder):
-        connection.setup(['cassandrahost'], 'biketimer', protocol_version=3)
+        connection.setup(['cassandrahost'], 'biketimer', protocol_version=4)
 
         users_repository_instance = CassandraUsersRepository() 
         binder.bind(UsersRepository, to=users_repository_instance)

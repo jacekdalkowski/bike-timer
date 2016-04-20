@@ -41,15 +41,15 @@ def run_cassandra_container():
     docker_running_containers_info.remove('')
     cassandra_container_running = False
     for docker_running_container_info in docker_running_containers_info:
-        if re.split('\\s+', docker_running_container_info)[1] == 'cassandra:2.2.5':
+        if re.split('\\s+', docker_running_container_info)[1] == 'cassandra:3.0.0':
             cassandra_container_running = True;
 
     if cassandra_container_running:
         print 'Cassandra container running. Proceeding.'
     else:
         print 'Starting Cassandra container.'
-        # docker run --name biketimer_web-database -d cassandra:2.2.5
-        starting_cassandra_result = run_command(['docker', 'run', '--name', 'biketimer_web-database', '-d', 'cassandra:2.2.5']).split('\n')
+        # docker run --name biketimer_web-database -d cassandra:3.0.0
+        starting_cassandra_result = run_command(['docker', 'run', '--name', 'biketimer_web-database', '-d', 'cassandra:3.0.0']).split('\n')
         starting_cassandra_result.remove('')
         print 'Starting cassandra result: ' + starting_cassandra_result[-1]
 
