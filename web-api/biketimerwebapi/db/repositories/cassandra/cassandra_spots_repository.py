@@ -1,24 +1,33 @@
 import logging
-from ...entities.spot_entity import SpotEntity
-from cassandra.cqlengine.management import sync_table
+from ...entities.spot import Spot
 
 logger = logging.getLogger('repositories')
 
 class CassandraSpotsRepository:
-    def __init__(self):
-        sync_table(SpotEntity)
+    def __init__(self, cluster):
+        self.cluster = cluster;
 
     def get_all(self):
-        all_spots = SpotEntity.objects
-        return list(all_spots)
+        #all_spots = SpotEntity.objects
+        #return list(all_spots)
+        session = self.cluster.connect('biketimer')
+        rows = session.execute("SELECT * FROM spots")
+        spots = [Spot.row_to_entity(row) for row in rows]
+        return spots;
 
     def get_by_id(self,id):
-        spot_query = SpotEntity.objects.filter(id=id)
-        number_of_spots_with_id = spot_query.count()
+        session = self.cluster.connect('biketimer')
+        rows = session.execute("SELECT * FROM spots WHERE id=" + str(id))
+        number_of_spots_with_id = sum(1 for row in rows)
         if number_of_spots_with_id > 0:
             if number_of_spots_with_id > 1:
                 logger.warn('There is more than one spot with id=' + str(id))
-            return spot_query[0]
+            # TODO second query
+            rows = session.execute("SELECT * FROM spots WHERE id=" + str(id))
+            return Spot.row_to_entity(rows[0])
         else:
             pass
+
+
+
 

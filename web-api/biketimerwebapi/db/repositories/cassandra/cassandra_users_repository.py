@@ -5,7 +5,8 @@ from cassandra.cqlengine.management import sync_table
 logger = logging.getLogger('repositories')
 
 class CassandraUsersRepository:
-    def __init__(self):
+    def __init__(self, cluster):
+        self.cluster = cluster;
         sync_table(UserEntity)
 
     def get_all(self):
