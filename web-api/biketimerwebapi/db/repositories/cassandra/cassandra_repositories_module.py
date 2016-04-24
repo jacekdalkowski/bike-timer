@@ -6,8 +6,10 @@ from cassandra.cqlengine.usertype import UserType
 from ...entities.track_type import TrackType
 from cassandra_users_repository import CassandraUsersRepository
 from cassandra_spots_repository import CassandraSpotsRepository
+from cassandra_runs_repository import CassandraRunsRepository
 from ..repositories_definitions import UsersRepository
 from ..repositories_definitions import SpotsRepository
+from ..repositories_definitions import RunsRepository
 
 class CassandraRepositoriesModule(Module):
 
@@ -20,3 +22,6 @@ class CassandraRepositoriesModule(Module):
 
         spots_repository_instance = CassandraSpotsRepository(cluster) 
         binder.bind(SpotsRepository, to=spots_repository_instance)
+
+        runs_repository_instance = CassandraRunsRepository(cluster) 
+        binder.bind(RunsRepository, to=runs_repository_instance)

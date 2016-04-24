@@ -10,6 +10,7 @@ from biketimerwebapi.resources.user_me import UserMe
 from biketimerwebapi.resources.user_friends import UserFriends
 from biketimerwebapi.resources.spot import Spot
 from biketimerwebapi.resources.spots import Spots
+from biketimerwebapi.resources.runs import Runs
 from biketimerwebapi.security.token_validator import TokenValidator
 from biketimerwebapi.db.repositories.cassandra.cassandra_repositories_module import CassandraRepositoriesModule
 
@@ -38,6 +39,7 @@ def SetupFlaskApp(logger):
     api.add_resource(User, '/User', '/User/<string:id>')
     api.add_resource(Spot, '/Spot', '/Spot/<string:id>')
     api.add_resource(Spots, '/Spots')
+    api.add_resource(Runs, '/Runs')
     return app
 
 def SetupBootstraper(logger):

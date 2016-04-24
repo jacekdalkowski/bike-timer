@@ -1,0 +1,119 @@
+USE biketimer;
+
+INSERT INTO runs_by_user_spot(id, user_id, spot_id, run_info)
+VALUES (00000000-0000-0000-0000-000000000001, 
+	00000000-0000-0000-0000-000000000001, 
+	00000000-0000-0000-0000-000000000001,
+	{
+		id: 00000000-0000-0000-0000-000000000001,
+		user_id: 00000000-0000-0000-0000-000000000001,
+		user_bt_name: 'Jacek Dalkowski',
+		segment: {
+			id: 00000000-0000-0000-0000-000000000003,
+			name: 'Meadow',
+			location_start:
+			{
+				id: 00000000-0000-0000-0000-000000000005,
+				location: { la: 50.1010566, lo: 17.1077972 }
+			},
+			location_stop:
+			{
+				id: 00000000-0000-0000-0000-000000000006,
+				location: { la: 50.1010566, lo: 17.1077972 }
+			},
+			valid_time_start: 1368438071000,
+			valid_time_stop: 0
+		},
+		time_start: 1461528287000,
+		time_stop: 1461528887000,
+		time_span_ms: 600000
+	});
+
+INSERT INTO runs_by_user_segment(id, user_id, segment_id, run_info)
+VALUES (00000000-0000-0000-0000-000000000001, 
+	00000000-0000-0000-0000-000000000001, 
+	00000000-0000-0000-0000-000000000003,
+	{
+		id: 00000000-0000-0000-0000-000000000001,
+		user_id: 00000000-0000-0000-0000-000000000001,
+		user_bt_name: 'Jacek Dalkowski',
+		segment: {
+			id: 00000000-0000-0000-0000-000000000003,
+			name: 'Meadow',
+			location_start:
+			{
+				id: 00000000-0000-0000-0000-000000000005,
+				location: { la: 50.1010566, lo: 17.1077972 }
+			},
+			location_stop:
+			{
+				id: 00000000-0000-0000-0000-000000000006,
+				location: { la: 50.1010566, lo: 17.1077972 }
+			},
+			valid_time_start: 1368438071000,
+			valid_time_stop: 0
+		},
+		time_start: 1461528287000,
+		time_stop: 1461528887000,
+		time_span_ms: 600000
+	});
+
+INSERT INTO runs_by_spot_user(id, spot_id, user_id, run_info)
+VALUES (00000000-0000-0000-0000-000000000001, 
+	00000000-0000-0000-0000-000000000001,
+	00000000-0000-0000-0000-000000000001,
+	{
+		id: 00000000-0000-0000-0000-000000000001,
+		user_id: 00000000-0000-0000-0000-000000000001,
+		user_bt_name: 'Jacek Dalkowski',
+		segment: {
+			id: 00000000-0000-0000-0000-000000000003,
+			name: 'Meadow',
+			location_start:
+			{
+				id: 00000000-0000-0000-0000-000000000005,
+				location: { la: 50.1010566, lo: 17.1077972 }
+			},
+			location_stop:
+			{
+				id: 00000000-0000-0000-0000-000000000006,
+				location: { la: 50.1010566, lo: 17.1077972 }
+			},
+			valid_time_start: 1368438071000,
+			valid_time_stop: 0
+		},
+		time_start: 1461528287000,
+		time_stop: 1461528887000,
+		time_span_ms: 600000
+	});
+
+INSERT INTO runs_by_segment_user(id, segment_id, user_id, run_info)
+VALUES (00000000-0000-0000-0000-000000000001, 
+	00000000-0000-0000-0000-000000000003,
+	00000000-0000-0000-0000-000000000001,
+	{
+		id: 00000000-0000-0000-0000-000000000001,
+		user_id: 00000000-0000-0000-0000-000000000001,
+		user_bt_name: 'Jacek Dalkowski',
+		segment: {
+			id: 00000000-0000-0000-0000-000000000003,
+			name: 'Meadow',
+			location_start:
+			{
+				id: 00000000-0000-0000-0000-000000000005,
+				location: { la: 50.1010566, lo: 17.1077972 }
+			},
+			location_stop:
+			{
+				id: 00000000-0000-0000-0000-000000000006,
+				location: { la: 50.1010566, lo: 17.1077972 }
+			},
+			valid_time_start: 1368438071000,
+			valid_time_stop: 0
+		},
+		time_start: 1461528287000,
+		time_stop: 1461528887000,
+		time_span_ms: 600000
+	});
+
+
