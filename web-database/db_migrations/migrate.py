@@ -4,7 +4,7 @@ import re
 from subprocess import call
 from operator import itemgetter, attrgetter, methodcaller
 
-CASSANDRA_PATH = '/Users/jacekdalkowski/Dev/_cassandra/apache-cassandra-2.2.3'
+CASSANDRA_PATH = '/Users/jacekdalkowski/Dev/_cassandra/apache-cassandra-3.0.0'
 ARTIFACTS_PATH = '/Users/jacekdalkowski/Dev/bike_timer/web-database/db_migrations'
 
 def filename_prefix_to_int(file_name):
