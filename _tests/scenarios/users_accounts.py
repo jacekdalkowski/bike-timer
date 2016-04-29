@@ -17,6 +17,7 @@ class UsersAccounts:
 
 	def add_first_user(self):
 		self.db_facade.clear_tables()
+		self.db_facade.add_spot()
 
 		# Register Aaron.
 		aaron_access_token = self.fb_facade.request_access_token(self.fb_facade.test_users.AaronChase.id)
@@ -30,6 +31,7 @@ class UsersAccounts:
 
 	def add_first_three_friends(self):
 		self.db_facade.clear_tables()
+		self.db_facade.add_spot()
 
 		# Register Aaron.
 		aaron_fb_access_token = self.fb_facade.request_access_token(self.fb_facade.test_users.AaronChase.id)

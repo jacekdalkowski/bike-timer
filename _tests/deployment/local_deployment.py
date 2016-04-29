@@ -27,12 +27,12 @@ class LocalDeployment:
     def GetLocalDockerDeployment():
         apiEndpoint = LocalDeployment.GetEndpoint('biketimer_web-api')
         identityEndpoint = LocalDeployment.GetEndpoint('biketimer_web-identity')
-        cqlshCommand = ['docker', 'run', '-i', '--link', 'biketimer_web-database:cassandra', '--rm', 'cassandra:2.2.5', 'cqlsh', 'cassandra']
+        cqlshCommand = ['docker', 'run', '-i', '--link', 'biketimer_web-database:cassandra', '--rm', 'cassandra:3.0.0', 'cqlsh', 'cassandra']
         return Deployment(apiEndpoint, identityEndpoint, cqlshCommand)
 
     @staticmethod
     def GetLocalDeployment():
         apiEndpoint = Endpoint('localhost', '5001')
         identityEndpoint = Endpoint('localhost', '8081')
-        cqlshCommand = ['/Users/jacekdalkowski/Dev/_cassandra/apache-cassandra-2.2.3/bin/cqlsh']
+        cqlshCommand = ['/Users/jacekdalkowski/Dev/_cassandra/apache-cassandra-3.0.0/bin/cqlsh']
         return Deployment(apiEndpoint, identityEndpoint, cqlshCommand)
