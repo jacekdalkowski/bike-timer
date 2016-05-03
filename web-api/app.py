@@ -13,6 +13,8 @@ from biketimerwebapi.resources.spots import Spots
 from biketimerwebapi.resources.runs import Runs
 from biketimerwebapi.security.token_validator import TokenValidator
 from biketimerwebapi.db.repositories.cassandra.cassandra_repositories_module import CassandraRepositoriesModule
+from biketimerwebapi.cache.memory.memory_cache_module import MemoryCacheModule
+from biketimerwebapi.scheduler.scheduler_module import SchedulerModule
 
 
 def SetupLogging():
@@ -43,7 +45,7 @@ def SetupFlaskApp(logger):
     return app
 
 def SetupBootstraper(logger):
-    flask_injector = FlaskInjector(app=app, modules=[CassandraRepositoriesModule])
+    flask_injector = FlaskInjector(app=app, modules=[CassandraRepositoriesModule, MemoryCacheModule, SchedulerModule])
     return flask_injector
 
 def StartListener(app, config, logger):
