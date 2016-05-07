@@ -2,6 +2,7 @@ import logging
 from datetime import datetime
 from ....entities.run import Run
 from cassandra_runs_query_builder import CassandraRunsQueryBuilder
+from cassandra_runs_insert_commands_builder import CassandraRunsInsertCommandsBuilder
 from cassandra_runs_query_result_parser import CassandraRunsQueryResultParser
 
 logger = logging.getLogger('repositories')
@@ -11,6 +12,7 @@ class CassandraRunsRepository:
         self.cluster = cluster;
         self.query_builder = CassandraRunsQueryBuilder()
         self.query_result_parser = CassandraRunsQueryResultParser()
+        self.insert_commands_builder = CassandraRunsInsertCommandsBuilder()
 
     #def get_all(self):
     #    #all_spots = SpotEntity.objects
@@ -69,6 +71,11 @@ class CassandraRunsRepository:
 
     def get_from_runs_by_spot_user_date(self, query_params, current_identity):
         pass
+
+    def save_run(self, spot_object, run_object):
+        query = self.insert_commands_builder.get_command_to_insert_into_all_tables(spot_object, run_object)
+        session = self.cluster.connect('biketimer')
+        rows = session.execute(query)
 
 
 

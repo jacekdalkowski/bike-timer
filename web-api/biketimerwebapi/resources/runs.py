@@ -1,6 +1,9 @@
 import logging
 import json
+import dateutil.parser
+import uuid
 from flask import Response
+from flask import request
 from flask import jsonify
 from flask_restful import Resource
 from flask_jwt import JWT, jwt_required, current_identity
@@ -8,6 +11,8 @@ from flask_injector import FlaskInjector
 from flask_restful import reqparse
 from injector import inject
 from ..db.repositories.repositories_definitions import RunsRepository
+from ..db.entities.run import Run
+from ..cache.cache_definitions import SpotsCacheKey
 from ..security.api_access_helper import ApiAccessHelper
 
 logger = logging.getLogger('resources')
@@ -16,10 +21,11 @@ class Runs(Resource):
 
     method_decorators = [jwt_required()] 
 
-    @inject(runs_repository=RunsRepository)
-    def __init__(self, runs_repository):
+    @inject(runs_repository=RunsRepository, spots_cache=SpotsCacheKey)
+    def __init__(self, runs_repository, spots_cache):
         logger.debug('Runs.__init__(self, runs_repository)')
         self.runs_repository = runs_repository
+        self.spots_cache = spots_cache
 
     def get(self):
         parser = reqparse.RequestParser()
@@ -94,4 +100,42 @@ class Runs(Resource):
 
     def post(self):
         logger.debug('Runs.post(self): invoked');
-        pass
+        if request.data == None:
+            return {}, 400
+        data = request.data
+        raw_request_data = json.loads(data)
+        logger.debug(str(type(raw_request_data)));
+        for raw_run in raw_request_data:
+            run_entity, spot_entity = self.run_request_data_to_run_and_spot(raw_run)
+            self.runs_repository.save_run(spot_entity, run_entity)        
+        return {}, 200
+
+    def run_request_data_to_run_and_spot(self, raw_run):
+        checkpoint_start_id = uuid.UUID(raw_run["checkpoint_start_id"])
+        checkpoint_stop_id = uuid.UUID(raw_run["checkpoint_stop_id"])
+        time_start = dateutil.parser.parse(raw_run["time_start"])
+        time_stop = dateutil.parser.parse(raw_run["time_stop"])
+        user_id = current_identity.id
+        user_bt_name = current_identity.bt_name
+
+        segment_by_checkpoint = self.spots_cache.find_segment_by_checkpoints(checkpoint_start_id, checkpoint_stop_id)
+        if segment_by_checkpoint == None:
+            raise Exception("Could not find segment.")
+
+        run_entity = Run();
+        run_entity.user_id = user_id
+        run_entity.user_bt_name = user_bt_name
+        run_entity.segment = segment_by_checkpoint.segment
+        run_entity.time_start = time_start
+        run_entity.time_stop = time_stop
+        run_entity.time_span_ms = 1
+
+        return run_entity, segment_by_checkpoint.spot
+        
+
+
+
+
+
+
+

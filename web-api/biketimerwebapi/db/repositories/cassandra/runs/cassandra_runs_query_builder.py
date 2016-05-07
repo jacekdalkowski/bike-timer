@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+from ..utils import Utils
 
 logger = logging.getLogger('repositories')
 
@@ -17,11 +18,11 @@ class CassandraRunsQueryBuilder:
         query = ('select * from runs_by_user_segment_date where user_id=' + user_id +
                 ' and segment_id=' + segment_id)
         if time_start_min_str != None:
-            time_start_min = str_to_cassandra_time(time_start_min_str)
+            time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
             query += (' and time_start >= ' + time_start_min)
 
         if time_start_max_str != None:
-            time_start_max = str_to_cassandra_time(time_start_max_str)
+            time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
             query += (' and time_start < ' + time_start_max)
 
         return query
@@ -34,12 +35,12 @@ class CassandraRunsQueryBuilder:
                 ' and spot_id=' + spot_id)
         if 'time_start_min' in query_params:
             time_start_min_str = query_params['time_start_min']
-            time_start_min = str_to_cassandra_time(time_start_min_str)
+            time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
             query += (' and time_start >= ' + time_start_min)
 
         if 'time_start_max' in query_params:
             time_start_max_str = query_params['time_start_max']
-            time_start_max = str_to_cassandra_time(time_start_max_str)
+            time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
             query += (' and time_start < ' + time_start_max)
 
         return query
@@ -56,20 +57,11 @@ class CassandraRunsQueryBuilder:
     def get_from_runs_by_spot_user_date(self, query_params, current_identity):
         pass
 
-
-
     def map_user_id_to_db_id(self, user_id, current_identity):
         if user_id.lower() == 'me':
             return str(current_identity.id)
         else:
             return user_id
 
-
-
-    def str_to_cassandra_time(dt_str):
-        dt = datetime.strptime('%Y-%m-%d')
-        epoch = datetime.utcfromtimestamp(0)
-        cassandra_time = (dt - epoch).total_seconds() * 1000.0
-        return str(cassandra_time)
 
 
