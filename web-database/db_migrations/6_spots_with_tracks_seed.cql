@@ -20,8 +20,8 @@ set tracks_old = {
 					id: 00000000-0000-0000-0000-000000000002,
 					location: { la: 50.1010566, lo: 17.1077972 }
 				},
-				valid_time_start: 1368438071000,
-				valid_time_stop: 1368438171000
+				valid_time_start: '2011-02-03T04:05+0000',
+				valid_time_stop: '2012-02-03T04:05+0000'
 			}
 		},
 		segments_current:
@@ -39,12 +39,12 @@ set tracks_old = {
 					id: 00000000-0000-0000-0000-000000000004,
 					location: { la: 50.1010566, lo: 17.1077972 }
 				},
-				valid_time_start: 1368438071000,
+				valid_time_start: '2015-02-03T04:05+0000',
 				valid_time_stop: 0
 			}
 		],
-		valid_time_start: 1368438071000,
-		valid_time_stop: 1368438072000
+		valid_time_start: '2013-02-03T04:05+0000',
+		valid_time_stop: '2014-02-03T04:05+0000'
 	} 
 },
 tracks_current = {
@@ -67,7 +67,7 @@ tracks_current = {
 					id: 00000000-0000-0000-0000-000000000006,
 					location: { la: 50.1010566, lo: 17.1077972 }
 				},
-				valid_time_start: 1368438071000,
+				valid_time_start: '2015-02-03T04:05+0000',
 				valid_time_stop: 0
 			},
 			{
@@ -83,11 +83,11 @@ tracks_current = {
 					id: 00000000-0000-0000-0000-000000000008,
 					location: { la: 50.1010566, lo: 17.1077972 }
 				},
-				valid_time_start: 1368438071000,
+				valid_time_start: '2015-02-03T04:05+0000',
 				valid_time_stop: 0
 			}
 		],
-		valid_time_start: 1368438071000,
+		valid_time_start: '2015-02-03T04:05+0000',
 		valid_time_stop: 0
 	} 
 }
