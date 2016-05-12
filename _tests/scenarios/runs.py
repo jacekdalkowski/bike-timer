@@ -17,14 +17,27 @@ class Runs:
 
 	def add_first_run(self):
 		self.db_facade.clear_tables()
+		self.db_facade.add_spot()
 
 		# Register / login Aaron.
 		aaron_access_token = self.fb_facade.request_access_token(self.fb_facade.test_users.AaronChase.id)
 		bt_token = self.identity_facade.request_bt_token_for_fb_token(aaron_access_token)
 
 		# Get Aaron account.
-		aaron_account_info = self.api_facade.request_user_me(bt_token)
+		aaron_account_info = self.api_facade.get_user_me(bt_token)
 		assert aaron_account_info['bt_name'] == 'Aaron Chase' 
+
+		# Submit run.
+		run_data = self.api_facade.post_run(bt_token, 
+				'00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000006', 
+				'2016-05-07T10:56:35.450686Z', '2016-05-07T10:58:35.450686Z')
+		print str(run_data)
+
+	def get_and_compare_from_all_tables(self):
+		pass
+
+	
+
 		
 		
 

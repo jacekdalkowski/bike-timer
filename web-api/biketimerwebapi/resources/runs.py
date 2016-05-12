@@ -103,12 +103,15 @@ class Runs(Resource):
         if request.data == None:
             return {}, 400
         data = request.data
+        logger.debug('Runs.post(self) data: ' + data);
         raw_request_data = json.loads(data)
-        logger.debug(str(type(raw_request_data)));
+        logger.debug(str(type(raw_request_data)))
+        runs_ids = []
         for raw_run in raw_request_data:
             run_entity, spot_entity = self.run_request_data_to_run_and_spot(raw_run)
-            self.runs_repository.save_run(spot_entity, run_entity)        
-        return {}, 200
+            run_id = self.runs_repository.save_run(spot_entity, run_entity)   
+            runs_ids.append(str(run_id))     
+        return {'runs_ids': runs_ids}, 200
 
     def run_request_data_to_run_and_spot(self, raw_run):
         checkpoint_start_id = uuid.UUID(raw_run["checkpoint_start_id"])

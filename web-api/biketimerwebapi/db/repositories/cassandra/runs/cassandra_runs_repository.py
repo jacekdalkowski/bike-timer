@@ -73,10 +73,11 @@ class CassandraRunsRepository:
         pass
 
     def save_run(self, spot_object, run_object):
-        queries = self.insert_commands_builder.get_command_to_insert_into_all_tables(spot_object, run_object)
+        run_id, queries = self.insert_commands_builder.get_command_to_insert_into_all_tables(spot_object, run_object)
         session = self.cluster.connect('biketimer')
         for query in queries:
             session.execute(query)
+        return run_id
 
 
 

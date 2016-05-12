@@ -20,15 +20,7 @@ class CassandraRunsInsertCommandsBuilder:
         c4 = self.get_command_to_insert_into_runs_by_segment_date_time(spot_object, run_object, run_id)
         c5 = self.get_command_to_insert_into_runs_by_segment_user_date(spot_object, run_object, run_id)
         c6 = self.get_command_to_insert_into_runs_by_segment_time(spot_object, run_object, run_id)
-        print 'c1'
-        print c1
-        print str(type(c1))
-        print str(type(c2))
-        print str(type(c3))
-        print str(type(c4))
-        print str(type(c5))
-        print str(type(c6))
-        return [c0, c1, c2, c3, c4, c5, c6]
+        return run_id, [c0, c1, c2, c3, c4, c5, c6]
 
     def get_command_to_insert_into_runs_by_user_spot_date(self, spot_object, run_object, run_id):
         return ('INSERT INTO runs_by_user_spot_date(id, user_id, spot_id, time_start, run_info) ' +
