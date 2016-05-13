@@ -41,7 +41,7 @@ def SetupFlaskApp(logger):
     api.add_resource(User, '/User', '/User/<string:id>')
     api.add_resource(Spot, '/Spot', '/Spot/<string:id>')
     api.add_resource(Spots, '/Spots')
-    api.add_resource(Runs, '/Runs')
+    api.add_resource(Runs, '/Runs/')
     return app
 
 def SetupBootstraper(logger):

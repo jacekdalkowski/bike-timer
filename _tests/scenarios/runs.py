@@ -3,6 +3,7 @@ from ..facades.fb import *
 from ..facades.identity import *
 from ..facades.api import *
 from ..facades.db import *
+import json
 
 # TODO use some testing framework
 
@@ -28,10 +29,58 @@ class Runs:
 		assert aaron_account_info['bt_name'] == 'Aaron Chase' 
 
 		# Submit run.
-		run_data = self.api_facade.post_run(bt_token, 
-				'00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000006', 
-				'2016-05-07T10:56:35.450686Z', '2016-05-07T10:58:35.450686Z')
-		print str(run_data)
+		checkpoint_start_id = '00000000-0000-0000-0000-000000000005'
+		checkpoint_stop_id = '00000000-0000-0000-0000-000000000006' 
+		time_start = '2016-05-07T10:56:35.450686Z'
+		time_stop = '2016-05-07T10:58:35.450686Z'
+		post_run_response = self.api_facade.post_run(bt_token, 
+				checkpoint_start_id, checkpoint_stop_id, 
+				time_start, time_stop)
+		run_id = post_run_response['runs_ids'][0]
+
+		# Query run tables.
+		segment_id = '00000000-0000-0000-0000-000000000003'
+		time_start_min = '2016-05-07'
+		time_start_max = '2016-05-08'
+		api_runs_response_raw = self.api_facade.get_runs_by_user_segment_date(bt_token, 
+			aaron_account_info['id'], segment_id, time_start_min, time_start_max)
+		print 'get_runs_by_user_segment_date response: '
+		print str(api_runs_response_raw) + '\n\n'
+
+		spot_id = '00000000-0000-0000-0000-000000000001'
+		api_runs_response_raw = self.api_facade.get_runs_by_user_spot_date(bt_token, 
+			aaron_account_info['id'], spot_id, time_start_min, time_start_max)
+		print 'get_runs_by_user_spot_date response: '
+		print str(api_runs_response_raw) + '\n\n'
+
+		return
+
+		api_runs_response_raw = self.api_facade.get_runs_by_user_date(bt_token, 
+			aaron_account_info['id'], time_start_min, time_start_max)
+		print 'get_runs_by_user_date response: '
+		print str(api_runs_response_raw)
+
+		return
+
+		api_runs_response_raw = self.api_facade.get_runs_by_spot_user_date(bt_token, 
+			spot_id, aaron_account_info['id'], time_start_min, time_start_max)
+		print 'get_runs_by_spot_user_date response: '
+		print str(api_runs_response_raw) + '\n\n'
+
+		api_runs_response_raw = self.api_facade.get_runs_by_segment_date_time(bt_token, 
+			segment_id, time_start_min, time_start_max)
+		print 'get_runs_by_segment_date_time response: '
+		print str(api_runs_response_raw) + '\n\n'
+
+		api_runs_response_raw = self.api_facade.get_runs_by_segment_user_date(bt_token, 
+			segment_id, aaron_account_info['id'], time_start_min, time_start_max)
+		print 'get_runs_by_segment_user_date response: '
+		print str(api_runs_response_raw) + '\n\n'
+
+		api_runs_response_raw = self.api_facade.get_runs_by_segment_time(bt_token, 
+			segment_id, time_start_min, time_start_max)
+		print 'get_runs_by_segment_time response: '
+		print str(api_runs_response_raw) + '\n\n'
 
 	def get_and_compare_from_all_tables(self):
 		pass

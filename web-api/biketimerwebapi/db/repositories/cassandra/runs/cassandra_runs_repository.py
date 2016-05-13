@@ -61,7 +61,11 @@ class CassandraRunsRepository:
         return objects
 
     def get_from_runs_by_user_date(self, query_params, current_identity):
-        pass
+        query = self.query_builder.get_from_runs_by_user_date(query_params, current_identity)
+        session = self.cluster.connect('biketimer')
+        rows = session.execute(query)
+        objects = self.query_result_parser.parse_from_runs_by_user_spot_date(rows)
+        return objects
 
     def get_from_runs_by_segment_date_time(self, query_params, current_identity):
         pass
