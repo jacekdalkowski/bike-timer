@@ -19,7 +19,13 @@ class ApiFacade:
 		print 'Received /User/Friends response: ' + r.text
 		return json.loads(r.text)
 
-
+	def get_run_by_id(self, bt_token, run_id):
+		url = ('http://' + self.api_server_host + ':' + self.api_server_port 
+			+ '/Runs/?id=' + run_id)
+		r = requests.get(url, 
+			headers={'Authorization': 'JWT ' + bt_token})
+		print 'Received ' + url + ' response: ' + r.text
+		return json.loads(r.text)
 
 	def get_runs_by_user_segment_date(self, bt_token, user_id, segment_id, time_start_min, time_start_max):
 		url = ('http://' + self.api_server_host + ':' + self.api_server_port 

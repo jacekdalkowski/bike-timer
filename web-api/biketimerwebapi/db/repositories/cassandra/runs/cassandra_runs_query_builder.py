@@ -9,6 +9,10 @@ class CassandraRunsQueryBuilder:
     def __init__(self):
         pass
 
+    def get_from_runs_by_id(self, run_id):
+        query = ('select * from runs_by_id where id=' + run_id)
+        return query
+
     def get_from_runs_by_user_segment_date(self, query_params, current_identity):
         user_id = self.map_user_id_to_db_id(query_params['user_id'], current_identity)
         segment_id = query_params['segment_id']
@@ -64,13 +68,56 @@ class CassandraRunsQueryBuilder:
         return query
 
     def get_from_runs_by_segment_date_time(self, query_params, current_identity):
-        pass
+        segment_id = query_params['segment_id']
+        
+        query = ('select * from runs_by_segment_date_time where segment_id=' + segment_id)
+        if 'time_start_min' in query_params:
+            time_start_min_str = query_params['time_start_min']
+            time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
+            query += (' and time_start >= ' + time_start_min)
+
+        if 'time_start_max' in query_params:
+            time_start_max_str = query_params['time_start_max']
+            time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
+            query += (' and time_start < ' + time_start_max)
+
+        return query
 
     def get_from_runs_by_segment_user_date(self, query_params, current_identity):
-        pass
+        segment_id = query_params['segment_id']
+        user_id = self.map_user_id_to_db_id(query_params['user_id'], current_identity)
+        
+        query = ('select * from runs_by_segment_date_time where segment_id=' + segment_id +
+                ' and user_id=' + user_id)
+        if 'time_start_min' in query_params:
+            time_start_min_str = query_params['time_start_min']
+            time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
+            query += (' and time_start >= ' + time_start_min)
+
+        if 'time_start_max' in query_params:
+            time_start_max_str = query_params['time_start_max']
+            time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
+            query += (' and time_start < ' + time_start_max)
+
+        return query
 
     def get_from_runs_by_spot_user_date(self, query_params, current_identity):
-        pass
+        spot_id = query_params['spot_id']
+        user_id = self.map_user_id_to_db_id(query_params['user_id'], current_identity)
+
+        query = ('select * from runs_by_spot_user_date where spot_id=' + spot_id +
+                ' and user_id=' + user_id)
+        if 'time_start_min' in query_params:
+            time_start_min_str = query_params['time_start_min']
+            time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
+            query += (' and time_start >= ' + time_start_min)
+
+        if 'time_start_max' in query_params:
+            time_start_max_str = query_params['time_start_max']
+            time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
+            query += (' and time_start < ' + time_start_max)
+
+        return query
 
     def map_user_id_to_db_id(self, user_id, current_identity):
         if user_id.lower() == 'me':

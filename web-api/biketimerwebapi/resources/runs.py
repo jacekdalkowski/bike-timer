@@ -29,6 +29,7 @@ class Runs(Resource):
 
     def get(self):
         parser = reqparse.RequestParser()
+        parser.add_argument('id')
         parser.add_argument('user_id')
         parser.add_argument('segment_id')
         parser.add_argument('spot_id')
@@ -37,6 +38,8 @@ class Runs(Resource):
         spot_provided = False
         segment_provided = False
         user_provided = False
+        if 'id' in query_params and query_params['id'] != None:
+            return self.get_by_id(query_params)
         if 'user_id' in query_params and query_params['user_id'] != None:
             return self.get_by_single_user(query_params)
         if 'segment_id' in query_params and query_params['segment_id'] != None:
@@ -44,6 +47,15 @@ class Runs(Resource):
         if 'spot_id' in query_params and query_params['spot_id'] != None:
             return self.get_by_single_spot(query_params)
         return {}, 400
+
+    def get_by_id(self, query_params):
+        logger.debug('Runs.get_by_id(self, query_params: ' + str(query_params) + ')')
+        run = self.runs_repository.get_from_runs_by_id(query_params)
+        if ApiAccessHelper.is_run_of_user_or_friend(run, current_identity):
+            return Response(json.dumps(run.to_dict()),  mimetype='application/json')
+        else:
+            logger.debug('Runs.get_by_id: requested run does not belong to current user nor to his friends. Returning 401.')
+            return {}, 401
 
     def get_by_single_user(self, query_params):
         logger.debug('Runs.get_by_single_user(self, query_params: ' + str(query_params) + ')')
@@ -63,27 +75,37 @@ class Runs(Resource):
             logger.debug('RunsRepository.get_from_runs_by_user_spot_date returned: ' + str(len(runs)) + ' entities.')
             response_data = [r.to_dict() for r in runs]
             return Response(json.dumps(response_data),  mimetype='application/json')       
-        if ('time_start_min' in query_params and query_params['time_start_min'] != None) or ('time_start_max' in query_params and query_params['time_start_max'] != None):
-            logger.debug('Invoking RunsRepository.get_from_runs_by_user_date')
-            runs = self.runs_repository.get_from_runs_by_user_date(query_params, current_identity)
-            logger.debug('RunsRepository.get_from_runs_by_user_date returned: ' + str(len(runs)) + ' entities.')
-            response_data = [r.to_dict() for r in runs]
-            return Response(json.dumps(response_data),  mimetype='application/json') 
-        return {}, 400
+        logger.debug('Invoking RunsRepository.get_from_runs_by_user_date')
+        runs = self.runs_repository.get_from_runs_by_user_date(query_params, current_identity)
+        logger.debug('RunsRepository.get_from_runs_by_user_date returned: ' + str(len(runs)) + ' entities.')
+        response_data = [r.to_dict() for r in runs]
+        return Response(json.dumps(response_data),  mimetype='application/json') 
 
     def get_by_single_segment(self, query_params):
         logger.debug('Runs.get_by_single_segment(self, query_params: ' + str(query_params) + ')')
         segment_id = query_params['segment_id']
-        time_start_min = query_params['time_start_min']
-        if time_start_min != None:
-            return self.runs_repository.get_from_runs_by_segment_date_time(query_params, current_identity)
-        user_id = query_params['user_id']
-        if user_id != None:
+        if 'time_start_min' in query_params and query_params['time_start_min'] != None:
+            time_start_min = query_params['time_start_min']
+            logger.debug('Invoking RunsRepository.get_from_runs_by_segment_date_time')
+            runs = self.runs_repository.get_from_runs_by_segment_date_time(query_params, current_identity)
+            logger.debug('RunsRepository.get_from_runs_by_user_spot_date returned: ' + str(len(runs)) + ' entities.')
+            response_data = [r.to_dict() for r in runs]
+            return Response(json.dumps(response_data),  mimetype='application/json')
+        if 'user_id' in query_params and query_params['user_id'] != None:
+            user_id = query_params['user_id']
             if ApiAccessHelper.IsCurrentUser(user_id, current_identity) or ApiAccessHelper.IsFriend(user_id, current_identity):
-                return self.runs_repository.get_from_runs_by_segment_user_date(query_params, current_identity)
+                logger.debug('Invoking RunsRepository.get_from_runs_by_segment_user_date')
+                runs = self.runs_repository.get_from_runs_by_segment_user_date(query_params, current_identity)
+                logger.debug('RunsRepository.get_from_runs_by_segment_user_date returned: ' + str(len(runs)) + ' entities.')
+                response_data = [r.to_dict() for r in runs]
+                return Response(json.dumps(response_data),  mimetype='application/json')
             else:
                 return {}, 401
-        return self.runs_repository.get_from_runs_by_segment_date_time(query_params, current_identity)
+        logger.debug('Invoking RunsRepository.get_from_runs_by_segment_date_time')
+        runs = self.runs_repository.get_from_runs_by_segment_date_time(query_params, current_identity)
+        logger.debug('RunsRepository.get_from_runs_by_segment_date_time returned: ' + str(len(runs)) + ' entities.')
+        response_data = [r.to_dict() for r in runs]
+        return Response(json.dumps(response_data),  mimetype='application/json')
 
     def get_by_single_spot(self, query_params):
         logger.debug('Runs.get_by_single_spot(self, query_params: ' + str(query_params) + ')')

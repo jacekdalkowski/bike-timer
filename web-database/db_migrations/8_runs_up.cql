@@ -52,3 +52,9 @@ CREATE TABLE runs_by_segment_user_date (
 	run_info frozen<run_info>,
 	PRIMARY KEY ((segment_id), user_id, time_start)
 );
+
+CREATE TABLE runs_by_id (
+	id uuid,
+	run_info frozen<run_info>,
+	PRIMARY KEY (id)
+);
