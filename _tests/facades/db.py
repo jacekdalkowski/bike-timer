@@ -1,11 +1,17 @@
 import subprocess
 from db_command_builder import DbCommandBuilder
+import dateutil.parser
 
 class DbTestCheckpoint:
 
 	def __init__(self, id, location_dict):
 		self.id = id
 		self.location_dict = location_dict
+		self.parent_segment = None
+
+	def set_references_to_parents(self, parent):
+		self.parent_segment = parent
+
 
 class DbTestSegment:
 
@@ -16,6 +22,12 @@ class DbTestSegment:
 		self.location_stop_checkpoint = location_stop_checkpoint
 		self.valid_time_start = valid_time_start
 		self.valid_time_stop = valid_time_stop
+		self.parent_track = None
+
+	def set_references_to_parents(self, parent):
+		self.parent_track = parent
+		self.location_start_checkpoint.set_references_to_parents(self)
+		self.location_stop_checkpoint.set_references_to_parents(self)
 
 class DbTestTrack:
 
@@ -26,6 +38,14 @@ class DbTestTrack:
 		self.segments_current = segments_current_list
 		self.valid_time_start = valid_time_start
 		self.valid_time_stop = valid_time_stop
+		self.parent_spot = None
+
+	def set_references_to_parents(self, parent):
+		self.parent_spot = parent
+		for segment_old in self.segments_old:
+			segment_old.set_references_to_parents(self)
+		for segment_current in self.segments_current:
+			segment_current.set_references_to_parents(self)
 
 class DbTestSpot:
 
@@ -36,6 +56,13 @@ class DbTestSpot:
 		self.tags = tags_list
 		self.tracks_old = tracks_old_list
 		self.tracks_current = tracks_current_list
+		self.set_references_to_parents()
+
+	def set_references_to_parents(self):
+		for track_old in self.tracks_old:
+			track_old.set_references_to_parents(self)
+		for track_current in self.tracks_current:
+			track_current.set_references_to_parents(self)
 
 class DbTestSpotsSet:
 
@@ -45,59 +72,59 @@ class DbTestSpotsSet:
 			[DbTestTrack('00000000-0000-0000-0000-000000000001', 'Chicken line', 
 				[DbTestSegment(
 					'00000000-0000-0000-0000-000000000001', 
-					'First segment', 
+					'Chicken line - First segment', 
 					DbTestCheckpoint(
 						'00000000-0000-0000-0000-000000000001',
 						{ 'la': '50.1010566', 'lo': '17.1077972' }),
 					DbTestCheckpoint(
 						'00000000-0000-0000-0000-000000000002',
 						{ 'la': '50.1010566','lo': '17.1077972' }),
-					1368438071000,
-					1368438171000
+					dateutil.parser.parse('1970-01-01 00:00:00+0000'),
+					dateutil.parser.parse('1970-01-01 00:00:00+0000')
 				)],
 				[DbTestSegment(
 					'00000000-0000-0000-0000-000000000002', 
-					'Second segment', 
+					'Chicken line - Second segment', 
 					DbTestCheckpoint(
 						'00000000-0000-0000-0000-000000000003',
 						{ 'la': '50.1010566', 'lo': '17.1077972' }),
 					DbTestCheckpoint(
 						'00000000-0000-0000-0000-000000000004',
 						{ 'la': '50.1010566', 'lo': '17.1077972' }),
-					1368438071000,
-					0
+					dateutil.parser.parse('1970-01-01 00:00:00+0000'),
+					dateutil.parser.parse('1970-01-01 00:00:00+0000')
 				)],
-				1368438071000,
-				1368438072000
+				dateutil.parser.parse('1970-01-01 00:00:00+0000'),
+				dateutil.parser.parse('1970-01-01 00:00:00+0000')
 			)],
-			[DbTestTrack('00000000-0000-0000-0000-000000000001', 'Chicken line', 
+			[DbTestTrack('00000000-0000-0000-0000-000000000002', 'RED line', 
 				[],
 				[DbTestSegment(
 					'00000000-0000-0000-0000-000000000003', 
-					'Meadow', 
+					'RED line - Meadow', 
 					DbTestCheckpoint(
 						'00000000-0000-0000-0000-000000000005',
 						{ 'la': '50.1010566', 'lo': '17.1077972' }),
 					DbTestCheckpoint(
 						'00000000-0000-0000-0000-000000000006',
 						{ 'la': '50.1010566', 'lo': '17.1077972' }),
-					1368438071000,
-					0
+					dateutil.parser.parse('1970-01-01 00:00:00+0000'),
+					dateutil.parser.parse('1970-01-01 00:00:00+0000')
 				),
 				DbTestSegment(
 					'00000000-0000-0000-0000-000000000004', 
-					'Forest', 
+					'RED line - Forest', 
 					DbTestCheckpoint(
 						'00000000-0000-0000-0000-000000000007',
 						{ 'la': '50.1010566', 'lo': '17.1077972' }),
 					DbTestCheckpoint(
 						'00000000-0000-0000-0000-000000000008',
 						{ 'la': '50.1010566', 'lo': '17.1077972' }),
-					1368438071000,
-					0
+					dateutil.parser.parse('1970-01-01 00:00:00+0000'),
+					dateutil.parser.parse('1970-01-01 00:00:00+0000')
 				)],
-				1368438071000,
-				1368438072000
+				dateutil.parser.parse('1970-01-01 00:00:00+0000'),
+				dateutil.parser.parse('1970-01-01 00:00:00+0000')
 			)])
 
 class DbFacade:
@@ -116,7 +143,8 @@ class DbFacade:
 										"truncate runs_by_user_date; "
 										"truncate runs_by_spot_user_date; "
 										"truncate runs_by_segment_user_date; "
-										"truncate runs_by_segment_time; ")
+										"truncate runs_by_segment_time; "
+										"truncate runs_by_id; ")
 		p_echo_command = subprocess.Popen(['echo', delete_from_tables_command], stdout=subprocess.PIPE)
 		p_cqlsh = subprocess.Popen(self.cqlshCommand, stdin=p_echo_command.stdout, stdout=subprocess.PIPE)
 		out, err = p_cqlsh.communicate()

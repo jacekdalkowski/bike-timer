@@ -26,6 +26,6 @@ class Segment:
         dict_data['name'] = str(self.name)
         dict_data['location_start'] = self.location_start.to_dict()
         dict_data['location_stop'] = self.location_stop.to_dict()
-        dict_data['valid_time_start'] = str(self.valid_time_start)
-        dict_data['valid_time_stop'] = str(self.valid_time_stop)
+        dict_data['valid_time_start'] = self.valid_time_start.strftime('%Y-%m-%d %H:%M:%S.%f')
+        dict_data['valid_time_stop'] = self.valid_time_stop.strftime('%Y-%m-%d %H:%M:%S.%f')
         return dict_data

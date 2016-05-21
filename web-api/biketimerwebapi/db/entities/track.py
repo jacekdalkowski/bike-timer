@@ -26,6 +26,6 @@ class Track:
         dict_data['name'] = str(self.name)
         dict_data['segments_old'] = [segment.to_dict() for segment in self.segments_old]
         dict_data['segments_current'] = [segment.to_dict() for segment in self.segments_current]
-        dict_data['valid_time_start'] = str(self.valid_time_start)
-        dict_data['valid_time_stop'] = str(self.valid_time_stop)
+        dict_data['valid_time_start'] = self.valid_time_start.strftime('%Y-%m-%d %H:%M:%S.%f')
+        dict_data['valid_time_stop'] = self.valid_time_stop.strftime('%Y-%m-%d %H:%M:%S.%f')
         return dict_data

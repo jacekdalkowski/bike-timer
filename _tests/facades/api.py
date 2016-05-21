@@ -120,10 +120,10 @@ class ApiFacade:
 				'Content-Type': 'application/json'
 			},
 			data = json.dumps([{
-				'checkpoint_start_id':'00000000-0000-0000-0000-000000000005',
-				'checkpoint_stop_id': '00000000-0000-0000-0000-000000000006',
-				'time_start': '2016-05-07T10:56:35.450686Z',
-				'time_stop': '2016-05-07T10:58:35.450686Z'
+				'checkpoint_start_id': checkpoint_start_id,
+				'checkpoint_stop_id': checkpoint_stop_id,
+				'time_start': time_start.isoformat(),
+				'time_stop': time_stop.isoformat()
 			}]))
 		print 'post run response: ' + r.text
 		return json.loads(r.text)

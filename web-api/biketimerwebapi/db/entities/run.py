@@ -18,6 +18,8 @@ class Run:
         run.user_id = row.run_info.user_id
         run.user_bt_name = row.run_info.user_bt_name
         run.segment = Segment.row_to_object(row.run_info.segment)
+        print 'type of time start cell'
+        print str(type(row.run_info.time_start))
         run.time_start = row.run_info.time_start
         run.time_stop = row.run_info.time_stop
         run.time_span_ms = row.run_info.time_span_ms
@@ -29,7 +31,7 @@ class Run:
         dict_data['user_id'] = str(self.user_id)
         dict_data['user_bt_name'] = str(self.user_bt_name)
         dict_data['segment'] = self.segment.to_dict()
-        dict_data['time_start'] = str(self.time_start)
-        dict_data['time_stop'] = str(self.time_stop)
+        dict_data['time_start'] = self.time_start.strftime('%Y-%m-%d %H:%M:%S.%f')
+        dict_data['time_stop'] = self.time_stop.strftime('%Y-%m-%d %H:%M:%S.%f')
         dict_data['time_span_ms'] = str(self.time_span_ms)
         return dict_data

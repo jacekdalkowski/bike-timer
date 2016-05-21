@@ -15,9 +15,10 @@ if __name__ == '__main__':
 	#users_accounts.add_first_three_friends();
 
 	runs_single = RunsSingle(deployment)
-	runs_single.add_first_run_and_verify_tables()
+	#runs_single.add_first_run_and_verify_tables()
 
-	#runs_multiple = RunsMultiple(deployment)
+	runs_multiple = RunsMultiple(deployment)
+	runs_multiple.add_runs_for_one_user_and_verify_tables()
 
 
 

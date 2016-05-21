@@ -1,4 +1,6 @@
 from db import *
+import datetime
+from ..utils import Utils
 
 class DbCommandBuilder:
 
@@ -23,8 +25,8 @@ class DbCommandBuilder:
 				"	name: '" + segment.name + "', "
 				"	location_start: " + DbCommandBuilder.create_checkpoint_part(segment.location_start_checkpoint) + ", "
 				"	location_stop: " + DbCommandBuilder.create_checkpoint_part(segment.location_stop_checkpoint) + ", "
-				"	valid_time_start: " + str(segment.valid_time_start) + ", "
-				"	valid_time_stop: " + str(segment.valid_time_stop) + " "
+				"	valid_time_start: " + Utils.datetime_to_cassandra_time(segment.valid_time_start) + ", "
+				"	valid_time_stop: " + Utils.datetime_to_cassandra_time(segment.valid_time_stop) + " "
 				"} ");
 
 		return ",".join(segment_strs)
@@ -39,8 +41,8 @@ class DbCommandBuilder:
 				"		name: '" + track.name + "', "
 				"		segments_old: {" + DbCommandBuilder.create_segments_command_part(track.segments_old) + "},"
 				"		segments_current: [" + DbCommandBuilder.create_segments_command_part(track.segments_current) + "], "
-				"		valid_time_start: " + str(track.valid_time_start) +", "
-				"		valid_time_stop: " + str(track.valid_time_stop) + " "
+				"		valid_time_start: " + Utils.datetime_to_cassandra_time(track.valid_time_start) +", "
+				"		valid_time_stop: " + Utils.datetime_to_cassandra_time(track.valid_time_stop) + " "
 				"	} ")
 		return ",".join(track_strs)
 

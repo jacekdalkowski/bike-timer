@@ -1,9 +1,11 @@
+import json
+import dateutil.parser
 from ..deployment.local_deployment import *
 from ..facades.fb import *
 from ..facades.identity import *
 from ..facades.api import *
 from ..facades.db import *
-import json
+from ..utils import Utils
 
 # TODO use some testing framework
 
@@ -27,11 +29,15 @@ class RunsSingle:
 		aaron_account_info = self.api_facade.get_user_me(bt_token)
 		assert aaron_account_info['bt_name'] == 'Aaron Chase' 
 
+		test_segment = self.db_facade.spots.KoutyNadDesnou.tracks_current[0].segments_current[0]
+
 		# Submit run.
-		checkpoint_start_id = '00000000-0000-0000-0000-000000000005'
-		checkpoint_stop_id = '00000000-0000-0000-0000-000000000006' 
-		time_start = '2016-05-07T10:56:35.450686Z'
-		time_stop = '2016-05-07T10:58:35.450686Z'
+		checkpoint_start_id = test_segment.location_start_checkpoint.id
+		checkpoint_stop_id = test_segment.location_stop_checkpoint.id 
+		time_start_string = '2016-05-19T10:56:35.000000Z'
+		time_start = dateutil.parser.parse(time_start_string)
+		time_stop_string = '2016-05-19T10:58:35.000000Z'
+		time_stop = dateutil.parser.parse(time_stop_string)
 		post_run_response = self.api_facade.post_run(bt_token, 
 				checkpoint_start_id, checkpoint_stop_id, 
 				time_start, time_stop)
@@ -41,70 +47,56 @@ class RunsSingle:
 		api_runs_response = self.api_facade.get_run_by_id(bt_token, run_id)
 		print 'get_run_by_id response: '
 		print str(api_runs_response) + '\n\n'
-		self.assert_single_run([api_runs_response], run_id, aaron_account_info)
+		Utils.assert_single_run([api_runs_response], run_id, aaron_account_info, time_start, time_stop, test_segment)
 
-		segment_id = '00000000-0000-0000-0000-000000000003'
+		segment_id = self.db_facade.spots.KoutyNadDesnou.tracks_current[0].segments_current[0].id
 		time_start_min = '2016-05-07'
 		time_start_max = '2016-05-08'
 		api_runs_response = self.api_facade.get_runs_by_user_segment_date(bt_token, 
 			aaron_account_info['id'], segment_id, time_start_min, time_start_max)
 		print 'get_runs_by_user_segment_date response: '
 		print str(api_runs_response) + '\n\n'
-		self.assert_single_run(api_runs_response, run_id, aaron_account_info)
+		Utils.assert_single_run(api_runs_response, run_id, aaron_account_info, time_start, time_stop, test_segment)
 
-		spot_id = '00000000-0000-0000-0000-000000000001'
+		spot_id = self.db_facade.spots.KoutyNadDesnou.id
 		api_runs_response = self.api_facade.get_runs_by_user_spot_date(bt_token, 
 			aaron_account_info['id'], spot_id, time_start_min, time_start_max)
 		print 'get_runs_by_user_spot_date response: '
 		print str(api_runs_response) + '\n\n'
-		self.assert_single_run(api_runs_response, run_id, aaron_account_info)
+		Utils.assert_single_run(api_runs_response, run_id, aaron_account_info, time_start, time_stop, test_segment)
 
 		api_runs_response = self.api_facade.get_runs_by_user_date(bt_token, 
 			aaron_account_info['id'], time_start_min, time_start_max)
 		print 'get_runs_by_user_date response: '
 		print str(api_runs_response) + '\n\n'
-		self.assert_single_run(api_runs_response, run_id, aaron_account_info)
+		Utils.assert_single_run(api_runs_response, run_id, aaron_account_info, time_start, time_stop, test_segment)
 
 		api_runs_response = self.api_facade.get_runs_by_spot_user_date(bt_token, 
 			spot_id, aaron_account_info['id'], time_start_min, time_start_max)
 		print 'get_runs_by_spot_user_date response: '
 		print str(api_runs_response) + '\n\n'
-		self.assert_single_run(api_runs_response, run_id, aaron_account_info)
+		Utils.assert_single_run(api_runs_response, run_id, aaron_account_info, time_start, time_stop, test_segment)
 
 		api_runs_response = self.api_facade.get_runs_by_segment_date_time(bt_token, 
 			segment_id, time_start_min, time_start_max)
 		print 'get_runs_by_segment_date_time response: '
 		print str(api_runs_response) + '\n\n'
-		self.assert_single_run(api_runs_response, run_id, aaron_account_info)
+		Utils.assert_single_run(api_runs_response, run_id, aaron_account_info, time_start, time_stop, test_segment)
 
 		api_runs_response = self.api_facade.get_runs_by_segment_user_date(bt_token, 
 			segment_id, aaron_account_info['id'], time_start_min, time_start_max)
 		print 'get_runs_by_segment_user_date response: '
 		print str(api_runs_response) + '\n\n'
+		Utils.assert_single_run(api_runs_response, run_id, aaron_account_info, time_start, time_stop, test_segment)
 
 		api_runs_response = self.api_facade.get_runs_by_segment_time(bt_token, 
 			segment_id, time_start_min, time_start_max)
 		print 'get_runs_by_segment_time response: '
 		print str(api_runs_response) + '\n\n'
+		Utils.assert_single_run(api_runs_response, run_id, aaron_account_info, time_start, time_stop, test_segment)
 
-	def assert_single_run(self, api_runs_response, run_id, user_account_info):
-		run_data = api_runs_response[0]
-		assert run_data['id'] == run_id
-		assert run_data['user_bt_name'] == user_account_info['bt_name']
-		assert run_data['time_span_ms'] == '1'
-		assert run_data['user_id'] == user_account_info['id']
-		assert run_data['time_start'] == '2016-05-07 10:56:35.450000'
-		assert run_data['time_stop'] == '2016-05-07 10:58:35.450000'
-		assert run_data['segment']['id'] == '00000000-0000-0000-0000-000000000003'
-		assert run_data['segment']['valid_time_start'] == '2013-05-13 09:41:11'
-		assert run_data['segment']['valid_time_stop'] == '1970-01-01 00:00:00'
-		assert run_data['segment']['name'] == 'Meadow'
-		assert run_data['segment']['location_start']['id'] == '00000000-0000-0000-0000-000000000005'
-		assert run_data['segment']['location_start']['location']['lo'] == 17.1077972
-		assert run_data['segment']['location_start']['location']['la'] == 50.1010566
-		assert run_data['segment']['location_stop']['id'] == '00000000-0000-0000-0000-000000000006'
-		assert run_data['segment']['location_stop']['location']['lo'] == 17.1077972
-		assert run_data['segment']['location_stop']['location']['la'] == 50.1010566
+	
+		
 
 		
 		
