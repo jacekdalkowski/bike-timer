@@ -1,0 +1,32 @@
+﻿<Properties StartupItem="iOS/biketimer.iOS.csproj">
+  <MonoDevelop.Ide.ItemProperties.biketimer.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.390819F4-4B7D-4246-9D1E-0F5A22821CDE" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Main.cs">
+    <Files>
+      <File FileName="iOS/Main.cs" Line="8" Column="12" />
+      <File FileName="iOS/AppDelegate.cs" Line="17" Column="26" />
+      <File FileName="biketimer/biketimer.cs" Line="10" Column="4" />
+      <File FileName="biketimer/Views/Debug/DebugView.xaml" Line="4" Column="27" />
+      <File FileName="biketimer/Views/Slideout/SlideoutNavigation.xaml" Line="5" Column="57" />
+      <File FileName="biketimer/Views/Slideout/SlideoutMenu.xaml" Line="3" Column="47" />
+      <File FileName="biketimer/Views/Slideout/SlideoutMenu.xaml.cs" Line="9" Column="35" />
+      <File FileName="biketimer/Views/Device/DeviceView.xaml" Line="4" Column="34" />
+      <File FileName="biketimer/Views/Login/LoginView.xaml" Line="5" Column="23" />
+      <File FileName="biketimer/Views/Stats/StatsView.xaml" Line="4" Column="33" />
+      <File FileName="biketimer/Views/Debug/DebugView.xaml.cs" Line="6" Column="26" />
+      <File FileName="biketimer/Views/Slideout/SlideoutMenuItem.cs" Line="5" Column="35" />
+      <File FileName="biketimer/Views/Device/DeviceView.xaml.cs" Line="6" Column="33" />
+      <File FileName="biketimer/Views/Login/LoginView.xaml.cs" Line="6" Column="32" />
+      <File FileName="biketimer/Views/Stats/StatsView.xaml.cs" Line="6" Column="32" />
+      <File FileName="biketimer/obj/Debug/biketimer.Views.Slideout.SlideoutNavigation.xaml.g.cs" Line="1" Column="1" />
+      <File FileName="biketimer/Views/Slideout/SlideoutNavigation.xaml.cs" Line="6" Column="35" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <DisabledProjects>
+    <String>Droid/biketimer.Droid.csproj</String>
+  </DisabledProjects>
+</Properties>
