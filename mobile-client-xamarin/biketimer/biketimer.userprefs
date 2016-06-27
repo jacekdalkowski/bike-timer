@@ -1,29 +1,66 @@
 ﻿<Properties StartupItem="iOS/biketimer.iOS.csproj">
-  <MonoDevelop.Ide.ItemProperties.biketimer.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.390819F4-4B7D-4246-9D1E-0F5A22821CDE" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Main.cs">
+  <MonoDevelop.Ide.ItemProperties.biketimer.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="biketimer/Facebook/FacebookFacade.cs">
     <Files>
-      <File FileName="iOS/Main.cs" Line="8" Column="12" />
-      <File FileName="iOS/AppDelegate.cs" Line="17" Column="26" />
-      <File FileName="biketimer/biketimer.cs" Line="10" Column="4" />
-      <File FileName="biketimer/Views/Debug/DebugView.xaml" Line="4" Column="27" />
-      <File FileName="biketimer/Views/Slideout/SlideoutNavigation.xaml" Line="5" Column="57" />
-      <File FileName="biketimer/Views/Slideout/SlideoutMenu.xaml" Line="3" Column="47" />
-      <File FileName="biketimer/Views/Slideout/SlideoutMenu.xaml.cs" Line="9" Column="35" />
-      <File FileName="biketimer/Views/Device/DeviceView.xaml" Line="4" Column="34" />
-      <File FileName="biketimer/Views/Login/LoginView.xaml" Line="5" Column="23" />
-      <File FileName="biketimer/Views/Stats/StatsView.xaml" Line="4" Column="33" />
-      <File FileName="biketimer/Views/Debug/DebugView.xaml.cs" Line="6" Column="26" />
-      <File FileName="biketimer/Views/Slideout/SlideoutMenuItem.cs" Line="5" Column="35" />
-      <File FileName="biketimer/Views/Device/DeviceView.xaml.cs" Line="6" Column="33" />
-      <File FileName="biketimer/Views/Login/LoginView.xaml.cs" Line="6" Column="32" />
-      <File FileName="biketimer/Views/Stats/StatsView.xaml.cs" Line="6" Column="32" />
-      <File FileName="biketimer/obj/Debug/biketimer.Views.Slideout.SlideoutNavigation.xaml.g.cs" Line="1" Column="1" />
-      <File FileName="biketimer/Views/Slideout/SlideoutNavigation.xaml.cs" Line="6" Column="35" />
+      <File FileName="iOS/Views/Login/LoginViewRenderer.cs" Line="119" Column="1" />
+      <File FileName="biketimer/Facebook/FacebookStateManagerCommon.cs" Line="18" Column="16" />
+      <File FileName="biketimer/Facebook/FacebookFacade.cs" Line="19" Column="1" />
+      <File FileName="iOS/Info.plist" />
+      <File FileName="iOS/Facebook/FacebookStateManager.cs" Line="26" Column="4" />
+      <File FileName="iOS/Views/LoadingOverlay.cs" Line="13" Column="29" />
+      <File FileName="iOS/AppDelegate.cs" Line="36" Column="46" />
+      <File FileName="iOS/Main.cs" Line="17" Column="1" />
+      <File FileName="biketimer/biketimer.cs" Line="14" Column="1" />
+      <File FileName="biketimer/Views/Slideout/SlideoutNavigation.xaml" Line="15" Column="27" />
+      <File FileName="biketimer/Views/Login/LoginView.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="biketimer" expanded="True">
+            <Node name="biketimer" expanded="True">
+              <Node name="References" expanded="True">
+                <Node name="From Packages" expanded="True" />
+              </Node>
+              <Node name="Packages" expanded="True" />
+              <Node name="Facebook" expanded="True">
+                <Node name="FacebookFacade.cs" selected="True" />
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Login" expanded="True" />
+                <Node name="Slideout" expanded="True">
+                  <Node name="SlideoutNavigation.xaml" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+            <Node name="biketimer.iOS" expanded="True">
+              <Node name="ComponentReferenceFolder" expanded="True" />
+              <Node name="Packages" expanded="True" />
+              <Node name="Facebook" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Login" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Facebook/FacebookManager.cs" line="42" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Facebook/FacebookManager.cs" line="38" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Facebook/FacebookFacade.cs" line="19" column="19" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="119" column="108" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Facebook/FacebookFacade.cs" line="24" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="100" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="152" column="34" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="157" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="156" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="113" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="110" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <DisabledProjects>

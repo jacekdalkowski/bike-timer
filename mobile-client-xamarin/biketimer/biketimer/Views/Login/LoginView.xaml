@@ -4,9 +4,10 @@
 		x:Class="Biketimer.Views.Login.LoginView">
 	<ContentPage.Content>
 		<StackLayout>
-			<Label Text="Login view" 
+			<Button Text="Login view" 
 				HorizontalOptions="Center" 
-				VerticalOptions="CenterAndExpand" />
+				VerticalOptions="CenterAndExpand"
+				Clicked="OnLoginClicked" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

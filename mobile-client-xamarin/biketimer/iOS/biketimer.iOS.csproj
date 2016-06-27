@@ -98,6 +98,15 @@
     <Reference Include="Robotics.Mobile.Core.iOS">
       <HintPath>..\packages\Monkey.Robotics.0.5.2\lib\Xamarin.iOS10\Robotics.Mobile.Core.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook">
+      <HintPath>..\packages\Xamarin.Facebook.iOS.4.12.0\lib\Xamarin.iOS10\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\biketimer\biketimer.csproj">
@@ -120,9 +129,23 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Bluetooth\BluetoothManager.cs" />
+    <Compile Include="AppDelegate.Facebook.cs" />
+    <Compile Include="AppDelegate.Bluetooth.cs" />
+    <Compile Include="Views\Login\LoginViewRenderer.cs" />
+    <Compile Include="Facebook\FacebookStateManager.cs" />
+    <Compile Include="Views\LoadingOverlay.cs" />
+    <Compile Include="Views\ViewHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bluetooth\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Login\" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="facebookios">
+      <Version>4.12.0.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

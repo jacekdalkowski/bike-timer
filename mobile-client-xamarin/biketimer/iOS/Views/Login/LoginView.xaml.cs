@@ -3,18 +3,13 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace Biketimer.Views.Login
+namespace Biketimer.iOS
 {
 	public partial class LoginView : ContentPage
 	{
 		public LoginView()
 		{
 			InitializeComponent();
-		}
-
-		public void OnLoginClicked(object sender, EventArgs args)
-		{
-
 		}
 	}
 }
