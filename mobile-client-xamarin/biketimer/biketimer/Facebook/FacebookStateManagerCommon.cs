@@ -6,25 +6,31 @@ namespace Biketimer.Facebook
 {
 	public abstract class FacebookStateManagerCommon
 	{
-		public FacebookAccount FacebookAccountData { get; private set; }
+		public event Action<FacebookAccount> LoginCompleted;
+		public event Action LogoutCompleted;
 
+		private FacebookAccount _facebookAccountData;
 		private readonly FacebookFacade _facebookFacade;
+
 
 		public FacebookStateManagerCommon()
 		{
 			_facebookFacade = new FacebookFacade();
 		}
 
-		public async Task OnAccessTokenReceived(FacebookAccess facebookAccessData, Action<FacebookAccount> onLoginCompleted)
+		public async Task OnAccessTokenReceived(FacebookAccess facebookAccessData)
 		{
 			FacebookProfile profile = await _facebookFacade.GetUserProfile(facebookAccessData.AccessToken);
-			FacebookAccountData = new FacebookAccount(facebookAccessData, profile);
-			onLoginCompleted(FacebookAccountData);
+			_facebookAccountData = new FacebookAccount(facebookAccessData, profile);
+			if (LoginCompleted != null)
+			{
+				LoginCompleted(_facebookAccountData);
+			}
 		}
 
 		public void OnLoggedOut()
 		{
-			FacebookAccountData = null;
+			_facebookAccountData = null;
 		}
 	}
 }

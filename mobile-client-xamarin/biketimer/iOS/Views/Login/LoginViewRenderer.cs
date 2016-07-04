@@ -84,6 +84,8 @@ namespace Biketimer.iOS.Views.Login
 			// Handle actions once the user is logged out
 			loginButton.LoggedOut += OnLoggedOut;
 
+			FacebookStateManager.Instance.LoginCompleted += OnLoginCompleted;
+
 			View.AddSubview(loginButton);
 		}
 
@@ -102,7 +104,7 @@ namespace Biketimer.iOS.Views.Login
 				eventArgs.Result.Token.TokenString,
 				eventArgs.Result.Token.Permissions.Select(p => p.Self.ToString()));
 
-			System.Threading.Tasks.Task.Run(async () => await FacebookStateManager.Instance.OnAccessTokenReceived(facebookAccess, OnLoginCompleted));
+			System.Threading.Tasks.Task.Run(async () => await FacebookStateManager.Instance.OnAccessTokenReceived(facebookAccess));
 		}
 
 		/// <summary>

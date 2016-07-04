@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Biketimer.Bluetooth;
+using Biketimer.Facebook;
 
 namespace Biketimer
 {
@@ -8,9 +9,10 @@ namespace Biketimer
 	{
 		private IBluetoothManager _bluetoothManager;
 
-		public App (IBluetoothManager bluetoothManager)
+		public App (IBluetoothManager bluetoothManager, FacebookStateManagerCommon facebookStateManager)
 		{
 			PlatformSpecificManagers.BluetoothManager = bluetoothManager;
+			PlatformSpecificManagers.FacebookStateManager = facebookStateManager;
 			MainPage = new Biketimer.Views.Slideout.SlideoutNavigation();
 		}
 
