@@ -14,7 +14,8 @@ namespace Biketimer.iOS.Views.Login
 {
 	public class LoginViewRenderer : PageRenderer
 	{
-		private FacebookCoreKit.ProfilePictureView pictureView;
+		private FacebookLoginKit.LoginButton _loginButton;
+		private FacebookCoreKit.ProfilePictureView _pictureView;
 
 		public override void ViewDidLoad()
 		{
@@ -38,39 +39,63 @@ namespace Biketimer.iOS.Views.Login
 			//View.AddSubview(btn);
 
 			base.ViewDidLoad();
-
-			string p = null;
-
-			if (p == null)
+			FacebookStateManager.Instance.LoginCompleted += OnLoginCompleted;
+			FacebookCoreKit.AccessToken accessToken = FacebookCoreKit.AccessToken.CurrentAccessToken;
+			if (accessToken != null)
 			{
-				RenderForLoggedIn();
+				FacebookAccess facebookAccess = new FacebookAccess(
+					accessToken.TokenString,
+					accessToken.Permissions.Select(p => p.Self.ToString()));
+				FacebookStateManager.Instance.SetAccessToken(facebookAccess);
+			}
+			
+			_loginButton = CreateLoginButton();
+			_pictureView = new FacebookCoreKit.ProfilePictureView(new CGRect(50, 50, 220, 220));
+
+			if (FacebookStateManager.Instance.Account != null)
+			{
+				SetupViewForLoggedIn();
 			}
 			else
 			{
-				RenderForNotLoggedIn();
+				SetupViewForNotLoggedIn();
 			}
 
 
 
 			//// The user image profile is set automatically once is logged in
-			//pictureView = new FacebookCoreKit.ProfilePictureView(new CGRect(50, 50, 220, 220));
+			//pictureView 
 
 			//// Add views to main view
 			//View.AddSubview(loginButton);
 			//View.AddSubview(pictureView);
 		}
 
-		private void RenderForLoggedIn()
+		private void SetupViewForLoggedIn()
 		{
-			RenderFacebookButton();
+			if (!View.Subviews.Any(s => s == _pictureView))
+			{
+				View.AddSubview(_pictureView);
+			}
+			if (!View.Subviews.Any(s => s == _loginButton))
+			{
+				View.AddSubview(_loginButton);
+			}
 		}
 
-		private void RenderForNotLoggedIn()
+		private void SetupViewForNotLoggedIn()
 		{
-			RenderFacebookButton();
+			if (View.Subviews.Any(s => s == _pictureView))
+			{
+				_pictureView.RemoveFromSuperview();
+			}
+			if (!View.Subviews.Any(s => s == _loginButton))
+			{
+				View.AddSubview(_loginButton);
+			}
 		}
 
-		private void RenderFacebookButton()
+		private FacebookLoginKit.LoginButton CreateLoginButton()
 		{
 			FacebookLoginKit.LoginButton loginButton = new FacebookLoginKit.LoginButton(new CGRect(48, 0, 218, 46))
 			{
@@ -84,10 +109,10 @@ namespace Biketimer.iOS.Views.Login
 			// Handle actions once the user is logged out
 			loginButton.LoggedOut += OnLoggedOut;
 
-			FacebookStateManager.Instance.LoginCompleted += OnLoginCompleted;
-
-			View.AddSubview(loginButton);
+			return loginButton;
 		}
+
+
 
 		private void OnAccessTokenReceived(object sender, FacebookLoginKit.LoginButtonCompletedEventArgs eventArgs)
 		{
@@ -96,15 +121,13 @@ namespace Biketimer.iOS.Views.Login
 				return;
 			}
 
-			var bounds = UIScreen.MainScreen.Bounds;
-
 			ViewHelpers.AddLoadingOverlay(View);
 
 			FacebookAccess facebookAccess = new FacebookAccess(
 				eventArgs.Result.Token.TokenString,
 				eventArgs.Result.Token.Permissions.Select(p => p.Self.ToString()));
 
-			System.Threading.Tasks.Task.Run(async () => await FacebookStateManager.Instance.OnAccessTokenReceived(facebookAccess));
+			FacebookStateManager.Instance.SetAccessToken(facebookAccess);
 		}
 
 		/// <summary>
@@ -112,46 +135,21 @@ namespace Biketimer.iOS.Views.Login
 		/// </summary>
 		private void OnLoginCompleted(FacebookAccount facebookAccountData)
 		{
-			InvokeOnMainThread(() => ViewHelpers.RemoveLoadingOverlay(View));
+			InvokeOnMainThread(() =>
+			{
+				SetupViewForLoggedIn();
+				ViewHelpers.RemoveLoadingOverlay(View);
+			});
 		}
 
 		private void OnLoggedOut(object sender, EventArgs eventArgs)
 		{
 			FacebookStateManager.Instance.OnLoggedOut();
+			InvokeOnMainThread(() =>
+			{
+				SetupViewForNotLoggedIn();
+			});
 		}
 
-		UIActivityIndicatorView spinner;
-		private void showIndicator()
-		{
-			if (spinner == null)
-			{
-				spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge);
-				spinner.HidesWhenStopped = true;
-				spinner.Color = UIColor.Black;
-			}
-			var windows = UIApplication.SharedApplication.Windows;
-			Array.Reverse(windows);
-			foreach (UIWindow w in windows)
-			{
-				if (w.WindowLevel == UIWindowLevel.Normal && !w.Hidden)
-				{
-					spinner.Frame = new CGRect((float)w.Bounds.GetMidX(), (float)(.66 * w.Bounds.Height), 37, 37);
-					w.AddSubview(spinner);
-					w.BringSubviewToFront(spinner);
-					break;
-				}
-			}
-			spinner.StartAnimating();
-		}
-
-		private void hideIndicator()
-		{
-			if (spinner == null)
-				return;
-			if (!spinner.IsAnimating)
-				return;
-			spinner.StopAnimating();
-		}
 	}
 }
-

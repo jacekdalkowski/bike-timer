@@ -22,13 +22,19 @@ namespace Biketimer.Views.Slideout
 			_menuForNotLoggedInUser = CreateMenuForNotLoggedInUser();
 
 			PlatformSpecificManagers.FacebookStateManager.LoginCompleted += OnLoginCompleted;
+			PlatformSpecificManagers.FacebookStateManager.LogoutCompleted += OnLogoutCompleted;
 
-			listView.ItemsSource = _menuForNotLoggedInUser;
+			ListView.ItemsSource = _menuForNotLoggedInUser;
 		}
 
 		private void OnLoginCompleted(FacebookAccount facebookAccessData)
 		{
-			Xamarin.Forms.Device.BeginInvokeOnMainThread(() => listView.ItemsSource = _menuForLoggedInUser);
+			Xamarin.Forms.Device.BeginInvokeOnMainThread(() => ListView.ItemsSource = _menuForLoggedInUser);
+		}
+
+		private void OnLogoutCompleted()
+		{
+			Xamarin.Forms.Device.BeginInvokeOnMainThread(() => ListView.ItemsSource = _menuForNotLoggedInUser);
 		}
 
 		private static List<SlideoutMenuItem> CreateMenuForLoggedInUser()
