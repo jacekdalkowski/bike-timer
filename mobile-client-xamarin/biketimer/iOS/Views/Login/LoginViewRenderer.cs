@@ -16,6 +16,10 @@ namespace Biketimer.iOS.Views.Login
 	{
 		private FacebookLoginKit.LoginButton _loginButton;
 		private FacebookCoreKit.ProfilePictureView _pictureView;
+		private UILabel _welcomeLabel;
+
+		private nfloat _pictureSide;
+		private nfloat _pictureTop;
 
 		public override void ViewDidLoad()
 		{
@@ -40,17 +44,14 @@ namespace Biketimer.iOS.Views.Login
 
 			base.ViewDidLoad();
 			FacebookStateManager.Instance.LoginCompleted += OnLoginCompleted;
-			FacebookCoreKit.AccessToken accessToken = FacebookCoreKit.AccessToken.CurrentAccessToken;
-			if (accessToken != null)
-			{
-				FacebookAccess facebookAccess = new FacebookAccess(
-					accessToken.TokenString,
-					accessToken.Permissions.Select(p => p.Self.ToString()));
-				FacebookStateManager.Instance.SetAccessToken(facebookAccess);
-			}
-			
+
+			var viewBounds = View.Bounds;
+			_pictureSide = viewBounds.Width * 0.7f;
+			_pictureTop = viewBounds.Height * 0.15f;
+
 			_loginButton = CreateLoginButton();
-			_pictureView = new FacebookCoreKit.ProfilePictureView(new CGRect(50, 50, 220, 220));
+			_pictureView = CreateProfilePicture();
+			_welcomeLabel = CreateWelcomeLabel();
 
 			if (FacebookStateManager.Instance.Account != null)
 			{
@@ -60,15 +61,14 @@ namespace Biketimer.iOS.Views.Login
 			{
 				SetupViewForNotLoggedIn();
 			}
+		}
 
-
-
-			//// The user image profile is set automatically once is logged in
-			//pictureView 
-
-			//// Add views to main view
-			//View.AddSubview(loginButton);
-			//View.AddSubview(pictureView);
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				FacebookStateManager.Instance.LoginCompleted -= OnLoginCompleted;
+			}
 		}
 
 		private void SetupViewForLoggedIn()
@@ -80,6 +80,10 @@ namespace Biketimer.iOS.Views.Login
 			if (!View.Subviews.Any(s => s == _loginButton))
 			{
 				View.AddSubview(_loginButton);
+			}
+			if (!View.Subviews.Any(s => s == _welcomeLabel))
+			{
+				View.AddSubview(_welcomeLabel);
 			}
 		}
 
@@ -93,11 +97,23 @@ namespace Biketimer.iOS.Views.Login
 			{
 				View.AddSubview(_loginButton);
 			}
+			if (View.Subviews.Any(s => s == _welcomeLabel))
+			{
+				_welcomeLabel.RemoveFromSuperview();
+			}
 		}
 
 		private FacebookLoginKit.LoginButton CreateLoginButton()
 		{
-			FacebookLoginKit.LoginButton loginButton = new FacebookLoginKit.LoginButton(new CGRect(48, 0, 218, 46))
+			var viewBounds = View.Bounds;
+			var buttonWidth = viewBounds.Width * 0.7f;
+			var buttonHeight = viewBounds.Height * 0.08f;
+
+			var buttonTop = viewBounds.Height * 0.035f;
+			var buttonLeft = viewBounds.Width * 0.15f;
+
+			FacebookLoginKit.LoginButton loginButton = new FacebookLoginKit.LoginButton(
+					new CGRect(buttonLeft, buttonTop, buttonWidth, buttonHeight))
 			{
 				LoginBehavior = FacebookLoginKit.LoginBehavior.Native,
 				ReadPermissions = new string[] { "public_profile" }
@@ -112,7 +128,30 @@ namespace Biketimer.iOS.Views.Login
 			return loginButton;
 		}
 
+		private FacebookCoreKit.ProfilePictureView CreateProfilePicture()
+		{
+			var viewBounds = View.Bounds;
+			var pictureLeft = viewBounds.Width * 0.15f;
 
+			return new FacebookCoreKit.ProfilePictureView(new CGRect(pictureLeft, _pictureTop, _pictureSide, _pictureSide));
+		}
+
+		private UILabel CreateWelcomeLabel()
+		{
+			var viewBounds = View.Bounds;
+			var labelWidth = viewBounds.Width * 0.7f;
+			var labelHeight = viewBounds.Height * 0.08f;
+
+			var labelTop = _pictureTop + _pictureSide + labelHeight;
+			var labelLeft = viewBounds.Width * 0.15f;
+
+			var welcomeLabel = new UILabel(new CGRect(labelLeft, labelTop, labelWidth, labelHeight));
+			welcomeLabel.TextAlignment = UITextAlignment.Center;
+			welcomeLabel.TextColor = UIKit.UIColor.FromRGB(59, 89, 152);
+			welcomeLabel.Text = "Welcome!";
+
+			return welcomeLabel;
+		}
 
 		private void OnAccessTokenReceived(object sender, FacebookLoginKit.LoginButtonCompletedEventArgs eventArgs)
 		{

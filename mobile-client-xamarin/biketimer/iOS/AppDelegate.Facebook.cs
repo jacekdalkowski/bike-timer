@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using System.Linq;
+using Foundation;
 using UIKit;
 using FacebookCoreKit = global::Facebook.CoreKit;
 
@@ -12,7 +13,18 @@ namespace Biketimer.iOS
 			//FacebookCoreKit.Settings.DisplayName = "biketimer";
 
 			// This method verifies if you have been logged into the app before, and keep you logged in after you reopen or kill your app.
-			return FacebookCoreKit.ApplicationDelegate.SharedInstance.FinishedLaunching(application, launchOptions);
+			var finishedLaunching = FacebookCoreKit.ApplicationDelegate.SharedInstance.FinishedLaunching(application, launchOptions);
+
+			FacebookCoreKit.AccessToken accessToken = FacebookCoreKit.AccessToken.CurrentAccessToken;
+			if (accessToken != null)
+			{
+				FacebookAccess facebookAccess = new FacebookAccess(
+					accessToken.TokenString,
+					accessToken.Permissions.Select(p => p.Self.ToString()));
+				FacebookStateManager.Instance.SetAccessToken(facebookAccess);
+			}
+
+			return finishedLaunching;
 		}
 	}
 }
