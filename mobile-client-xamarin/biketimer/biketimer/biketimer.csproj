@@ -51,11 +51,19 @@
     <Compile Include="Bluetooth\IBluetoothManager.cs" />
     <Compile Include="PlatformSpecificManagers.cs" />
     <Compile Include="Views\Login\LoginView.cs" />
-    <Compile Include="Facebook\FacebookStateManagerCommon.cs" />
     <Compile Include="Facebook\FacebookAccount.cs" />
     <Compile Include="Facebook\FacebookAccess.cs" />
     <Compile Include="Facebook\FacebookProfile.cs" />
     <Compile Include="Facebook\FacebookFacade.cs" />
+    <Compile Include="BiketimerApiServer\BiketimerFacade.cs" />
+    <Compile Include="BiketimerApiServer\BiketimerAccess.cs" />
+    <Compile Include="BiketimerApiServer\BiketimerAccount.cs" />
+    <Compile Include="BiketimerApiServer\BiketimerProfile.cs" />
+    <Compile Include="BiketimerIdentityServer\BiketimerIdentityFacade.cs" />
+    <Compile Include="BiketimerIdentityServer\BiketimerIdentityResponse.cs" />
+    <Compile Include="AccountManager.cs" />
+    <Compile Include="AccountManager.Singleton.cs" />
+    <Compile Include="Account.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -98,6 +106,8 @@
     <Folder Include="Views\Debug\" />
     <Folder Include="Bluetooth\" />
     <Folder Include="Facebook\" />
+    <Folder Include="BiketimerApiServer\" />
+    <Folder Include="BiketimerIdentityServer\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Slideout\SlideoutNavigation.xaml">

@@ -11,11 +11,11 @@ namespace Biketimer
 	public class FacebookFacade
 	{
 		private const string _facebookApiDomainUrl = "https://graph.facebook.com";
-		private const string _getProfileAbsoluteUrl = "/v2.1/me";
+		private const string _getProfileAbsoluteUrl = "/v2.6/me?fields=id,email,first_name,last_name,name,gender";
 
 		public async Task<FacebookProfile> GetUserProfile(string userAccessToken)
 		{
-			FacebookProfile profile = await GetData<FacebookProfile>(_getProfileAbsoluteUrl + "?access_token=" + userAccessToken);
+			FacebookProfile profile = await GetData<FacebookProfile>(_getProfileAbsoluteUrl + "&access_token=" + userAccessToken);
 			return profile;
 		}
 

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Biketimer.Facebook
 {
-	public abstract class FacebookStateManagerCommon
+	public class FacebookStateManagerCommon
 	{
 		public event Action<FacebookAccount> LoginCompleted;
 		public event Action LogoutCompleted;
@@ -45,7 +45,7 @@ namespace Biketimer.Facebook
 		public void OnLoggedOut()
 		{
 			_facebookAccountData = null;
-			if (LoginCompleted != null)
+			if (LogoutCompleted != null)
 			{
 				LogoutCompleted();
 			}

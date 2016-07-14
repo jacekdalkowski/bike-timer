@@ -18,8 +18,7 @@ namespace Biketimer.iOS
 			global::Xamarin.Forms.Forms.Init ();
 
 			var bluetoothManager = new BluetoothManager(Adapter.Current);
-			var facebookStateManager = FacebookStateManager.Instance;
-			var commonApp = new Biketimer.App(bluetoothManager, facebookStateManager);
+			var commonApp = new Biketimer.App(bluetoothManager);
 			LoadApplication(commonApp);
 
 			FacebookSetupOnFinishedLaunching(app, options);

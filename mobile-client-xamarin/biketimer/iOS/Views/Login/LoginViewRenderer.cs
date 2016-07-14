@@ -43,7 +43,7 @@ namespace Biketimer.iOS.Views.Login
 			//View.AddSubview(btn);
 
 			base.ViewDidLoad();
-			FacebookStateManager.Instance.LoginCompleted += OnLoginCompleted;
+			AccountManager.Instance.LoginCompleted += OnLoginCompleted;
 
 			var viewBounds = View.Bounds;
 			_pictureSide = viewBounds.Width * 0.7f;
@@ -53,7 +53,7 @@ namespace Biketimer.iOS.Views.Login
 			_pictureView = CreateProfilePicture();
 			_welcomeLabel = CreateWelcomeLabel();
 
-			if (FacebookStateManager.Instance.Account != null)
+			if (AccountManager.Instance.AccountData != null)
 			{
 				SetupViewForLoggedIn();
 			}
@@ -67,7 +67,7 @@ namespace Biketimer.iOS.Views.Login
 		{
 			if (disposing)
 			{
-				FacebookStateManager.Instance.LoginCompleted -= OnLoginCompleted;
+				AccountManager.Instance.LoginCompleted -= OnLoginCompleted;
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace Biketimer.iOS.Views.Login
 					new CGRect(buttonLeft, buttonTop, buttonWidth, buttonHeight))
 			{
 				LoginBehavior = FacebookLoginKit.LoginBehavior.Native,
-				ReadPermissions = new string[] { "public_profile" }
+				ReadPermissions = new string[] { "public_profile", "email" }
 			};
 
 			// Handle actions once the user is logged in
@@ -166,13 +166,14 @@ namespace Biketimer.iOS.Views.Login
 				eventArgs.Result.Token.TokenString,
 				eventArgs.Result.Token.Permissions.Select(p => p.Self.ToString()));
 
-			FacebookStateManager.Instance.SetAccessToken(facebookAccess);
+			//FacebookStateManager.Instance.SetAccessToken(facebookAccess);
+			AccountManager.Instance.Login(facebookAccess);
 		}
 
 		/// <summary>
 		/// Called when login process is completed by FacebookManager.
 		/// </summary>
-		private void OnLoginCompleted(FacebookAccount facebookAccountData)
+		private void OnLoginCompleted(Account accountData)
 		{
 			InvokeOnMainThread(() =>
 			{
@@ -183,7 +184,7 @@ namespace Biketimer.iOS.Views.Login
 
 		private void OnLoggedOut(object sender, EventArgs eventArgs)
 		{
-			FacebookStateManager.Instance.OnLoggedOut();
+			//FacebookStateManager.Instance.OnLoggedOut();
 			InvokeOnMainThread(() =>
 			{
 				SetupViewForNotLoggedIn();

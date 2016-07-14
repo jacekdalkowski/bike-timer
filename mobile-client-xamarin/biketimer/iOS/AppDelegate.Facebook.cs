@@ -21,7 +21,7 @@ namespace Biketimer.iOS
 				FacebookAccess facebookAccess = new FacebookAccess(
 					accessToken.TokenString,
 					accessToken.Permissions.Select(p => p.Self.ToString()));
-				FacebookStateManager.Instance.SetAccessToken(facebookAccess);
+				//FacebookStateManager.Instance.SetAccessToken(facebookAccess);
 			}
 
 			return finishedLaunching;
