@@ -23,27 +23,9 @@ namespace Biketimer.iOS.Views.Login
 
 		public override void ViewDidLoad()
 		{
-			//base.ViewDidLoad();
-
-			//View.BackgroundColor = UIColor.White;
-			//Title = "My Custom View Controller";
-
-			//var btn = UIButton.FromType(UIButtonType.System);
-			//btn.Frame = new CGRect(20, 200, 280, 44);
-			//btn.SetTitle("Click Me", UIControlState.Normal);
-
-			//var user = new UIViewController();
-			//user.View.BackgroundColor = UIColor.Magenta;
-
-			//btn.TouchUpInside += (sender, e) =>
-			//{
-			//	this.NavigationController.PushViewController(user, true);
-			//};
-
-			//View.AddSubview(btn);
-
 			base.ViewDidLoad();
 			AccountManager.Instance.LoginCompleted += OnLoginCompleted;
+			AccountManager.Instance.LoginFailed += OnLoginFailed;
 
 			var viewBounds = View.Bounds;
 			_pictureSide = viewBounds.Width * 0.7f;
@@ -68,6 +50,7 @@ namespace Biketimer.iOS.Views.Login
 			if (disposing)
 			{
 				AccountManager.Instance.LoginCompleted -= OnLoginCompleted;
+				AccountManager.Instance.LoginFailed -= OnLoginFailed;
 			}
 		}
 
@@ -167,7 +150,7 @@ namespace Biketimer.iOS.Views.Login
 				eventArgs.Result.Token.Permissions.Select(p => p.Self.ToString()));
 
 			//FacebookStateManager.Instance.SetAccessToken(facebookAccess);
-			AccountManager.Instance.Login(facebookAccess);
+			AccountManager.Instance.StartLogin(facebookAccess);
 		}
 
 		/// <summary>
@@ -178,6 +161,15 @@ namespace Biketimer.iOS.Views.Login
 			InvokeOnMainThread(() =>
 			{
 				SetupViewForLoggedIn();
+				ViewHelpers.RemoveLoadingOverlay(View);
+			});
+		}
+
+		private void OnLoginFailed()
+		{
+			InvokeOnMainThread(() =>
+			{
+				// TODO: error message
 				ViewHelpers.RemoveLoadingOverlay(View);
 			});
 		}
