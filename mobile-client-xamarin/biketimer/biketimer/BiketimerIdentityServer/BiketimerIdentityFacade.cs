@@ -31,7 +31,7 @@ namespace Biketimer
 				}
 				else
 				{
-					return null;
+					throw new BiketimerIdentityException(); // TODO: some kind of identity-server-connection-exceptio 
 				}
 			}
 		}

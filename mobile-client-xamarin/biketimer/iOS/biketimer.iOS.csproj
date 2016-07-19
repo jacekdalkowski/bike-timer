@@ -135,6 +135,7 @@
     <Compile Include="Facebook\FacebookStateManager.cs" />
     <Compile Include="Views\LoadingOverlay.cs" />
     <Compile Include="Views\ViewHelpers.cs" />
+    <Compile Include="AppDelegate.Storage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bluetooth\" />

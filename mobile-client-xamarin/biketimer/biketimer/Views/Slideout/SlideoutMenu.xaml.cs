@@ -78,6 +78,12 @@ namespace Biketimer.Views.Slideout
 					Title = "Login",
 					IconSource = "contacts.png",
 					TargetType = typeof(LoginView)
+				},
+				new SlideoutMenuItem
+				{
+					Title = "Debug",
+					IconSource = "reminders.png",
+					TargetType = typeof(DebugView)
 				}
 			};
 			return menuItems;

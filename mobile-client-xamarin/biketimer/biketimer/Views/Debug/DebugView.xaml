@@ -1,12 +1,26 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+<NavigationPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="Biketimer.Views.Debug.DebugView">
+		x:Class="Biketimer.Views.Debug.DebugView"
+		xmlns:debug="clr-namespace:Biketimer.Views.Debug;assembly=biketimer"
+		Title="Schedule" Icon="schedule.png">
+	<x:Arguments>
+		<!--<debug:DebugViewList />-->
+	</x:Arguments>
+</NavigationPage>
+<!--<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="Biketimer.Views.Debug.DebugView"
+		xmlns:account="clr-namespace:Biketimer.Views.Debug.Account;assembly=biketimer">
 	<ContentPage.Content>
-		<StackLayout>
-			<Label Text="Debug view" 
-				HorizontalOptions="Center" 
-				VerticalOptions="CenterAndExpand" />
-		</StackLayout>
+
+			<NavigationPage Title="Schedule" Icon="schedule.png">
+				<x:Arguments>
+					<account:AccountsList />
+				</x:Arguments>
+			</NavigationPage>
+
 	</ContentPage.Content>
-</ContentPage>
+</ContentPage>-->
+
+

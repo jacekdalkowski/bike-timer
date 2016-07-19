@@ -64,6 +64,13 @@
     <Compile Include="Account\Account.cs" />
     <Compile Include="Account\AccountManager.cs" />
     <Compile Include="Account\LoginProcessor.cs" />
+    <Compile Include="BiketimerIdentityServer\BiketimerIdentityException.cs" />
+    <Compile Include="Views\Debug\Account\AccountsList.xaml.cs">
+      <DependentUpon>AccountsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Debug\DebugViewList.xaml.cs">
+      <DependentUpon>DebugViewList.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -109,6 +116,7 @@
     <Folder Include="BiketimerApiServer\" />
     <Folder Include="BiketimerIdentityServer\" />
     <Folder Include="Account\" />
+    <Folder Include="Views\Debug\Account\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Slideout\SlideoutNavigation.xaml">
@@ -124,6 +132,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Debug\DebugView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Debug\Account\AccountsList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Debug\DebugViewList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

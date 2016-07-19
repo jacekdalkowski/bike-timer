@@ -18,7 +18,15 @@ namespace Biketimer.Views.Slideout
 			var item = e.SelectedItem as SlideoutMenuItem;
 			if (item != null)
 			{
-				Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
+				Page page = (Page)Activator.CreateInstance(item.TargetType);
+				if (page is NavigationPage)
+				{
+					Detail = page;
+				}
+				else 
+				{
+					Detail = new NavigationPage(page);
+				}
 				slideoutMenu.ListView.SelectedItem = null;
 				IsPresented = false;
 			}

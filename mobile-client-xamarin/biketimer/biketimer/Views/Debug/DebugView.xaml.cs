@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Biketimer.Views.Debug.Account;
 using Xamarin.Forms;
 
 namespace Biketimer.Views.Debug
 {
-	public partial class DebugView : ContentPage
+	public partial class DebugView : NavigationPage
 	{
-		public DebugView()
+		public DebugView() : base()
 		{
 			InitializeComponent();
+			DebugViewList debugViewList = new DebugViewList(this);
+			PushAsync(debugViewList);
 		}
 	}
 }

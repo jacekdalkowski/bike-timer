@@ -13,17 +13,22 @@ namespace Biketimer.iOS
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
-		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+		private UIApplication _iOSApp;
+		private Biketimer.App _formsApp;
+
+		public override bool FinishedLaunching (UIApplication iOSApp, NSDictionary options)
 		{
-			global::Xamarin.Forms.Forms.Init ();
+			_iOSApp = iOSApp;
+
+			global::Xamarin.Forms.Forms.Init();
 
 			var bluetoothManager = new BluetoothManager(Adapter.Current);
-			var commonApp = new Biketimer.App(bluetoothManager);
-			LoadApplication(commonApp);
+			_formsApp = new Biketimer.App(bluetoothManager);
+			LoadApplication(_formsApp);
 
-			FacebookSetupOnFinishedLaunching(app, options);
+			FacebookSetupOnFinishedLaunching(options);
 
-			return base.FinishedLaunching (app, options);
+			return base.FinishedLaunching (iOSApp, options);
 		}
 
 		public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)

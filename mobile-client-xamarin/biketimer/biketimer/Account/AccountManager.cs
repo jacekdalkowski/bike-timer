@@ -18,8 +18,6 @@ namespace Biketimer
 			}
 		}
 
-		private LoginProcessor _loginProcessor;
-
 		public void StartLogin(FacebookAccess facebookAccess)
 		{
 			Task.Run(async () => await HandleLoginProcessAsync(facebookAccess));
@@ -30,10 +28,10 @@ namespace Biketimer
 			try
 			{
 				LoginProcessor loginProcessor = new LoginProcessor();
-				Account userAccount = await loginProcessor.LoginAsync(facebookAccess);
+				_accountData = await loginProcessor.LoginAsync(facebookAccess);
 				if (LoginCompleted != null)
 				{
-					LoginCompleted(userAccount);
+					LoginCompleted(_accountData);
 				}
 			}
 			catch(Exception e)
@@ -45,11 +43,15 @@ namespace Biketimer
 			}
 		}
 
+		public void RestoreAccountData(Account accountData)
+		{
+			_accountData = accountData;
+		}
+
 		#region Singleton
 
 		private AccountManager()
 		{
-			_loginProcessor = new LoginProcessor();
 		}
 
 		private static AccountManager _instance = null;
