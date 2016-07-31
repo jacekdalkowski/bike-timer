@@ -31,7 +31,7 @@ namespace Biketimer.Views.Debug
 			DebugListItem item = e.SelectedItem as DebugListItem;
 			if (item != null)
 			{
-				Page page = (Page)Activator.CreateInstance(item.ViewType);
+				Page page = (Page)Activator.CreateInstance(item.ViewType, _topNavigationPage);
 				_topNavigationPage.PushAsync(page);
 				ListView.SelectedItem = null;
 			}
