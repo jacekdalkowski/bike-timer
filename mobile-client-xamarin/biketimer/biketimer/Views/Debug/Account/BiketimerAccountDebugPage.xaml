@@ -3,8 +3,37 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		x:Class="Biketimer.BiketimerAccountDebugPage">
 	<ContentPage.Content>
-		<StackLayout Padding="10, 0">
-			<Editor Text="{Binding AccessToken, Mode=TwoWay }" />
-		</StackLayout>
+		<ScrollView>
+			<StackLayout Padding="10, 0">
+				<StackLayout Padding="10, 10">
+					<Label Text="Access token:" />
+					<Editor Text="{Binding AccessToken, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Id:" />
+					<Editor Text="{Binding Id, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Email:" />
+					<Editor Text="{Binding Email, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="BtName:" />
+					<Editor Text="{Binding BtName, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="FbId:" />
+					<Editor Text="{Binding FbId, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="FbName:" />
+					<Editor Text="{Binding FbName, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="FbSurname:" />
+					<Editor Text="{Binding FbSurname, Mode=TwoWay }" />
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
 	</ContentPage.Content>
 </ContentPage>
