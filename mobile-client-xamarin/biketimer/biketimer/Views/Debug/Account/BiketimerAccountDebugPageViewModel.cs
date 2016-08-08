@@ -10,6 +10,8 @@ namespace Biketimer
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		#region Biketimer access
+
 		private string _accessToken;
 		public string AccessToken
 		{
@@ -27,6 +29,10 @@ namespace Biketimer
 				return _accessToken;
 			}
 		}
+
+		#endregion
+
+		#region Biketimer profile 
 
 		private string _id;
 		public string Id
@@ -171,6 +177,8 @@ namespace Biketimer
 				return _friends;
 			}
 		}
+
+		#endregion
 
 		protected virtual void OnPropertyChanged(string propertyName)
 		{

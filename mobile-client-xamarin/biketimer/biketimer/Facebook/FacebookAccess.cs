@@ -5,8 +5,8 @@ namespace Biketimer
 {
 	public class FacebookAccess
 	{
-		public string AccessToken { get; private set; }
-		public IEnumerable<string> GrantedPermissions { get; private set; }
+		public string AccessToken { get; set; }
+		public IEnumerable<string> GrantedPermissions { get; set; }
 
 		public FacebookAccess(string accessToken, IEnumerable<string> grantedPermissions)
 		{

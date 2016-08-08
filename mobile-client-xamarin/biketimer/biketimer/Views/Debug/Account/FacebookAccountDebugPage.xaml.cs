@@ -7,9 +7,11 @@ namespace Biketimer
 {
 	public partial class FacebookAccountDebugPage : ContentPage
 	{
-		public FacebookAccountDebugPage()
+		
+		public FacebookAccountDebugPage(FacebookAccountDebugPageViewModel viewModel)
 		{
 			InitializeComponent();
+			BindingContext = viewModel;
 		}
 	}
 }

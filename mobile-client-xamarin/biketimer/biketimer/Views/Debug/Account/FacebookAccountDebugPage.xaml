@@ -3,8 +3,41 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		x:Class="Biketimer.FacebookAccountDebugPage">
 	<ContentPage.Content>
-		<StackLayout Padding="10, 0">
-			<Editor />
-		</StackLayout>
+		<ScrollView>
+			<StackLayout Padding="10, 0">
+				<StackLayout Padding="10, 10">
+					<Label Text="Access token:" />
+					<Editor Text="{Binding AccessToken, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Granted permissions:" />
+					<Editor Text="{Binding GrantedPermissions, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Id:" />
+					<Editor Text="{Binding Id, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Email:" />
+					<Editor Text="{Binding Email, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="FirstName:" />
+					<Editor Text="{Binding FirstName, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="LastName:" />
+					<Editor Text="{Binding LastName, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Name:" />
+					<Editor Text="{Binding Name, Mode=TwoWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Gender:" />
+					<Editor Text="{Binding Gender, Mode=TwoWay }" />
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
 	</ContentPage.Content>
 </ContentPage>

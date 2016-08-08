@@ -21,6 +21,11 @@ namespace Biketimer.Views.Debug
 				{
 					Title = "Account",
 					ViewType = typeof(AccountsList)
+				},
+				new DebugListItem
+				{
+					Title = "Servers",
+					ViewType = typeof(ServersList)
 				}
 			};
 			ListView.ItemSelected += OnItemSelected;
