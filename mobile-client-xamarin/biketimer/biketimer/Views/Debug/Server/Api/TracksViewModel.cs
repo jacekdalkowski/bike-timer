@@ -3,9 +3,7 @@ namespace Biketimer
 {
 	public class TracksViewModel
 	{
-		public TracksViewModel()
-		{
-		}
+
 	}
 }
 

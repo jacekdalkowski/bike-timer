@@ -24,6 +24,11 @@ namespace Biketimer.Views.Debug
 				},
 				new DebugListItem
 				{
+					Title = "AppData",
+					ViewType = typeof(AppDataView)
+				},
+				new DebugListItem
+				{
 					Title = "Servers",
 					ViewType = typeof(ServersList)
 				}

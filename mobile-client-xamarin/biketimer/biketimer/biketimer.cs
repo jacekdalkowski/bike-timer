@@ -6,10 +6,14 @@ namespace Biketimer
 {
 	public class App : Application
 	{
+		// TODO
+		public static App Instance;
+
 		private IBluetoothManager _bluetoothManager;
 
 		public App (IBluetoothManager bluetoothManager)
 		{
+			Instance = this;
 			PlatformSpecificManagers.BluetoothManager = bluetoothManager;
 			MainPage = new Biketimer.Views.Slideout.SlideoutNavigation();
 		}

@@ -25,6 +25,11 @@ namespace Biketimer
 
 		[JsonProperty(PropertyName = "fb_surname")]
 		public string FbSurname { get; set; }
+
+		public bool IsValid()
+		{
+			return !string.IsNullOrEmpty(Id);
+		}
 	}
 }
 

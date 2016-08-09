@@ -18,6 +18,12 @@ namespace Biketimer
 		public string Name { get; set; }
 
 		public string Gender { get; set; }
+
+		public bool IsValid()
+		{
+			// TODO
+			return true;
+		}
 	}
 }
 

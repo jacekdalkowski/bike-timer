@@ -37,7 +37,7 @@ namespace Biketimer.Views.Debug.Server.Api
 			ApiResourcesListItem item = e.SelectedItem as ApiResourcesListItem;
 			if (item != null)
 			{
-				Page page = (Page)Activator.CreateInstance(item.TargetViewType);
+				Page page = (Page)Activator.CreateInstance(item.TargetViewType, _topNavigationPage);
 				_topNavigationPage.PushAsync(page);
 				ListView.SelectedItem = null;
 			}

@@ -1,13 +1,14 @@
 ﻿using System;
-namespace Biketimer
+
+namespace Biketimer.Account
 {
-	public class Account
+	public class AccountData
 	{
 		public FacebookAccount FacebookAccountData { get; private set; }
 
 		public BiketimerAccount BiketimerAccountData { get; private set; }
 
-		public Account(FacebookAccount facebookAccountData, BiketimerAccount biketimerAccountData)
+		public AccountData(FacebookAccount facebookAccountData, BiketimerAccount biketimerAccountData)
 		{
 			FacebookAccountData = facebookAccountData;
 			BiketimerAccountData = biketimerAccountData;

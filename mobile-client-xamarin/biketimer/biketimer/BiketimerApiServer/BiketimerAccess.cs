@@ -9,6 +9,12 @@ namespace Biketimer
 		{
 			AccessToken = accessToken;
 		}
+
+		public bool IsValid()
+		{
+			// TODO validate token expirtaion date
+			return !string.IsNullOrEmpty(AccessToken);
+		}
 	}
 }
 

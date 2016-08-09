@@ -5,6 +5,7 @@ using Biketimer.Views.Login;
 using Biketimer.Views.Device;
 using Biketimer.Views.Stats;
 using Biketimer.Views.Debug;
+using Biketimer.Account;
 
 namespace Biketimer.Views.Slideout
 {
@@ -27,7 +28,7 @@ namespace Biketimer.Views.Slideout
 			ListView.ItemsSource = _menuForNotLoggedInUser;
 		}
 
-		private void OnLoginCompleted(Account accountData)
+		private void OnLoginCompleted(AccountData accountData)
 		{
 			Xamarin.Forms.Device.BeginInvokeOnMainThread(() => ListView.ItemsSource = _menuForLoggedInUser);
 		}

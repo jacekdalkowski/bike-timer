@@ -1,21 +1,35 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Biketimer
+namespace Biketimer.Account
 {
 	public class AccountManager
 	{
-		public event Action<Account> LoginCompleted;
+		public event Action<AccountData> LoginCompleted;
 		public event Action LoginFailed;
 		public event Action LogoutCompleted;
 
-		private Account _accountData;
-		public Account AccountData
+		private AccountData _accountData;
+		public AccountData AccountData
 		{
 			get
 			{
 				return _accountData;
 			}
+		}
+
+		public bool FacebookAccountDataPresent()
+		{
+			return AccountData != null
+					&& AccountData.FacebookAccountData != null
+					&& AccountData.FacebookAccountData.IsValid();
+		}
+
+		public bool BiketimerAccountDataPresent()
+		{
+			return AccountData != null
+					&& AccountData.BiketimerAccountData != null
+					&& AccountData.BiketimerAccountData.IsValid();
 		}
 
 		public void StartLogin(FacebookAccess facebookAccess)
@@ -43,7 +57,7 @@ namespace Biketimer
 			}
 		}
 
-		public void RestoreAccountData(Account accountData)
+		public void RestoreAccountData(AccountData accountData)
 		{
 			_accountData = accountData;
 		}

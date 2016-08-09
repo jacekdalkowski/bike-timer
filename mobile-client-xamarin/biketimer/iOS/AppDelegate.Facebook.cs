@@ -2,6 +2,7 @@
 using Foundation;
 using UIKit;
 using FacebookCoreKit = global::Facebook.CoreKit;
+using Biketimer.Account;
 
 namespace Biketimer.iOS
 {
@@ -14,27 +15,24 @@ namespace Biketimer.iOS
 
 			AccountManager.Instance.LoginCompleted += OnLoginCompleted;
 
-			// This method verifies if you have been logged into the app before, and keep you logged in after you reopen or kill your app.
-			var finishedLaunching = FacebookCoreKit.ApplicationDelegate.SharedInstance.FinishedLaunching(_iOSApp, launchOptions);
-
-			FacebookCoreKit.AccessToken accessToken = FacebookCoreKit.AccessToken.CurrentAccessToken;
-			if (accessToken != null)
+			AccountData accountData = GetAccountData();
+			if (accountData != null)
 			{
-				FacebookAccess facebookAccess = new FacebookAccess(
-					accessToken.TokenString,
-					accessToken.Permissions.Select(p => p.Self.ToString()));
-				//FacebookStateManager.Instance.SetAccessToken(facebookAccess);
-				Account accountData = GetAccountData();
-				if (accountData != null)
+				// This method verifies if you have been logged into the app before, and keep you logged in after you reopen or kill your app.
+				var finishedLaunching = FacebookCoreKit.ApplicationDelegate.SharedInstance.FinishedLaunching(_iOSApp, launchOptions);
+
+				FacebookCoreKit.AccessToken accessToken = FacebookCoreKit.AccessToken.CurrentAccessToken;
+				if (accessToken != null)
 				{
 					AccountManager.Instance.RestoreAccountData(accountData);
+					return finishedLaunching;
 				}
 			}
 
-			return finishedLaunching;
+			return true;
 		}
 
-		private void OnLoginCompleted(Account accountData)
+		private void OnLoginCompleted(AccountData accountData)
 		{
 			SaveAccountData(accountData);
 		}

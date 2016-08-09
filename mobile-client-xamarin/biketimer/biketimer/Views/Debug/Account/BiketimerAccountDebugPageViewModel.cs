@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Biketimer.Account;
 
-namespace Biketimer
+namespace Biketimer.Views.Debug.Account
 {
 	public class BiketimerAccountDebugPageViewModel : INotifyPropertyChanged
 	{

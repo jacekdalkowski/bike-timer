@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Biketimer.BiketimerApiServer;
 
-namespace Biketimer
+namespace Biketimer.Account
 {
 	internal class LoginProcessor
 	{
@@ -17,7 +17,7 @@ namespace Biketimer
 			_biketimerFacade = new BiketimerFacade();
 		}
 
-		public async Task<Account> LoginAsync(FacebookAccess facebookAccess)
+		public async Task<AccountData> LoginAsync(FacebookAccess facebookAccess)
 		{
 			Task<FacebookProfile> facebookProfileTask = _facebookFacade.GetUserProfile(facebookAccess.AccessToken);
 
@@ -29,7 +29,7 @@ namespace Biketimer
 			BiketimerAccount biketimerAccount = await biketimerAccountTask;
 
 			FacebookAccount facebookAccount = new FacebookAccount(facebookAccess, facebookProfile);
-			Account _accountData = new Account(facebookAccount, biketimerAccount);
+			AccountData _accountData = new AccountData(facebookAccount, biketimerAccount);
 
 			return _accountData;
 		}

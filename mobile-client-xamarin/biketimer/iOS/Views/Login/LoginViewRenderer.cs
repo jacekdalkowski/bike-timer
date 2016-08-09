@@ -7,6 +7,7 @@ using Xamarin.Forms.Platform.iOS;
 using Biketimer.iOS;
 using FacebookLoginKit = Facebook.LoginKit;
 using FacebookCoreKit = Facebook.CoreKit;
+using Biketimer.Account;
 
 
 [assembly: ExportRenderer(typeof(Biketimer.Views.Login.LoginView), typeof(Biketimer.iOS.Views.Login.LoginViewRenderer))]
@@ -99,7 +100,7 @@ namespace Biketimer.iOS.Views.Login
 					new CGRect(buttonLeft, buttonTop, buttonWidth, buttonHeight))
 			{
 				LoginBehavior = FacebookLoginKit.LoginBehavior.Native,
-				ReadPermissions = new string[] { "public_profile", "email" }
+				ReadPermissions = FacebookAccess.RequiredPermissions.ToArray()
 			};
 
 			// Handle actions once the user is logged in
@@ -156,7 +157,7 @@ namespace Biketimer.iOS.Views.Login
 		/// <summary>
 		/// Called when login process is completed by FacebookManager.
 		/// </summary>
-		private void OnLoginCompleted(Account accountData)
+		private void OnLoginCompleted(AccountData accountData)
 		{
 			InvokeOnMainThread(() =>
 			{

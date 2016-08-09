@@ -11,6 +11,12 @@ namespace Biketimer
 			Access = access;
 			Profile = profile;
 		}
+
+		public bool IsValid()
+		{
+			return Access != null && Access.IsValid()
+				&& Profile != null && Profile.IsValid();
+		}
 	}
 }
 

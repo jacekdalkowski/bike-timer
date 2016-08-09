@@ -3,9 +3,7 @@ namespace Biketimer
 {
 	public class SegmentsViewModel
 	{
-		public SegmentsViewModel()
-		{
-		}
+
 	}
 }
 
