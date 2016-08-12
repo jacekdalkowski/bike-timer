@@ -170,7 +170,15 @@ namespace Biketimer.iOS.Views.Login
 		{
 			InvokeOnMainThread(() =>
 			{
-				// TODO: error message
+				if (FacebookCoreKit.AccessToken.CurrentAccessToken != null)
+				{
+					FacebookLoginKit.LoginManager fbLoginManager = new FacebookLoginKit.LoginManager();
+					fbLoginManager.LogOut();
+				}
+
+				UIAlertView error = new UIAlertView("Error", "An error occured during login", null, "Ok", null);
+				error.Show();
+
 				ViewHelpers.RemoveLoadingOverlay(View);
 			});
 		}
