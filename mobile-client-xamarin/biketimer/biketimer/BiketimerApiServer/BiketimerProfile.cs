@@ -30,6 +30,12 @@ namespace Biketimer
 		{
 			return !string.IsNullOrEmpty(Id);
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[BiketimerProfile: Id={0},\nEmail={1},\nBtName={2},\nRoles=({3}),\nFriends=({4}),\nFbId={5},\nFbName={6},\nFbSurname={7}]", 
+			        Id, Email, BtName, string.Join(", ", Roles), string.Join(", ", Friends), FbId, FbName, FbSurname);
+		}
 	}
 }
 

@@ -24,6 +24,12 @@ namespace Biketimer
 			// TODO
 			return true;
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[FacebookProfile: Id={0},\nEmail={1},\nFirstName={2},\nLastName={3},\nName={4},\nGender={5}]", 
+			                     Id, Email, FirstName, LastName, Name, Gender);
+		}
 	}
 }
 

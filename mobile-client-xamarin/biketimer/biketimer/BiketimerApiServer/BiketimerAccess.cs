@@ -15,6 +15,11 @@ namespace Biketimer
 			// TODO validate token expirtaion date
 			return !string.IsNullOrEmpty(AccessToken);
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[BiketimerAccess: AccessToken={0}]", AccessToken);
+		}
 	}
 }
 

@@ -7,6 +7,7 @@ namespace Biketimer
 	public class FacebookAccess
 	{
 		public static readonly IEnumerable<string> RequiredPermissions = new string[] { "public_profile", "email" };
+
 		public string AccessToken { get; set; }
 		public IEnumerable<string> GrantedPermissions { get; set; }
 
@@ -28,6 +29,12 @@ namespace Biketimer
 			}
 
 			return accessTokenValid && permissionsValid;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[FacebookAccess: AccessToken={0},\nGrantedPermissions=({1})]", 
+			                     AccessToken, string.Join(", ", GrantedPermissions));
 		}
 	}
 }

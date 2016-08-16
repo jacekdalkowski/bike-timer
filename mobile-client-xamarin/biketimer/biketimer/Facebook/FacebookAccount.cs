@@ -19,6 +19,11 @@ namespace Biketimer
 			return Access != null && Access.IsValid()
 				    && Profile != null && Profile.IsValid();
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[FacebookAccount: Access={0},\nProfile={1}]", Access, Profile);
+		}
 	}
 }
 
