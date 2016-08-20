@@ -1,5 +1,5 @@
 
-class GeoPoint:
+class GeoPoint(object):
     def __init__(self):
         self.la = None
         self.lo = None

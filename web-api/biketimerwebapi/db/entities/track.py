@@ -1,6 +1,6 @@
 from segment import Segment
 
-class Track:
+class Track(object):
     def __init__(self):
         self.id = None
         self.name = None

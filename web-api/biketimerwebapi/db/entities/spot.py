@@ -2,7 +2,7 @@ from datetime import datetime
 from geo_point import GeoPoint
 from track import Track
 
-class Spot():
+class Spot(object):
 
     def __init__(self):
         self.id = None

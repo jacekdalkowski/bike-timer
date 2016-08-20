@@ -1,6 +1,6 @@
 from geo_point import GeoPoint
 
-class Checkpoint:
+class Checkpoint(object):
     
     def __init__(self):
         self.id = None

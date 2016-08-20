@@ -11,6 +11,7 @@ from biketimerwebapi.resources.user_friends import UserFriends
 from biketimerwebapi.resources.spot import Spot
 from biketimerwebapi.resources.spots import Spots
 from biketimerwebapi.resources.runs import Runs
+from biketimerwebapi.resources.checkpoint_passes import CheckpointPasses
 from biketimerwebapi.security.token_validator import TokenValidator
 from biketimerwebapi.db.repositories.cassandra.cassandra_repositories_module import CassandraRepositoriesModule
 from biketimerwebapi.cache.memory.memory_cache_module import MemoryCacheModule
@@ -42,6 +43,7 @@ def SetupFlaskApp(logger):
     api.add_resource(Spot, '/Spot', '/Spot/<string:id>')
     api.add_resource(Spots, '/Spots')
     api.add_resource(Runs, '/Runs/')
+    api.add_resource(CheckpointPasses, '/CheckpointPasses')
     return app
 
 def SetupBootstraper(logger):

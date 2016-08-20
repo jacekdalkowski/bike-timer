@@ -1,3 +1,7 @@
+
+# migrate.py [up|seed|down] [local|docker]
+# e.g. migrate.py up docker
+
 import sys
 import os
 import re

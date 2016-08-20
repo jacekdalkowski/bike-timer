@@ -44,6 +44,15 @@ CREATE TABLE runs_by_segment_date_time (
 	PRIMARY KEY ((segment_id), time_start, time_span_ms)
 );
 
+CREATE TABLE runs_by_segment_time (
+	id uuid,
+	segment_id uuid,
+	time_span_ms int,
+	time_start timestamp,
+	run_info frozen<run_info>,
+	PRIMARY KEY ((segment_id), time_span_ms)
+);
+
 CREATE TABLE runs_by_segment_user_date (
 	id uuid,
 	segment_id uuid,

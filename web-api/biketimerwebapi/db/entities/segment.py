@@ -1,6 +1,6 @@
 from checkpoint import Checkpoint
 
-class Segment:
+class Segment(object):
     def __init__(self):
         self.id = None;
         self.name = None

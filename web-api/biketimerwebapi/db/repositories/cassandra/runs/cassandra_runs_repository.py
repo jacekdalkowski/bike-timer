@@ -8,8 +8,9 @@ from cassandra_runs_query_result_parser import CassandraRunsQueryResultParser
 logger = logging.getLogger('repositories')
 
 class CassandraRunsRepository:
-    def __init__(self, cluster):
-        self.cluster = cluster;
+    def __init__(self, cluster, session):
+        self.cluster = cluster
+        self.session = session
         self.query_builder = CassandraRunsQueryBuilder()
         self.query_result_parser = CassandraRunsQueryResultParser()
         self.insert_commands_builder = CassandraRunsInsertCommandsBuilder()
@@ -17,8 +18,7 @@ class CassandraRunsRepository:
     def get_from_runs_by_id(self, query_params):
         run_id = query_params['id']
         query = self.query_builder.get_from_runs_by_id(run_id)
-        session = self.cluster.connect('biketimer')
-        rows_list = list(session.execute(query))
+        rows_list = list(self.session.execute(query))
         if len(rows_list) == 0:
             logger.warn('No runs found for id: ' + str(run_id))
             return None
@@ -29,51 +29,44 @@ class CassandraRunsRepository:
 
     def get_from_runs_by_user_segment_date(self, query_params, current_identity):
         query = self.query_builder.get_from_runs_by_user_segment_date(query_params, current_identity)
-        session = self.cluster.connect('biketimer')
-        rows = session.execute(query)
+        rows = self.session.execute(query)
         objects = self.query_result_parser.parse_from_runs_by_user_segment_date(rows)
         return objects
 
     def get_from_runs_by_user_spot_date(self, query_params, current_identity):
         query = self.query_builder.get_from_runs_by_user_spot_date(query_params, current_identity)
-        session = self.cluster.connect('biketimer')
-        rows = session.execute(query)
+        rows = self.session.execute(query)
         objects = self.query_result_parser.parse_from_runs_by_user_spot_date(rows)
         return objects
 
     def get_from_runs_by_user_date(self, query_params, current_identity):
         query = self.query_builder.get_from_runs_by_user_date(query_params, current_identity)
-        session = self.cluster.connect('biketimer')
-        rows = session.execute(query)
+        rows = self.session.execute(query)
         objects = self.query_result_parser.parse_from_runs_by_user_date(rows)
         return objects
 
     def get_from_runs_by_segment_date_time(self, query_params, current_identity):
         query = self.query_builder.get_from_runs_by_segment_date_time(query_params, current_identity)
-        session = self.cluster.connect('biketimer')
-        rows = session.execute(query)
+        rows = self.session.execute(query)
         objects = self.query_result_parser.parse_from_runs_by_segment_date_time(rows)
         return objects
 
     def get_from_runs_by_segment_user_date(self, query_params, current_identity):
         query = self.query_builder.get_from_runs_by_segment_user_date(query_params, current_identity)
-        session = self.cluster.connect('biketimer')
-        rows = session.execute(query)
+        rows = self.session.execute(query)
         objects = self.query_result_parser.parse_from_runs_by_segment_user_date(rows)
         return objects
 
     def get_from_runs_by_spot_user_date(self, query_params, current_identity):
         query = self.query_builder.get_from_runs_by_spot_user_date(query_params, current_identity)
-        session = self.cluster.connect('biketimer')
-        rows = session.execute(query)
+        rows = self.session.execute(query)
         objects = self.query_result_parser.parse_from_runs_by_spot_user_date(rows)
         return objects
 
     def save_run(self, spot_object, run_object):
         run_id, queries = self.insert_commands_builder.get_command_to_insert_into_all_tables(spot_object, run_object)
-        session = self.cluster.connect('biketimer')
         for query in queries:
-            session.execute(query)
+            self.session.execute(query)
         return run_id
 
 

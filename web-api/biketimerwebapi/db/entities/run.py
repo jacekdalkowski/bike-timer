@@ -1,7 +1,7 @@
 from segment import Segment
 from datetime import datetime
 
-class Run:
+class Run(object):
     def __init__(self):
         self.id = None
         self.user_id = None
