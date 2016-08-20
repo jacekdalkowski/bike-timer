@@ -41,8 +41,8 @@ class SpotsCache:
 	def load_checkpoints_to_dict(self, all_spots):
 		checkpoints = {}
 		for spot in all_spots:
-			for currnet_track in spot.tracks_current:
-				for current_segment in currnet_track.segments_current:
+			for current_track in spot.tracks_current:
+				for current_segment in current_track.segments_current:
 					if not current_segment.location_start.id in checkpoints:
 						checkpoints[current_segment.location_start.id] = current_segment.location_start
 					if not current_segment.location_stop.id in checkpoints:
@@ -53,9 +53,9 @@ class SpotsCache:
 	def convert_spots_to_segments_by_checkpoints(self, all_spots):
 		segments_by_checkpoints = {}
 		for spot in all_spots:
-			for currnet_track in spot.tracks_current:
-				for current_segment in currnet_track.segments_current:
-					segment_by_checkpoints = SegmentByCheckpoints(current_segment, currnet_track, spot)
+			for current_track in spot.tracks_current:
+				for current_segment in current_track.segments_current:
+					segment_by_checkpoints = SegmentByCheckpoints(current_segment, current_track, spot)
 					segment_start_checkpoint_id = segment_by_checkpoints.checkpoint_start.id
 					if segment_start_checkpoint_id in segments_by_checkpoints:
 						logger.warning('Duplicate checkpoint id: ' + str(segment_start_checkpoint_id) + '. Cannot add segment at to cache.')
