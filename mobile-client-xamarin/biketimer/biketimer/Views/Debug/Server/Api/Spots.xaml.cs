@@ -30,10 +30,7 @@ namespace Biketimer.Views.Debug.Server.Api
 
 			ListView.ItemsSource = new ObservableCollection<Spot>();
 
-			if (AccountManager.Instance.AccountData != null
-					&& AccountManager.Instance.AccountData.BiketimerAccountData != null
-					&& AccountManager.Instance.AccountData.BiketimerAccountData.Access != null
-					&& AccountManager.Instance.AccountData.BiketimerAccountData.Access.AccessToken != null)
+			if (AccountManager.Instance.BiketimerAccountDataPresent())
 			{
 				BiketimerFacade biketimerFacade = new BiketimerFacade();
 				biketimerFacade.GetSpots(AccountManager.Instance.AccountData.BiketimerAccountData.Access.AccessToken)
@@ -64,6 +61,8 @@ namespace Biketimer.Views.Debug.Server.Api
 			{
 				spotsInList.Add(spot);
 			}
+
+			ListView.MinimumHeightRequest = 200d;
 		}
 	}
 }

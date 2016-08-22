@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="Biketimer.Views.Debug.Server.Api.TrackAndSegments">
+	<ContentPage.Content>
+		<ScrollView>
+			<StackLayout Padding="10, 0">
+				<StackLayout Padding="10, 10">
+					<Label Text="Id:" />
+					<Editor Text="{Binding Id, Mode=OneWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Name:" />
+					<Editor Text="{Binding Name, Mode=OneWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Valid time start:" />
+					<Editor Text="{Binding ValidTimeStart, Mode=OneWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Valid time stop:" />
+					<Editor Text="{Binding ValidTimeStop, Mode=OneWay }" />
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Current segments:" />
+					<ListView x:Name="currentSegmentsList" 
+							SeparatorVisibility="None"
+							HeightRequest="250">
+		                <ListView.ItemTemplate>
+		                    <DataTemplate>
+		                        <ImageCell Text="{Binding Name}" />
+		                    </DataTemplate>
+		                </ListView.ItemTemplate>
+		            </ListView>
+				</StackLayout>
+				<StackLayout Padding="10, 10">
+					<Label Text="Old segments:" />
+					<ListView x:Name="oldSegmentsList" 
+							SeparatorVisibility="None"
+							HeightRequest="250">
+		                <ListView.ItemTemplate>
+		                    <DataTemplate>
+		                        <ImageCell Text="{Binding Name}" />
+		                    </DataTemplate>
+		                </ListView.ItemTemplate>
+		            </ListView>
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>
