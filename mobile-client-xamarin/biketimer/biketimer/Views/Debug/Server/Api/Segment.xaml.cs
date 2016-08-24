@@ -13,6 +13,9 @@ namespace Biketimer.Views.Debug.Server.Api
 		{
 			_topNavigationPage = topNavigationPage;
 
+			var segmentViewModel = new SegmentViewModel(segment);
+			BindingContext = segmentViewModel;
+
 			InitializeComponent();
 		}
 	}

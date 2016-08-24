@@ -88,7 +88,6 @@
     <Compile Include="Views\Debug\Server\Api\Segment.xaml.cs">
       <DependentUpon>Segment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Debug\Server\Api\SegmentsViewModel.cs" />
     <Compile Include="Views\Debug\Server\Api\SpotsViewModel.cs" />
     <Compile Include="Views\Debug\Server\Api\TracksViewModel.cs" />
     <Compile Include="BiketimerApiServer\Entities\Spot.cs" />
