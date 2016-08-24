@@ -58,7 +58,7 @@ namespace Biketimer.Views.Slideout
 				{
 					Title = "Stats",
 					IconSource = "reminders.png",
-					TargetType = typeof(StatsView)
+					TargetType = typeof(StatsPage)
 				},
 				new SlideoutMenuItem
 				{
