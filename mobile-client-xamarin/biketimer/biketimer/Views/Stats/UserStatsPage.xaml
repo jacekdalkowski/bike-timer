@@ -4,8 +4,48 @@
 		x:Class="Biketimer.Views.Stats.UserStatsPage">
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="FillAndExpand">
-			<Label>LABEL</Label>
-			<ListView x:Name="listView" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+			<Grid VerticalOptions="FillAndExpand">
+				<Grid.RowDefinitions>
+    				<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Button 
+					x:Name="filterByDateButton"
+					Grid.Row="0" 
+					Grid.Column="0"
+					Text="Date"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand" />
+				<Button 
+					x:Name="filterBySpotButton"
+					Grid.Row="0" 
+					Grid.Column="1"
+					Text="Spot"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand" />
+				<Button 
+					x:Name="filterBySegmentButton"
+					Grid.Row="0" 
+					Grid.Column="2"
+					Text="Seg"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand" />
+				<Button 
+					x:Name="sortButton"
+					Grid.Row="0" 
+					Grid.Column="3"
+					Text="Sort"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand" />
+			</Grid>
+			<ListView x:Name="listView" 
+					VerticalOptions="FillAndExpand" 
+					SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell Text="{Binding Title}" />
