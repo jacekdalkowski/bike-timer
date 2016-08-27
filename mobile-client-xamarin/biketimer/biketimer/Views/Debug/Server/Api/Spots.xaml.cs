@@ -5,6 +5,7 @@ using Biketimer.BiketimerApiServer;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Biketimer.Account;
+using Biketimer.BiketimerApiServer.Entities;
 
 namespace Biketimer.Views.Debug.Server.Api
 {

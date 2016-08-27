@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Biketimer
+
+namespace Biketimer.BiketimerApiServer.Entities
 {
 	public class Checkpoint
 	{

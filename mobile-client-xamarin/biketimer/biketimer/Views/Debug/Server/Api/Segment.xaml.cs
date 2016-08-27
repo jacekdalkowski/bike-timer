@@ -9,7 +9,7 @@ namespace Biketimer.Views.Debug.Server.Api
 	{
 		private NavigationPage _topNavigationPage;
 
-		public Segment(NavigationPage topNavigationPage, Biketimer.Segment segment)
+		public Segment(NavigationPage topNavigationPage, Biketimer.BiketimerApiServer.Entities.Segment segment)
 		{
 			_topNavigationPage = topNavigationPage;
 

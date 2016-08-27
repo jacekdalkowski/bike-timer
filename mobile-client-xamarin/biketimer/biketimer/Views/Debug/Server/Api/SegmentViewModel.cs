@@ -187,7 +187,7 @@ namespace Biketimer
 			}
 		}
 
-		public SegmentViewModel(Biketimer.Segment segment)
+		public SegmentViewModel(Biketimer.BiketimerApiServer.Entities.Segment segment)
 		{
 			_id = segment.Id.ToString();
 			_name = segment.Name;

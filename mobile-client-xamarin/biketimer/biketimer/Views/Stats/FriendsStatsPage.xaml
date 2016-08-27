@@ -3,5 +3,8 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		x:Class="Biketimer.Views.Stats.FriendsStatsPage">
 	<ContentPage.Content>
+		<ActivityIndicator
+				x:Name="activityIndicator"
+				Color="Black" />
 	</ContentPage.Content>
 </ContentPage>

@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Biketimer
+namespace Biketimer.BiketimerApiServer.Entities
 {
 	public class Segment
 	{

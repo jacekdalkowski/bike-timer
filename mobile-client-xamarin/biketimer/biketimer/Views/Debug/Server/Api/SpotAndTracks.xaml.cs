@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Biketimer.BiketimerApiServer.Entities;
 using Xamarin.Forms;
 
 namespace Biketimer.Views.Debug.Server.Api

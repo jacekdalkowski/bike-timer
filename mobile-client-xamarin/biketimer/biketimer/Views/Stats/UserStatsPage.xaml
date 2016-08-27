@@ -4,6 +4,9 @@
 		x:Class="Biketimer.Views.Stats.UserStatsPage">
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="FillAndExpand">
+			<ActivityIndicator
+					x:Name="activityIndicator"
+					Color="Black" />
 			<Grid VerticalOptions="FillAndExpand">
 				<Grid.RowDefinitions>
     				<RowDefinition Height="*" />

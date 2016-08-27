@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Biketimer.BiketimerApiServer.Entities;
 
 namespace Biketimer.Views.Debug.Server.Api
 {

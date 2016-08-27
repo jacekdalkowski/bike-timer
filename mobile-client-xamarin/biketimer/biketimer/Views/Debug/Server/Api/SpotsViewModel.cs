@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Biketimer.BiketimerApiServer.Entities;
 
 namespace Biketimer
 {

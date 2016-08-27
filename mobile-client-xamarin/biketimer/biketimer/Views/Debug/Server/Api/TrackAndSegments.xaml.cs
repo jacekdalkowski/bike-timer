@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
+using Biketimer.BiketimerApiServer.Entities;
 
 namespace Biketimer.Views.Debug.Server.Api
 {
@@ -28,7 +28,7 @@ namespace Biketimer.Views.Debug.Server.Api
 
 		void OnSegmentSelected(object sender, SelectedItemChangedEventArgs e, ListView listView)
 		{
-			Biketimer.Segment selectedSegment = e.SelectedItem as Biketimer.Segment;
+			Biketimer.BiketimerApiServer.Entities.Segment selectedSegment = e.SelectedItem as Biketimer.BiketimerApiServer.Entities.Segment;
 			if (selectedSegment != null)
 			{
 				Page page = new Segment(_topNavigationPage, selectedSegment);

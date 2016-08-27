@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Biketimer
+namespace Biketimer.BiketimerApiServer
 {
 	public class BiketimerProfile
 	{
