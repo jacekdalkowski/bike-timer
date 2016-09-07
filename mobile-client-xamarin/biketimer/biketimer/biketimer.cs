@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Biketimer.Bluetooth;
+using Biketimer.LocalStorage;
 
 namespace Biketimer
 {
@@ -9,12 +10,11 @@ namespace Biketimer
 		// TODO
 		public static App Instance;
 
-		private IBluetoothManager _bluetoothManager;
-
-		public App (IBluetoothManager bluetoothManager)
+		public App (IBluetoothManager bluetoothManager, ILocalStorageManager localStorageManager)
 		{
 			Instance = this;
 			PlatformSpecificManagers.BluetoothManager = bluetoothManager;
+			PlatformSpecificManagers.LocalStorageManager = localStorageManager;
 			MainPage = new Biketimer.Views.Slideout.SlideoutNavigation();
 		}
 

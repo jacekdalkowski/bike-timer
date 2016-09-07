@@ -135,12 +135,13 @@
     <Compile Include="Facebook\FacebookStateManager.cs" />
     <Compile Include="Views\LoadingOverlay.cs" />
     <Compile Include="Views\ViewHelpers.cs" />
-    <Compile Include="AppDelegate.Storage.cs" />
+    <Compile Include="LocalStorage\LocalStorageManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bluetooth\" />
     <Folder Include="Views\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="LocalStorage\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="facebookios">

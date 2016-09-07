@@ -6,12 +6,17 @@
 		<StackLayout VerticalOptions="FillAndExpand">
 			<ActivityIndicator
 					x:Name="activityIndicator"
-					Color="Black" />
-			<Grid VerticalOptions="FillAndExpand">
+					Color="Black" 
+					IsVisible="{Binding IsLoadingInitData}"
+					IsRunning="{Binding IsLoadingInitData}" />
+			<Grid 
+					VerticalOptions="FillAndExpand"
+					IsVisible="{Binding IsInitDataLoaded}" >
 				<Grid.RowDefinitions>
     				<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="*" />
@@ -32,23 +37,33 @@
 	                HorizontalOptions="Center"
 	                VerticalOptions="CenterAndExpand" />
 				<Button 
-					x:Name="filterBySegmentButton"
+					x:Name="filterByTrackButton"
 					Grid.Row="0" 
 					Grid.Column="2"
+					Text="Track"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand"
+					IsEnabled="{Binding IsFilteringSpotNameSet}" />
+				<Button 
+					x:Name="filterBySegmentButton"
+					Grid.Row="0" 
+					Grid.Column="3"
 					Text="Seg"
 	                HorizontalOptions="Center"
-	                VerticalOptions="CenterAndExpand" />
+	                VerticalOptions="CenterAndExpand"
+					IsEnabled="{Binding IsFilteringTrackNameSet}" />
 				<Button 
 					x:Name="sortButton"
 					Grid.Row="0" 
-					Grid.Column="3"
+					Grid.Column="4"
 					Text="Sort"
 	                HorizontalOptions="Center"
 	                VerticalOptions="CenterAndExpand" />
 			</Grid>
 			<ListView x:Name="listView" 
 					VerticalOptions="FillAndExpand" 
-					SeparatorVisibility="None">
+					SeparatorVisibility="None"
+					IsVisible="{Binding IsInitDataLoaded}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell Text="{Binding Title}" />

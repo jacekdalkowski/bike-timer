@@ -60,6 +60,10 @@ namespace Biketimer.Account
 		public void RestoreAccountData(AccountData accountData)
 		{
 			_accountData = accountData;
+			if (LoginCompleted != null)
+			{
+				LoginCompleted(_accountData);
+			}
 		}
 
 		#region Singleton

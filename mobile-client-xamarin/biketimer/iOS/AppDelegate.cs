@@ -8,6 +8,8 @@ using FacebookCoreKit = Facebook.CoreKit;
 
 using Robotics.Mobile.Core.Bluetooth.LE;
 
+using Biketimer.iOS.LocalStorage;
+
 namespace Biketimer.iOS
 {
 	[Register ("AppDelegate")]
@@ -23,10 +25,11 @@ namespace Biketimer.iOS
 			global::Xamarin.Forms.Forms.Init();
 
 			var bluetoothManager = new BluetoothManager(Adapter.Current);
-			_formsApp = new Biketimer.App(bluetoothManager);
+			var localStorageManager = new LocalStorageManager();
+			_formsApp = new Biketimer.App(bluetoothManager, localStorageManager);
 			LoadApplication(_formsApp);
 
-			FacebookSetupOnFinishedLaunching(options);
+			FacebookSetupOnFinishedLaunching(options, localStorageManager);
 
 			return base.FinishedLaunching (iOSApp, options);
 		}

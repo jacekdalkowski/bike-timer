@@ -1,5 +1,6 @@
 ﻿using System;
 using Biketimer.Bluetooth;
+using Biketimer.LocalStorage;
 
 namespace Biketimer
 {
@@ -22,6 +23,22 @@ namespace Biketimer
 			}
 		}
 
+		private static ILocalStorageManager _localStorageManager;
+		public static ILocalStorageManager LocalStorageManager
+		{
+			get
+			{
+				return _localStorageManager;
+			}
+			set
+			{
+				if (_localStorageManager != null)
+				{
+					throw new InvalidOperationException("Local storage manager already set.");
+				}
+				_localStorageManager = value;
+			}
+		}
 	}
 }
 

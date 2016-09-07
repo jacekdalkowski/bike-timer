@@ -3,19 +3,20 @@ using Foundation;
 using UIKit;
 using FacebookCoreKit = global::Facebook.CoreKit;
 using Biketimer.Account;
+using Biketimer.LocalStorage;
 
 namespace Biketimer.iOS
 {
 	public partial class AppDelegate
 	{
-		private bool FacebookSetupOnFinishedLaunching(NSDictionary launchOptions)
+		private bool FacebookSetupOnFinishedLaunching(NSDictionary launchOptions, ILocalStorageManager localStorageManager)
 		{
 			//FacebookCoreKit.Settings.AppID = "258884457813694";
 			//FacebookCoreKit.Settings.DisplayName = "biketimer";
 
-			AccountManager.Instance.LoginCompleted += OnLoginCompleted;
+			AccountManager.Instance.LoginCompleted += (AccountData ad) => localStorageManager.SaveAccountData(ad);
 
-			AccountData accountData = GetAccountData();
+			AccountData accountData = localStorageManager.GetAccountData();
 			if (accountData != null)
 			{
 				// This method verifies if you have been logged into the app before, and keep you logged in after you reopen or kill your app.
@@ -30,11 +31,6 @@ namespace Biketimer.iOS
 			}
 
 			return true;
-		}
-
-		private void OnLoginCompleted(AccountData accountData)
-		{
-			SaveAccountData(accountData);
 		}
 	}
 }
