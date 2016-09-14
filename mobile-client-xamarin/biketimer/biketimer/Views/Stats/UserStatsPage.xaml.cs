@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Biketimer.BiketimerApiServer.Entities;
 using Xamarin.Forms;
 using System.Linq;
+using Biketimer.Views.Helpers;
 
 namespace Biketimer.Views.Stats
 {
@@ -56,39 +57,39 @@ namespace Biketimer.Views.Stats
 
 		async void OnFilterByDateClicked(object sender, EventArgs e)
 		{
-			string[] spots = new string[] { "Today", "Last 2 days", "Last week" };
-			string selectedSpot = await DisplayActionSheet("Period", "Cancel", null, spots);
+			string[] periods = new string[] { "Today", "Last 2 days", "Last week" };
+			string selectedSpot = await DisplayActionSheet("Period", "Cancel", null, periods);
 		}
 
 		async void OnFilterBySpotClicked(object sender, EventArgs e)
 		{
-			string selectedValue = await DisplayActionSheet("Spot", "Cancel", null, _viewModel.FilteringSpotsNamesList.ToArray());
-			if (!string.Equals("Cancel", selectedValue, StringComparison.Ordinal))
+			Tuple<string, string> selectedValue = await this.DisplayKeyValueActionSheet("Spot", "Cancel", null, _viewModel.FilteringSpotsList);
+			if (selectedValue != null)
 			{
-				_viewModel.FilteringSpotName = selectedValue;
+				_viewModel.FilteringSpot = selectedValue;
 			}
 		}
 
 		async void OnFilterByTrackClicked(object sender, EventArgs e)
 		{
-			if (_viewModel.IsFilteringSpotNameSet)
+			if (_viewModel.IsFilteringSpotSet)
 			{
-				string selectedValue = await DisplayActionSheet("Track", "Cancel", null, _viewModel.FilteringTracksNamesList.ToArray());
-				if (!string.Equals("Cancel", selectedValue, StringComparison.Ordinal))
+				Tuple<string, string> selectedValue = await this.DisplayKeyValueActionSheet("Track", "Cancel", null, _viewModel.FilteringTracksList);
+				if (selectedValue != null)
 				{
-					_viewModel.FilteringTrackName = selectedValue;
+					_viewModel.FilteringTrack = selectedValue;
 				}
 			}
 		}
 
 		async void OnFilterBySegmentClicked(object sender, EventArgs e)
 		{
-			if (_viewModel.IsFilteringTrackNameSet)
+			if (_viewModel.IsFilteringTrackSet)
 			{
-				string selectedValue = await DisplayActionSheet("Segment", "Cancel", null, _viewModel.FilteringSegmentsNamesList.ToArray());
-				if (!string.Equals("Cancel", selectedValue, StringComparison.Ordinal))
+				Tuple<string, string> selectedValue = await this.DisplayKeyValueActionSheet("Segment", "Cancel", null, _viewModel.FilteringSegmentsList);
+				if (selectedValue != null)
 				{
-					_viewModel.FilteringSegmentName = selectedValue;
+					_viewModel.FilteringSegment = selectedValue;
 				}
 			}
 		}

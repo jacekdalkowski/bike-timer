@@ -43,7 +43,7 @@
 					Text="Track"
 	                HorizontalOptions="Center"
 	                VerticalOptions="CenterAndExpand"
-					IsEnabled="{Binding IsFilteringSpotNameSet}" />
+					IsEnabled="{Binding IsFilteringSpotSet}" />
 				<Button 
 					x:Name="filterBySegmentButton"
 					Grid.Row="0" 
@@ -51,7 +51,7 @@
 					Text="Seg"
 	                HorizontalOptions="Center"
 	                VerticalOptions="CenterAndExpand"
-					IsEnabled="{Binding IsFilteringTrackNameSet}" />
+					IsEnabled="{Binding IsFilteringTrackSet}" />
 				<Button 
 					x:Name="sortButton"
 					Grid.Row="0" 

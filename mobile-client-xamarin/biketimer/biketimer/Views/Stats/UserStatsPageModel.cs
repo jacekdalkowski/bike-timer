@@ -45,144 +45,144 @@ namespace Biketimer
 		public void SetSpotsData(IEnumerable<Spot> spotsData)
 		{
 			_spotsData = spotsData;
-			_filteringSpotsNamesList = spotsData.Select(s => s.Name);
+			_filteringSpotsList = spotsData.Select(s => Tuple.Create(s.Name, s.Id.ToString()));
 		}
 
-		private IEnumerable<string> _filteringSpotsNamesList;
-		public IEnumerable<string> FilteringSpotsNamesList
+		private IEnumerable<Tuple<string, string>> _filteringSpotsList;
+		public IEnumerable<Tuple<string, string>> FilteringSpotsList
 		{
 			private set
 			{
-				_filteringSpotsNamesList = value;
-				OnPropertyChanged("FilteringSpotsNamesList");
+				_filteringSpotsList = value;
+				OnPropertyChanged("FilteringSpotsList");
 			}
 			get
 			{
-				return _filteringSpotsNamesList;
+				return _filteringSpotsList;
 			}
 		}
 
-		private string _filteringSpotName;
-		public string FilteringSpotName
+		private Tuple<string, string> _filteringSpot;
+		public Tuple<string, string> FilteringSpot
 		{
 			set
 			{
-				if (_filteringSpotName != value)
+				if (!Tuple.Equals(_filteringSpot, value))
 				{
-					_filteringSpotName = value;
-					Spot filteringSpot = _spotsData.Single(s => string.Equals(s.Name, _filteringSpotName, StringComparison.Ordinal));
-					FilteringTracksNamesList = filteringSpot.TracksCurrent.Select(t => t.Name);
-					OnPropertyChanged("FilteringSpotName");
-					IsFilteringSpotNameSet = !string.IsNullOrEmpty(_filteringSpotName);
+					_filteringSpot = value;
+					Spot filteringSpot = _spotsData.Single(s => string.Equals(s.Id.ToString(), _filteringSpot.Item2, StringComparison.Ordinal));
+					FilteringTracksList = filteringSpot.TracksCurrent.Select(t => Tuple.Create(t.Name, t.Id.ToString()));
+					OnPropertyChanged("FilteringSpot");
+					IsFilteringSpotSet = _filteringSpot != null;
 				}
 			}
 			get
 			{
-				return _filteringSpotName;
+				return _filteringSpot;
 			}
 		}
 
-		public bool IsFilteringSpotNameSet
+		public bool IsFilteringSpotSet
 		{
 			set
 			{
-				OnPropertyChanged("IsFilteringSpotNameSet");
+				OnPropertyChanged("IsFilteringSpotSet");
 			}
 			get
 			{
-				return !string.IsNullOrEmpty(_filteringSpotName);
+				return _filteringSpot != null;
 			}
 		}
 
-		private IEnumerable<string> _filteringTracksNamesList;
-		public IEnumerable<string> FilteringTracksNamesList
+		private IEnumerable<Tuple<string, string>> _filteringTracksList;
+		public IEnumerable<Tuple<string, string>> FilteringTracksList
 		{
 			private set
 			{
-				_filteringTracksNamesList = value;
-				OnPropertyChanged("FilteringTracksNamesList");
+				_filteringTracksList = value;
+				OnPropertyChanged("FilteringTracksList");
 			}
 			get
 			{
-				return _filteringTracksNamesList;
+				return _filteringTracksList;
 			}
 		}
 
-		private string _filteringTrackName;
-		public string FilteringTrackName
+		private Tuple<string, string> _filteringTrack;
+		public Tuple<string, string> FilteringTrack
 		{
 			set
 			{
-				if (_filteringTrackName != value)
+				if (!Tuple.Equals(_filteringTrack, value))
 				{
-					_filteringTrackName = value;
-					Track filteringTrack = _spotsData.Single(s => string.Equals(s.Name, _filteringSpotName, StringComparison.Ordinal))
+					_filteringTrack = value;
+					Track filteringTrack = _spotsData.Single(s => string.Equals(s.Id.ToString(), _filteringSpot.Item2, StringComparison.Ordinal))
 					                                 .TracksCurrent
-					                                 .Single(t => string.Equals(t.Name, _filteringTrackName, StringComparison.Ordinal));
-					FilteringSegmentsNamesList = filteringTrack.SegmentsCurrent.Select(t => t.Name);
-					OnPropertyChanged("FilteringTrackName");
-					IsFilteringTrackNameSet = !string.IsNullOrEmpty(_filteringTrackName);
+						                             .Single(t => string.Equals(t.Id.ToString(), _filteringTrack.Item2, StringComparison.Ordinal));
+					FilteringSegmentsList = filteringTrack.SegmentsCurrent.Select(t => Tuple.Create(t.Name, t.Id.ToString()));
+					OnPropertyChanged("FilteringTrack");
+					IsFilteringTrackSet = _filteringTrack != null;
 				}
 			}
 			get
 			{
-				return _filteringTrackName;
+				return _filteringTrack;
 			}
 		}
 
-		public bool IsFilteringTrackNameSet
+		public bool IsFilteringTrackSet
 		{
 			set
 			{
-				OnPropertyChanged("IsFilteringTrackNameSet");
+				OnPropertyChanged("IsFilteringTrackSet");
 			}
 			get
 			{
-				return !string.IsNullOrEmpty(_filteringTrackName);
+				return _filteringTrack != null;
 			}
 		}
 
-		private IEnumerable<string> _filteringSegmentsNamesList;
-		public IEnumerable<string> FilteringSegmentsNamesList
+		private IEnumerable<Tuple<string, string>> _filteringSegmentsList;
+		public IEnumerable<Tuple<string, string>> FilteringSegmentsList
 		{
 			private set
 			{
-				_filteringSegmentsNamesList = value;
-				OnPropertyChanged("FilteringSegmentsNamesList");
+				_filteringSegmentsList = value;
+				OnPropertyChanged("FilteringSegmentsList");
 			}
 			get
 			{
-				return _filteringSegmentsNamesList;
+				return _filteringSegmentsList;
 			}
 		}
 
-		private string _filteringSegmentName;
-		public string FilteringSegmentName
+		private Tuple<string, string> _filteringSegment;
+		public Tuple<string, string> FilteringSegment
 		{
 			set
 			{
-				if (_filteringSegmentName != value)
+				if (!Tuple.Equals(_filteringSegment, value))
 				{
-					_filteringSegmentName = value;
-					OnPropertyChanged("FilteringSegmentName");
-					IsFilteringSegmentNameSet = !string.IsNullOrEmpty(_filteringSegmentName);
+					_filteringSegment = value;
+					OnPropertyChanged("FilteringSegment");
+					IsFilteringSegmentSet = _filteringSegment != null;
 				}
 			}
 			get
 			{
-				return _filteringSegmentName;
+				return _filteringSegment;
 			}
 		}
 
-		public bool IsFilteringSegmentNameSet
+		public bool IsFilteringSegmentSet
 		{
 			set
 			{
-				OnPropertyChanged("IsFilteringSegmentNameSet");
+				OnPropertyChanged("IsFilteringSegmentSet");
 			}
 			get
 			{
-				return !string.IsNullOrEmpty(_filteringSegmentName);
+				return _filteringSegment != null;
 			}
 		}
 

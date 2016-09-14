@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Views\Stats\UserStatsPageModel.cs" />
     <Compile Include="LocalStorage\ILocalStorageManager.cs" />
+    <Compile Include="Views\Helpers\ActionSheet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -173,6 +174,7 @@
     <Folder Include="BiketimerApiServer\Entities\" />
     <Folder Include="Views\Debug\AppData\" />
     <Folder Include="LocalStorage\" />
+    <Folder Include="Views\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Slideout\SlideoutNavigation.xaml">
