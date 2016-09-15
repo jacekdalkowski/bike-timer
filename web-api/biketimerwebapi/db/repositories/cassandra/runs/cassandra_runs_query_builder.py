@@ -20,12 +20,12 @@ class CassandraRunsQueryBuilder:
         query = ('select * from runs_by_user_segment_date where user_id=' + user_id +
                 ' and segment_id=' + segment_id)
 
-        if 'time_start_min' in query_params:
+        if 'time_start_min' in query_params and query_params['time_start_min'] != None:
             time_start_min_str = query_params['time_start_min']
             time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
             query += (' and time_start >= ' + time_start_min)
 
-        if 'time_start_max' in query_params:
+        if 'time_start_max' in query_params and query_params['time_start_max'] != None:
             time_start_max_str = query_params['time_start_max']
             time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
             query += (' and time_start < ' + time_start_max)
@@ -38,12 +38,12 @@ class CassandraRunsQueryBuilder:
         
         query = ('select * from runs_by_user_spot_date where user_id=' + user_id +
                 ' and spot_id=' + spot_id)
-        if 'time_start_min' in query_params:
+        if 'time_start_min' in query_params and query_params['time_start_min'] != None:
             time_start_min_str = query_params['time_start_min']
             time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
             query += (' and time_start >= ' + time_start_min)
 
-        if 'time_start_max' in query_params:
+        if 'time_start_max' in query_params and query_params['time_start_max'] != None:
             time_start_max_str = query_params['time_start_max']
             time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
             query += (' and time_start < ' + time_start_max)
@@ -55,12 +55,12 @@ class CassandraRunsQueryBuilder:
         spot_id = query_params['spot_id']
         
         query = ('select * from runs_by_user_date where user_id=' + user_id)
-        if 'time_start_min' in query_params:
+        if 'time_start_min' in query_params and query_params['time_start_min'] != None:
             time_start_min_str = query_params['time_start_min']
             time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
             query += (' and time_start >= ' + time_start_min)
 
-        if 'time_start_max' in query_params:
+        if 'time_start_max' in query_params and query_params['time_start_max'] != None:
             time_start_max_str = query_params['time_start_max']
             time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
             query += (' and time_start < ' + time_start_max)
@@ -71,12 +71,12 @@ class CassandraRunsQueryBuilder:
         segment_id = query_params['segment_id']
         
         query = ('select * from runs_by_segment_date_time where segment_id=' + segment_id)
-        if 'time_start_min' in query_params:
+        if 'time_start_min' in query_params and query_params['time_start_min'] != None:
             time_start_min_str = query_params['time_start_min']
             time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
             query += (' and time_start >= ' + time_start_min)
 
-        if 'time_start_max' in query_params:
+        if 'time_start_max' in query_params and query_params['time_start_max'] != None:
             time_start_max_str = query_params['time_start_max']
             time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
             query += (' and time_start < ' + time_start_max)
@@ -89,12 +89,12 @@ class CassandraRunsQueryBuilder:
         
         query = ('select * from runs_by_segment_date_time where segment_id=' + segment_id +
                 ' and user_id=' + user_id)
-        if 'time_start_min' in query_params:
+        if 'time_start_min' in query_params and query_params['time_start_min'] != None:
             time_start_min_str = query_params['time_start_min']
             time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
             query += (' and time_start >= ' + time_start_min)
 
-        if 'time_start_max' in query_params:
+        if 'time_start_max' in query_params and query_params['time_start_max'] != None:
             time_start_max_str = query_params['time_start_max']
             time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
             query += (' and time_start < ' + time_start_max)
@@ -107,12 +107,12 @@ class CassandraRunsQueryBuilder:
 
         query = ('select * from runs_by_spot_user_date where spot_id=' + spot_id +
                 ' and user_id=' + user_id)
-        if 'time_start_min' in query_params:
+        if 'time_start_min' in query_params and query_params['time_start_min'] != None:
             time_start_min_str = query_params['time_start_min']
             time_start_min = Utils.str_to_cassandra_time(time_start_min_str)
             query += (' and time_start >= ' + time_start_min)
 
-        if 'time_start_max' in query_params:
+        if 'time_start_max' in query_params and query_params['time_start_max'] != None:
             time_start_max_str = query_params['time_start_max']
             time_start_max = Utils.str_to_cassandra_time(time_start_max_str)
             query += (' and time_start < ' + time_start_max)

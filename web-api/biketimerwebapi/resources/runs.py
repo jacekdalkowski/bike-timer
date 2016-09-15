@@ -33,6 +33,8 @@ class Runs(Resource):
         parser.add_argument('user_id')
         parser.add_argument('segment_id')
         parser.add_argument('spot_id')
+        parser.add_argument('time_start_min')
+        parser.add_argument('time_start_max')
         query_params = parser.parse_args()
         logger.debug('Runs.get(self, args: ' + str(query_params) + ')')
         spot_provided = False
