@@ -3,8 +3,9 @@ namespace Biketimer
 {
 	public class BiketimerFacadeQueryBuilder
 	{
-		public BiketimerFacadeQueryBuilder()
+		public static BuildRunsQuery(string userId, string spotId, string trackId, string segmentId, )
 		{
+
 		}
 	}
 }

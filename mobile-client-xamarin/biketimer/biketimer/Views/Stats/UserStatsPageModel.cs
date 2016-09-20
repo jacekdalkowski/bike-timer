@@ -192,6 +192,7 @@ namespace Biketimer
 			{
 				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+
 		}
 	}
 }

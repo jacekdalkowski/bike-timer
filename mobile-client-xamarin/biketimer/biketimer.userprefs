@@ -1,12 +1,10 @@
-﻿<Properties StartupItem="iOS/biketimer.iOS.csproj">
+﻿<Properties StartupConfiguration="{E00A2D1A-96A1-43A7-AA3D-04583028A0FE}|Default">
   <MonoDevelop.Ide.ItemProperties.biketimer.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Views/Login/LoginViewRenderer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="biketimer/Views/Stats/UserStatsPageModel.cs">
     <Files>
-      <File FileName="biketimer/Account/AccountManager.cs" Line="55" Column="1" />
-      <File FileName="biketimer/Account/LoginProcessor.cs" Line="29" Column="1" />
-      <File FileName="biketimer/Facebook/FacebookFacade.cs" Line="20" Column="1" />
-      <File FileName="iOS/Views/Login/LoginViewRenderer.cs" Line="182" Column="1" />
-      <File FileName="iOS/AppDelegate.Facebook.cs" Line="19" Column="1" />
+      <File FileName="biketimer/Views/Stats/UserStatsPageModel.cs" Line="112" Column="46" />
+      <File FileName="biketimer/BiketimerApiServer/BiketimerFacade.cs" Line="25" Column="1" />
+      <File FileName="biketimer/BiketimerApiServer/BiketimerFacadeQueryBuilder.cs" Line="6" Column="96" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
@@ -17,14 +15,10 @@
       <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="158" column="1" />
       <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="157" column="1" />
       <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Views/Debug/Account/BiketimerAccountDebugPageViewModel.cs" line="230" column="1" />
-      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Views/Debug/Server/Api/Spots.xaml.cs" line="66" column="1" />
-      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Views/Debug/Server/Api/SpotAndTracks.xaml.cs" line="15" column="1" />
-      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Views/Debug/Server/Api/Spots.xaml.cs" line="60" column="1" />
-      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Views/Debug/AppData/AppDataView.xaml.cs" line="13" column="1" />
-      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Account/LoginProcessor.cs" line="29" column="1" />
-      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Account/AccountManager.cs" line="53" column="1" />
-      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Account/AccountManager.cs" line="55" column="1" />
-      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="182" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Views/Stats/UserStatsPageModel.cs" line="164" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/iOS/Views/Login/LoginViewRenderer.cs" line="39" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/Views/Stats/StatsPage.cs" line="25" column="1" />
+      <Breakpoint file="/Users/jacekdalkowski/Dev/bike_timer/mobile-client-xamarin/biketimer/biketimer/BiketimerApiServer/BiketimerFacade.cs" line="25" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
