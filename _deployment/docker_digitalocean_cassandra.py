@@ -12,13 +12,13 @@ def start_cassandra_container(ssh):
     print result
     return str(result).rstrip()
 
-def copy_cassandra_scripts_to_remote_host(cassandra_container_id):
+def copy_cassandra_scripts_to_remote_host(cassandra_container_id, ssh_con_str):
     print "Copying cassandra scripts to remote host."
     pwd = run_local_command("pwd").rstrip()
     print "pwd: " + pwd
     local_dir = pwd + "/../web-database/db_migrations"
     print "local dir to copy: " + local_dir
-    os.system("scp -r " + local_dir + " root@46.101.148.70:/root")
+    os.system("scp -r " + local_dir + " " + ssh_con_str + ":/root")
     print "Cassandra scripts copied to remote host."
 
 def copy_cassandra_scripts_to_docker_container(ssh, container_id):
@@ -38,8 +38,4 @@ def run_cassandra_migration_scripts_in_docker_container(ssh, container_id):
     print "Migration scripts result:"
     print result
 
-def setup_cassandra(ssh):
-    cassandra_container_id = start_cassandra_container(ssh)
-    copy_cassandra_scripts_to_remote_host(cassandra_container_id)
-    copy_cassandra_scripts_to_docker_container(ssh, cassandra_container_id)
-    run_cassandra_migration_scripts_in_docker_container(ssh, cassandra_container_id)
+
