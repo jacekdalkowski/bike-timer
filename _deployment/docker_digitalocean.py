@@ -20,6 +20,10 @@ print "Successfully connected to remote server."
 kill_and_remove_all_containers(ssh)
 
 cassandra_container_id = start_cassandra_container(ssh)
+print "Wait for cassandra to warm up."
+time.sleep(20) # wait for cassandra to init.
+
+print "Setup cassandra schema."
 copy_cassandra_scripts_to_remote_host(cassandra_container_id, ssh_con_str)
 copy_cassandra_scripts_to_docker_container(ssh, cassandra_container_id)
 run_cassandra_migration_scripts_in_docker_container(ssh, cassandra_container_id)
@@ -36,6 +40,7 @@ build_webapi_continer_in_remote_host(ssh)
 print "Start cassandra."
 ssh("docker start biketimer-web-database")
 print "Wait for cassandra to warm up."
+time.sleep(20)
 
 print "Start webapi."
 run_webapi_container(ssh)
