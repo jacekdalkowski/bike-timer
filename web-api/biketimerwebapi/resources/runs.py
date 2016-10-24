@@ -148,7 +148,12 @@ class Runs(Resource):
 
         segment_by_checkpoint = self.spots_cache.find_segment_by_checkpoints(checkpoint_start_id, checkpoint_stop_id)
         if segment_by_checkpoint == None:
-            raise Exception("Could not find segment. Start checkpoint id: " + checkpoint_start_id + " stop checkpoint id: " + checkpoint_stop_id)
+            # TODO this could potentially lead to DOS...
+            # should refresh only once in some fixed time window
+            self.spots_cache.refresh()
+            segment_by_checkpoint = self.spots_cache.find_segment_by_checkpoints(checkpoint_start_id, checkpoint_stop_id)
+            if segment_by_checkpoint == None:
+                raise Exception("Could not find segment. Start checkpoint id: " + checkpoint_start_id + " stop checkpoint id: " + checkpoint_stop_id)
 
         run_entity = Run();
         run_entity.user_id = user_id

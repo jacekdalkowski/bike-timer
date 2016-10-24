@@ -129,8 +129,8 @@ class DbTestSpotsSet:
 
 class DbFacade:
 
-	def __init__(self, cqlshCommand):
-		self.cqlshCommand = cqlshCommand
+	def __init__(self, runCqlshCommand):
+		self.runCqlshCommand = runCqlshCommand
 		self.spots = DbTestSpotsSet()
 
 	def clear_tables(self):
@@ -145,17 +145,16 @@ class DbFacade:
 										"truncate runs_by_segment_user_date; "
 										"truncate runs_by_segment_time; "
 										"truncate runs_by_id; ")
-		p_echo_command = subprocess.Popen(['echo', delete_from_tables_command], stdout=subprocess.PIPE)
+		out, err = self.runCqlshCommand(delete_from_tables_command)
+		'''p_echo_command = subprocess.Popen(['echo', delete_from_tables_command], stdout=subprocess.PIPE)
 		p_cqlsh = subprocess.Popen(self.cqlshCommand, stdin=p_echo_command.stdout, stdout=subprocess.PIPE)
-		out, err = p_cqlsh.communicate()
+		out, err = p_cqlsh.communicate()'''
 		print "Db command 'delete_from_tables_command' output: " + str(out)
 		print "Db command 'delete_from_tables_command' error output: " + str(err)
 
 	def add_spot(self):
 		add_spot_command = DbCommandBuilder.create_insert_spot_command(self.spots.KoutyNadDesnou)
-		p_echo_command = subprocess.Popen(['echo', add_spot_command], stdout=subprocess.PIPE)
-		p_cqlsh = subprocess.Popen(self.cqlshCommand, stdin=p_echo_command.stdout, stdout=subprocess.PIPE)
-		out, err = p_cqlsh.communicate()
+		out, err = self.runCqlshCommand(add_spot_command)
 		print "Db command 'add_spot_command' output: " + str(out)
 		print "Db command 'add_spot_command' error output: " + str(err)
 

@@ -19,8 +19,6 @@ class RunsSingle:
 		self.api_facade = ApiFacade(self.deployment_info.ApiEndpoint.Address, self.deployment_info.ApiEndpoint.Port)
 
 	def add_first_run_and_verify_tables(self):
-		self.db_facade.clear_tables()
-		self.db_facade.add_spot()
 
 		# Register / login Aaron.
 		aaron_access_token = self.fb_facade.request_access_token(self.fb_facade.test_users.AaronChase.id)
