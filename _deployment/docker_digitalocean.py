@@ -8,7 +8,7 @@ from docker_digitalocean_cassandra import *
 from docker_digitalocean_webidentity import *
 from docker_digitalocean_webapi import *
 
-ssh_con_str = "root@46.101.148.70"
+ssh_con_str = "root@67.205.147.105"
 
 print "NOTICE: this script has to be run as a user with access to SSH keys."
 print "Deployment to remote server (" + ssh_con_str + ") started."

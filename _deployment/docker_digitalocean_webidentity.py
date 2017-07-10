@@ -3,7 +3,7 @@ from docker_digitalocean_common import *
 
 def copy_webidentity_src_to_remote_host(ssh_con_str):
 	pwd = run_local_command("pwd").rstrip()
-	local_dir = pwd + "/../web-identity"
+	local_dir = pwd + "/../web-identity/*"
 	print "Copying web-identity src (" + local_dir + ") to remote host."
 	os.system("scp -r " + local_dir + " " + ssh_con_str + ":/root/apps/web-identity")
 	print "Copying web-identity src to remote host finished."
