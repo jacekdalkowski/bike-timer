@@ -5,7 +5,7 @@
 import sys
 import os
 import re
-from subprocess import call
+from subprocess import call, check_output
 from operator import itemgetter, attrgetter, methodcaller
 
 CASSANDRA_PATH_LOCAL = '/Users/jacekdalkowski/Dev/_cassandra/apache-cassandra-3.0.0/bin/'
@@ -48,7 +48,8 @@ def db_operation(current_dir, file_sufix, env, reverse):
 		source_arg = 'SOURCE \'' + artifacts_path + '/' + file['file'] + '\''
 		call_args = [cqlsh_path, '-e', source_arg]
 		print call_args
-		call(call_args)
+		call_output = check_output(call_args)
+		print call_output
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
