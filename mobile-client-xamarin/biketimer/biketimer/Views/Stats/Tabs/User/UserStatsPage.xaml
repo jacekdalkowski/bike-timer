@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="Biketimer.Views.Stats.UserStatsPage">
+	<ContentPage.Content>
+		<StackLayout VerticalOptions="FillAndExpand">
+			<ActivityIndicator
+					x:Name="activityIndicator"
+					Color="Black" 
+					IsVisible="{Binding IsLoading}"
+					IsRunning="{Binding IsLoading}" />
+			<Grid 
+					VerticalOptions="FillAndExpand"
+					IsVisible="{Binding IsLoaded}" >
+				<Grid.RowDefinitions>
+    				<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Button 
+					x:Name="filterByDateButton"
+					Grid.Row="0" 
+					Grid.Column="0"
+					Text="Date"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand" />
+				<Button 
+					x:Name="filterBySpotButton"
+					Grid.Row="0" 
+					Grid.Column="1"
+					Text="Spot"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand" />
+				<Button 
+					x:Name="filterByTrackButton"
+					Grid.Row="0" 
+					Grid.Column="2"
+					Text="Track"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand"
+					IsEnabled="{Binding IsFilteringSpotSet}" />
+				<Button 
+					x:Name="filterBySegmentButton"
+					Grid.Row="0" 
+					Grid.Column="3"
+					Text="Seg"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand"
+					IsEnabled="{Binding IsFilteringTrackSet}" />
+				<Button 
+					x:Name="sortButton"
+					Grid.Row="0" 
+					Grid.Column="4"
+					Text="Sort"
+	                HorizontalOptions="Center"
+	                VerticalOptions="CenterAndExpand" />
+			</Grid>
+			<ListView x:Name="listView" 
+					VerticalOptions="FillAndExpand" 
+					SeparatorVisibility="None"
+					IsVisible="{Binding IsLoaded}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell Text="{Binding Title}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

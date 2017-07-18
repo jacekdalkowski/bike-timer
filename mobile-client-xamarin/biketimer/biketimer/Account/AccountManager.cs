@@ -41,7 +41,7 @@ namespace Biketimer.Account
 		{
 			try
 			{
-				LoginProcessor loginProcessor = new LoginProcessor();
+				LoginProcessor loginProcessor = new LoginProcessor(Config.IdentityDomainUrl, Config.BiketimerApiDomainUrl);
 				_accountData = await loginProcessor.LoginAsync(facebookAccess);
 				if (LoginCompleted != null)
 				{

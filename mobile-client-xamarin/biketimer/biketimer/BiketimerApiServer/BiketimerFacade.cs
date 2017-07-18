@@ -10,9 +10,14 @@ namespace Biketimer.BiketimerApiServer
 {
 	public class BiketimerFacade
 	{
-		private const string _biketimerApiDomainUrl = "http://46.101.148.70:5001";
 		private const string _getProfileAbsoluteUrl = "/User/Me";
 		private const string _getSpotsAbsoluteUrl = "/Spots";
+		private readonly string _biketimerApiDomainUrl;
+
+		public BiketimerFacade(string biketimerApiDomainUrl)
+		{
+			this._biketimerApiDomainUrl = biketimerApiDomainUrl;
+		}
 
 		public async Task<BiketimerProfile> GetUserProfile(string biketimerUserAccessToken)
 		{

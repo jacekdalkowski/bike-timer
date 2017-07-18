@@ -110,36 +110,33 @@
     <Compile Include="Views\Debug\Server\Api\TrackAndSegmentsViewModel.cs" />
     <Compile Include="Views\Debug\Server\Api\SegmentViewModel.cs" />
     <Compile Include="Views\Stats\StatsPage.cs" />
-    <Compile Include="Views\Stats\UserStatsPage.xaml.cs">
-      <DependentUpon>UserStatsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Stats\FriendsStatsPage.xaml.cs">
-      <DependentUpon>FriendsStatsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Stats\SpotsStatsPage.xaml.cs">
-      <DependentUpon>SpotsStatsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Stats\UserStatsPageModel.cs" />
     <Compile Include="LocalStorage\ILocalStorageManager.cs" />
     <Compile Include="Views\Helpers\ActionSheet.cs" />
     <Compile Include="BiketimerApiServer\BiketimerFacadeQueryBuilder.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Views\Stats\StatsPageModel.cs" />
+    <Compile Include="Views\Stats\Common\Filtering\FilteringModel.cs" />
+    <Compile Include="Views\Stats\Tabs\Friends\FriendsStatsPage.xaml.cs">
+      <DependentUpon>FriendsStatsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stats\Tabs\Friends\FriendsStatsPageModel.cs" />
+    <Compile Include="Views\Stats\Tabs\Spots\SpotsStatsPage.xaml.cs">
+      <DependentUpon>SpotsStatsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stats\Tabs\Spots\SpotsStatsPageModel.cs" />
+    <Compile Include="Views\Stats\Tabs\User\UserStatsPage.xaml.cs">
+      <DependentUpon>UserStatsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stats\Tabs\User\UserStatsPageModel.cs" />
+    <Compile Include="Views\Stats\Common\Filtering\FilteringModel.Load.cs" />
+    <Compile Include="Views\Stats\Common\Filtering\FilteringModel.Spots.cs" />
+    <Compile Include="Views\Stats\Common\Filtering\FilteringModel.Tracks.cs" />
+    <Compile Include="Views\Stats\Common\Filtering\FilteringModel.Segments.cs" />
+    <Compile Include="Views\Stats\Common\Filtering\FilteringModel.Sorting.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
-  <Import Project="..\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <ItemGroup>
-    <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\packages\Xamarin.Forms.2.3.0.49\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\packages\Xamarin.Forms.2.3.0.49\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\packages\Xamarin.Forms.2.3.0.49\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wp8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
@@ -154,6 +151,18 @@
     </Reference>
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +185,12 @@
     <Folder Include="Views\Debug\AppData\" />
     <Folder Include="LocalStorage\" />
     <Folder Include="Views\Helpers\" />
+    <Folder Include="Views\Stats\Common\" />
+    <Folder Include="Views\Stats\Tabs\" />
+    <Folder Include="Views\Stats\Common\Filtering\" />
+    <Folder Include="Views\Stats\Tabs\User\" />
+    <Folder Include="Views\Stats\Tabs\Spots\" />
+    <Folder Include="Views\Stats\Tabs\Friends\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Slideout\SlideoutNavigation.xaml">
@@ -223,17 +238,18 @@
     <EmbeddedResource Include="Views\Debug\Server\Api\TrackAndSegments.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stats\UserStatsPage.xaml">
+    <EmbeddedResource Include="Views\Stats\Tabs\Friends\FriendsStatsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stats\FriendsStatsPage.xaml">
+    <EmbeddedResource Include="Views\Stats\Tabs\Spots\SpotsStatsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stats\SpotsStatsPage.xaml">
+    <EmbeddedResource Include="Views\Stats\Tabs\User\UserStatsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>

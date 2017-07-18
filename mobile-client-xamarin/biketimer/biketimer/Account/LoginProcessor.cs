@@ -10,11 +10,11 @@ namespace Biketimer.Account
 		private readonly BiketimerIdentityFacade _biketimerIdentityFacade;
 		private readonly BiketimerFacade _biketimerFacade;
 
-		internal LoginProcessor()
+		internal LoginProcessor(string identityDomainUrl, string biketimerApiDomainUrl)
 		{
 			_facebookFacade = new FacebookFacade();
-			_biketimerIdentityFacade = new BiketimerIdentityFacade();
-			_biketimerFacade = new BiketimerFacade();
+			_biketimerIdentityFacade = new BiketimerIdentityFacade(identityDomainUrl);
+			_biketimerFacade = new BiketimerFacade(biketimerApiDomainUrl);
 		}
 
 		public async Task<AccountData> LoginAsync(FacebookAccess facebookAccess)

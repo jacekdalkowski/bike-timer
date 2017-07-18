@@ -29,8 +29,7 @@ namespace Biketimer.iOS
 		public static void RemoveLoadingOverlay(UIView view)
 		{
 			UIView topmostView = GetTopmostView(view);
-			topmostView.Subviews[0]
-			           .Subviews.Where(v => v is LoadingOverlay)
+			topmostView.Subviews.Where(v => v is LoadingOverlay)
 					   .ToList()
 			           .ForEach(v =>
 							{

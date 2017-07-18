@@ -1,11 +1,13 @@
 ﻿using System;
-namespace Biketimer
+
+namespace Biketimer.BiketimerApiServer
 {
 	public class BiketimerFacadeQueryBuilder
 	{
-		public static BuildRunsQuery(string userId, string spotId, string trackId, string segmentId, )
+		public static string BuildRunsQuery(string userId, string spotId, 
+                string trackId, string segmentId, DateTime? timeRangeStart, DateTime? timeRangeEnd)
 		{
-
+            return string.Empty;
 		}
 	}
 }

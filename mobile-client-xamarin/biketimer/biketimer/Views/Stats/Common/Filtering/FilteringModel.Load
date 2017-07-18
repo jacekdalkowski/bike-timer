@@ -1,0 +1,10 @@
+﻿using System;
+namespace Biketimer
+{
+	public class FilteringModel
+	{
+		public FilteringModel()
+		{
+		}
+	}
+}

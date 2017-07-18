@@ -33,7 +33,7 @@ namespace Biketimer.Views.Debug.Server.Api
 
 			if (AccountManager.Instance.BiketimerAccountDataPresent())
 			{
-				BiketimerFacade biketimerFacade = new BiketimerFacade();
+				BiketimerFacade biketimerFacade = new BiketimerFacade(Config.BiketimerApiDomainUrl);
 				biketimerFacade.GetSpots(AccountManager.Instance.AccountData.BiketimerAccountData.Access.AccessToken)
 							   .ContinueWith(OnSpotsDownloaded);
 			}
